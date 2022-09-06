@@ -11,9 +11,6 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  puesto: {
-    type: String,
-  },
   state: {
     type: String,
     default: "pending",

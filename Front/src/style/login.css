@@ -1,0 +1,30 @@
+.css-156sogh:hover {
+  border-color: #bfd732 !important;
+}
+.css-156sogh:focus-visible {
+  border-color: #bfd732 !important;
+  box-shadow: 0 0 0 1px #bfd732 !important;
+}
+.login input {
+  margin: 0 25px;
+  max-width: 220px;
+}
+.css-1p5r5x7 {
+  background-color: #bfd732 !important;
+  color: black !important;
+  border-radius: 30px !important;
+}
+.login button {
+  background-color: #bfd732 !important;
+  margin: 10px;
+}
+.loginCart {
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto !important;
+}
+.loginView {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto !important;
+}

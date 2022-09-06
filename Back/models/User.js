@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   tel: {
     type: Number,
   },
-  puesto: {
+  companyRole: {
     type: String,
   },
   salt: {

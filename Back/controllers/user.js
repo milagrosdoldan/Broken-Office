@@ -41,14 +41,17 @@ user.login = async (req, res) => {
 
         const token = generateToken({ email });
         res.cookie("token", token);
-        res.status(201).send(`succesfully logged in with ${req.body.email}`); // envio informacion del usuario
+        res.send({
+          email: user.email,
+          name: user.name,
+          lastname: user.lastname,
+        });
       });
     });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
-
 user.all = async (req, res) => {
   try {
     const userAll = await User.find({});

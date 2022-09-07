@@ -14,7 +14,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import "@fontsource/open-sans/700.css";
+import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import { useDispatch } from "react-redux";
 import { signUp } from "../state/user";

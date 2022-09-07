@@ -17,11 +17,10 @@ import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
-
+import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useEffect } from "react";
-
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const Login = () => {
       userName: userObject.name,
       loginWithOauth: true,
     };
-    dispatch(postLoginUser(payload));
+    dispatch(logIn(payload));
     navigate("/");
   };
 
@@ -132,7 +131,7 @@ const Login = () => {
           Iniciar Sesión
         </Button>
         <Box id={10}></Box>
-        <Box>
+        {/* <Box>
           <Button borderRadius="30px">
             <Image
               boxSize="30px"
@@ -141,11 +140,10 @@ const Login = () => {
             />
             <Text>Login whit Google</Text>
           </Button>
-        </Box>
+        </Box> */}
         <Link to="/register">
           <Text>Need an account? Click here</Text>
         </Link>
-
       </Box>
     </Box>
   );

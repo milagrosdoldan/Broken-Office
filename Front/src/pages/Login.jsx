@@ -15,19 +15,22 @@ import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => dispatch(logIn(data));
+  const onSubmit = (data) => {
+    dispatch(logIn(data));
+    navigate("/");
+  };
 
   return (
     <Box
@@ -56,7 +59,6 @@ const Login = () => {
             <Input
               type="email"
               placeholder="Email"
-              color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />
@@ -78,7 +80,7 @@ const Login = () => {
                 {...register("password", { required: true, minLength: "10" })}
               />
 
-              <InputRightElement width="4.5rem">
+              <InputRightElement width="4.5rem" mr={5}>
                 <Button
                   h="1.75rem"
                   size="sm"
@@ -95,11 +97,10 @@ const Login = () => {
             </Box>
           </FormControl>
         </Center>
-        <Link to="/">
-          <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
-            Iniciar Sesión
-          </Button>
-        </Link>
+
+        <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
+          Iniciar Sesión
+        </Button>
       </Box>
     </Box>
   );

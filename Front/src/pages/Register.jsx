@@ -12,27 +12,33 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import { useDispatch } from "react-redux";
 import { signUp } from "../state/user";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const toast = useToast();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => dispatch(signUp(data));
+  const onSubmit = (data) => {
+    dispatch(signUp(data));
+    navigate("/login");
+  };
 
   return (
-    <HStack w="full" h="100vh">
+    <HStack w="full" h="84.2vh">
       <Flex w="full" h="full" borderRightWidth={1}>
         <Image
           objectFit="cover"
@@ -119,9 +125,20 @@ const Register = () => {
             fontFamily="body"
             display="flex"
             mt={4}
-            onClick={handleSubmit(onSubmit)}
+            onClick={() => {
+              handleSubmit(onSubmit);
+              toast({
+                title: "Account created.",
+                description: "We've created your account for you.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
+              navigate("/");
+            }}
             borderRadius="40px"
             bg="secondary"
+            _hover={{ bg: "fourth" }}
           >
             Register
           </Button>

@@ -52,12 +52,22 @@ user.login = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
 user.all = async (req, res) => {
   try {
     const userAll = await User.find({});
     res.status(200).json(userAll);
   } catch (err) {
     return res.status(500).json({ message: err.message });
+  }
+};
+
+user.deleteUser = (req, res) => {
+  try {
+    User.findByIdAndDelete({ id: req.params.id });
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ message: err.message });
   }
 };
 

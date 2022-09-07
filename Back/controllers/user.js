@@ -31,7 +31,7 @@ user.me = (req, res) => {
 
 user.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password} = req.body;
 
     User.findOne({ email }).then((user) => {
       if (!user) return res.sendStatus(401);
@@ -41,10 +41,10 @@ user.login = async (req, res) => {
 
         const token = generateToken({ email });
         res.cookie("token", token);
-        res.status(201).send(`succesfully logged in with
+        res.send(`
          email: ${req.body.email}, 
          name: ${req.body.name},  
-         lastname: ${req.body.lastname}); 
+         lastname: ${req.body.lastname}`); 
       });
     });
   } catch (error) {

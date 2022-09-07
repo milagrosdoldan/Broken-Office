@@ -16,7 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/heebo";
-
+import register from "../style/register.css";
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);

@@ -1,15 +1,11 @@
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Center,
-  Text,
   Heading,
   Box,
   Button,
-  Image,
 } from "@chakra-ui/react";
 import React from "react";
 import login from "../style/login.css";

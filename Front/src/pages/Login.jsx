@@ -39,7 +39,7 @@ const Login = () => {
         <Center>
           <FormControl className="login" isRequired>
             <FormLabel textAlign={"center"}>Email</FormLabel>
-            <Input type="email" placeholder="e-mail" color="BFD732" />
+            <Input type="email" placeholder="e-mail" color="BFD732" size="md" />
           </FormControl>
         </Center>
         <Center>

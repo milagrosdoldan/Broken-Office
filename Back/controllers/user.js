@@ -10,7 +10,7 @@ user.register = async (req, res) => {
     const newUser = new User({
       name: user.name,
       lastname: user.lastname,
-      password : user.password,
+      password: user.password,
       email: user.email,
       tel: user.tel,
       companyRole: user.companyRole,
@@ -31,7 +31,7 @@ user.me = (req, res) => {
 
 user.login = async (req, res) => {
   try {
-     const { email, password } = req.body;
+    const { email, password } = req.body;
 
     User.findOne({ email }).then((user) => {
       if (!user) return res.sendStatus(401);
@@ -39,12 +39,11 @@ user.login = async (req, res) => {
       user.validatePassword(password).then((isValid) => {
         if (!isValid) return res.sendStatus(401);
 
-        const payload = user.save()
-        const token = generateToken({email});
+        const token = generateToken({ email });
         res.cookie("token", token);
-        res.status(201).json(payload); // envio informacion del usuario
+        res.status(201).send(`succesfully logged in with ${req.body.email}`); // envio informacion del usuario
       });
-    }); 
+    });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

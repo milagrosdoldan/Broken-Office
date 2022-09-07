@@ -68,7 +68,7 @@ user.deleteUser = (req, res) => {
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: err.message });
-  }
+  };
 };
 
 module.exports = user;

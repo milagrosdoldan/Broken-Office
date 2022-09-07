@@ -21,7 +21,7 @@ export const sendMe = createAsyncThunk("SEND_ME", async () => {
 });
 
 export const logOut = createAsyncThunk("LOG_OUT", async () => {
-  const res = await axios.get("/api/user/delete");
+  const res = await axios.post("/api/user/logout");
   return res.data;
 });
 

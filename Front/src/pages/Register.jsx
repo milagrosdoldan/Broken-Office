@@ -16,17 +16,20 @@ import {
 import { useForm } from "react-hook-form";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/heebo";
+import { useDispatch } from "react-redux";
+import { signUp } from "../state/user";
 
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+  const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => dispatch(signUp(data));
 
   return (
     <HStack w="full" h="100vh">
@@ -57,7 +60,7 @@ const Register = () => {
                 {errors.name?.type === "required" && "Name is required"}
               </Box>
             </FormControl>
-            <FormControl isRequired>
+            <FormControl id="lastname" isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
                 ml={5}
@@ -71,7 +74,7 @@ const Register = () => {
               </Box>
             </FormControl>
           </Box>
-          <FormControl isRequired id="name">
+          <FormControl isRequired id="email">
             <FormLabel>Email</FormLabel>
             <Input
               placeholder="Email"

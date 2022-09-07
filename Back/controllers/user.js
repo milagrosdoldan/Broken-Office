@@ -41,7 +41,10 @@ user.login = async (req, res) => {
 
         const token = generateToken({ email });
         res.cookie("token", token);
-        res.status(201).send(`succesfully logged in with ${req.body.email}`); // envio informacion del usuario
+        res.status(201).send(`succesfully logged in with
+         email: ${req.body.email}, 
+         name: ${req.body.name},  
+         lastname: ${req.body.lastname}); 
       });
     });
   } catch (error) {

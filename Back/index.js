@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-// const routes = require("./routes");
+const routes = require("./routes");
 const morgan = require("morgan");
 const cors = require("cors");
 // conexion a db, cluster
@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: true }));
-// app.use("/api", routes);
+ app.use("/api", routes);
+
 
 app.listen(process.env.PORT, () => {
   console.log("api working!...");

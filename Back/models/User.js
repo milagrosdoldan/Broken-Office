@@ -40,4 +40,18 @@ UserSchema.pre("save", async function () {
   return (this.password = await bcrypt.hash(this.password, this.salt));
 });
 
+UserSchema.methods.validatePassword = function validatePassword(password){
+  return bcrypt.hash(password, this.salt).then(
+    (newHash) => newHash === this.password
+  );
+}
+
+UserSchema.set('toJSON', {
+  transform: (document, returnedObject)=>{
+    returnedObject.id = returnedObject._id
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
 module.exports = mongoose.model("User", UserSchema);

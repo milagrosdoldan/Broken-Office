@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
   },
   password: {
-    type: String
+    type: String,
   },
   tel: {
     type: Number,
@@ -35,22 +35,24 @@ const UserSchema = new mongoose.Schema({
 
 // Schema Hook => has de la password y creacion del salt del usuario
 UserSchema.pre("save", async function () {
-  this.salt = bcrypt.genSaltSync();
-  return (this.password = await bcrypt.hash(this.password, this.salt));
+  if (this.password) {
+    this.salt = bcrypt.genSaltSync();
+    return (this.password = await bcrypt.hash(this.password, this.salt));
+  }
 });
 
-UserSchema.methods.validatePassword = function validatePassword(password){
-  return bcrypt.hash(password, this.salt).then(
-    (newHash) => newHash === this.password
-  );
-}
+UserSchema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt
+    .hash(password, this.salt)
+    .then((newHash) => newHash === this.password);
+};
 
-UserSchema.set('toJSON', {
-  transform: (document, returnedObject)=>{
-    returnedObject.id = returnedObject._id
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
+UserSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
 module.exports = mongoose.model("User", UserSchema);

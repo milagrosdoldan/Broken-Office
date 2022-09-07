@@ -1,7 +1,10 @@
 import { Box, Heading, Image, Text, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
-
+import CartPerfil from "../commons/CartPerfil";
+import CartPermissions from "../commons/CartPermissions";
+import CartReports from "../commons/CartReports";
+import About from "../commons/About";
 const Perfil = () => {
   const user = useSelector((state) => state.user);
   return (
@@ -28,72 +31,9 @@ const Perfil = () => {
           fontWeight="bold"
         >{`${user.name} ${user.lastname}`}</Text>
       </Box>
-      <Box>
-        <Heading ml="10" mt="5">
-          About
-        </Heading>
-        <Box
-          display="flex"
-          flexDirection="row"
-          mx="10"
-          bg="white"
-          p="1.5rem"
-          borderRadius="10"
-          boxShadow="dark-lg"
-        >
-          <Box display="flex" flexDirection="column">
-            <Text fontWeight="bold">Email</Text>
-            <Text fontWeight="bold">Works From</Text>
-          </Box>
-          <Box display="flex" flexDirection="column">
-            <Text ml="1rem">{`${user.email}`}</Text>
-            <Text ml="1rem"> Globant</Text>
-          </Box>
-        </Box>
-      </Box>
-      <Box>
-        <Heading ml="10" mt="5">
-          Permissions
-        </Heading>
-        <Box
-          display="flex"
-          flexDirection="row"
-          mx="10"
-          bg="white"
-          p="1.5rem"
-          borderRadius="10"
-          boxShadow="dark-lg"
-        >
-          <Box display="flex" flexDirection="column">
-            <Text fontWeight="bold">Passes</Text>
-            <Text fontWeight="bold">Manages</Text>
-            <Text fontWeight="bold">Gropus</Text>
-            <Text fontWeight="bold">Roles</Text>
-          </Box>
-          <Box display="flex" flexDirection="column">
-            <Text ml="1rem">Default Pass</Text>
-            <Text ml="1rem"> Globant</Text>
-            <Text ml="1rem"> None</Text>
-            <Text ml="1rem"> None</Text>
-          </Box>
-        </Box>
-        <Box>
-          <Heading ml="10" mt="5">
-            Reports
-          </Heading>
-          <Box
-            display="flex"
-            flexDirection="row"
-            mx="10"
-            bg="white"
-            p="1.5rem"
-            borderRadius="10"
-            boxShadow="dark-lg"
-          >
-            <Text>No reports</Text>
-          </Box>
-        </Box>
-      </Box>
+      <CartPerfil email={user.email} />
+      <CartPermissions />
+      <CartReports />
     </Box>
   );
 };

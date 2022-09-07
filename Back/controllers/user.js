@@ -10,6 +10,7 @@ user.register = async (req, res) => {
     const newUser = new User({
       name: user.name,
       lastname: user.lastname,
+      password : user.password,
       email: user.email,
       tel: user.tel,
       companyRole: user.companyRole,
@@ -17,15 +18,15 @@ user.register = async (req, res) => {
     });
 
     newUser.save().then((savedUser) => {
-      res.status(201).json(savedUser);
+      res.status(201).send(savedUser);
     });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
 };
 
 user.me = (req, res) => {
-  res.json(req.user);
+  res.send(req.user);
 };
 
 user.login = async (req, res) => {
@@ -39,7 +40,7 @@ user.login = async (req, res) => {
         if (!isValid) return res.sendStatus(401);
 
         const payload = user.save()
-        const token = generateToken(payload);
+        const token = generateToken({email});
         res.cookie("token", token);
         res.status(201).json(payload); // envio informacion del usuario
       });

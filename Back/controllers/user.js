@@ -31,6 +31,7 @@ user.me = (req, res) => {
 
 user.login = async (req, res) => {
   try {
+    if(!req.body.loginWithGoogle){
     const { email, password} = req.body;
 
     User.findOne({ email }).then((user) => {
@@ -39,7 +40,7 @@ user.login = async (req, res) => {
       user.validatePassword(password).then((isValid) => {
         if (!isValid) return res.sendStatus(401);
 
-        const token = generateToken({ email });
+        const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
         res.cookie("token", token);
 
         res.send({
@@ -50,7 +51,31 @@ user.login = async (req, res) => {
 
       });
     });
-  } catch (error) {
+  } else{
+    const userArr = await User.find({email : req.body.email})
+    if(userArr.length){
+      let user = userArr[0]
+      const token = generateToken({ email : user.email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
+      res.cookie("token", token);
+
+      res.send({
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+      });
+    }else{
+      const user = await User.create(req.body)
+      const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
+      res.cookie("token", token);
+
+      res.send({
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+      });
+    }
+  }
+}catch (error) {
     res.status(500).send({ message: error.message });
   }
 };

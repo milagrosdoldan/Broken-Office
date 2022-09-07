@@ -14,6 +14,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import "@fontsource/open-sans/700.css";
+import "@fontsource/heebo";
 
 const Register = () => {
   const [show, setShow] = React.useState(false);
@@ -22,7 +24,6 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
@@ -39,7 +40,7 @@ const Register = () => {
       </Flex>
       <Flex w="full" h="full" alignItems="center" justifyContent="center">
         <Stack maxW="lg" spacing={6} p={6}>
-          <Heading fontSize="35px" color="black">
+          <Heading fontSize="35px" color="third">
             Registrate
           </Heading>
 
@@ -52,8 +53,10 @@ const Register = () => {
                 size="md"
                 {...register("name", { required: true })}
               ></Input>
+              <Box>
+                {errors.name?.type === "required" && "Name is required"}
+              </Box>
             </FormControl>
-            {errors.name?.type === "required" && "Name is required"}
             <FormControl isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
@@ -63,7 +66,9 @@ const Register = () => {
                 size="md"
                 {...register("lastname", { required: true })}
               ></Input>
-              {errors.lastname?.type === "required" && "First name is required"}
+              <Box ml="22px">
+                {errors.lastname?.type === "required" && "Lastname is required"}
+              </Box>
             </FormControl>
           </Box>
           <FormControl isRequired id="name">
@@ -78,18 +83,21 @@ const Register = () => {
                 },
               })}
             ></Input>
+            {errors.email?.type === "required" && "Email is required"}
             {errors.email?.type === "pattern" && "Invalid email address"}
           </FormControl>
-          <FormControl isRequired id="password">
+          <FormControl fontFamily="body" isRequired id="password">
             <FormLabel>Password </FormLabel>
             <InputGroup size="md">
               <Input
+                fontFamily="body"
                 pr="4.5rem"
                 size="md"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
-                {...register("password", { required: true })}
+                {...register("password", { required: true, minLength: "10" })}
               />
+
               <InputRightElement width="4.5rem">
                 <Button
                   h="1.75rem"
@@ -101,13 +109,16 @@ const Register = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
+            {errors.password?.type === "required" && "Password is required"}
+            {errors.password?.type === "minLength" && "Password is required"}
           </FormControl>
           <Button
+            fontFamily="body"
             display="flex"
             mt={4}
             onClick={handleSubmit(onSubmit)}
             borderRadius="40px"
-            backgroundColor="#BFD732"
+            bg="secondary"
           >
             Register
           </Button>

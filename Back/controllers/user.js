@@ -88,4 +88,26 @@ user.all = async (req, res) => {
   }
 };
 
+user.deleteUser = (req, res) => {
+  try {
+    const {id} = req.params
+    User.findByIdAndDelete({id})
+    res.sendStatus(204)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+user.updateUser = (req, res) => {
+  try {
+    const {id} = req.params
+    User.findByIdAndUpdate({id}, req.body)
+    res.sendStatus(204)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 module.exports = user;

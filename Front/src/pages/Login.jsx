@@ -17,9 +17,9 @@ import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
+import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -135,7 +135,6 @@ const Login = () => {
           Iniciar Sesión
         </Button>
         <Box id={10}></Box>
-
         <Link to="/register">
           <Text>Need an account? Click here</Text>
         </Link>

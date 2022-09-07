@@ -22,7 +22,6 @@ import { signUp } from "../state/user";
 
 import { useNavigate } from "react-router-dom";
 
-
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -59,6 +58,7 @@ const Register = () => {
             <FormControl isRequired id="name">
               <FormLabel>Name</FormLabel>
               <Input
+                _hover={{ color: "secondary" }}
                 width={40}
                 placeholder="Name"
                 size="md"

@@ -18,7 +18,7 @@ import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import { useDispatch } from "react-redux";
 import { signUp } from "../state/user";
-
+import register from "../style/register.css";
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);

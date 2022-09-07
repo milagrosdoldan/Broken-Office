@@ -1,5 +1,7 @@
 const User = require("../models/User");
+
 const { generateToken } = require("../config/token");
+
 const user = {};
 
 user.register = async (req, res) => {
@@ -28,26 +30,20 @@ user.me = (req, res) => {
 
 user.login = async (req, res) => {
   try {
-   /*  const { email, password } = req.body;
+     const { email, password } = req.body;
 
     User.findOne({ email }).then((user) => {
       if (!user) return res.sendStatus(401);
+
       user.validatePassword(password).then((isValid) => {
         if (!isValid) return res.sendStatus(401);
 
-        const payload = {
-          id: user.id,
-          email: user.email,
-          lastname: user.lastname,
-          tel: user.tel,
-          companyRole: user.companyRole,
-          isAdmin: user.isAdmin,
-        };
+        const payload = user.save()
         const token = generateToken(payload);
         res.cookie("token", token);
-        res.json(payload); // envio informacion del usuario
+        res.status(201).json(payload); // envio informacion del usuario
       });
-    }); */
+    }); 
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

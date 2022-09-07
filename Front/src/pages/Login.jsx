@@ -8,6 +8,8 @@ import {
   Button,
   InputRightElement,
   InputGroup,
+  Image,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import login from "../style/login.css";
@@ -16,6 +18,7 @@ import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -28,6 +31,30 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => dispatch(logIn(data));
+
+  const handleCallbackResponse = (response) => {
+    let userObject = jwt_decode(response.credential);
+    const payload = {
+      name: userObject.given_name,
+      lastname: userObject.family_name,
+      email: userObject.email,
+      userName: userObject.name,
+      loginWithOauth: true,
+    };
+    dispatch(postLoginUser(payload));
+    navigate("/");
+  };
+
+  useEffect(() => {
+    /* global google */ google.accounts.id.initialize({
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById(10), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
 
   return (
     <Box
@@ -95,10 +122,22 @@ const Login = () => {
             </Box>
           </FormControl>
         </Center>
-        <Link to="/">
-          <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
-            Iniciar Sesión
+        <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
+          Iniciar Sesión
+        </Button>
+        <Box id={10}></Box>
+        <Box>
+          <Button borderRadius="30px">
+            <Image
+              boxSize="30px"
+              src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+              mx={5}
+            />
+            <Text>Login whit Google</Text>
           </Button>
+        </Box>
+        <Link to="/register">
+          <Text>Need an account? Click here</Text>
         </Link>
       </Box>
     </Box>

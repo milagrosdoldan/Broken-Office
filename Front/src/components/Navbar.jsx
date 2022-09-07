@@ -56,7 +56,10 @@ const Navbar = () => {
 
         {user.email ? (
           <MenuList>
-            <MenuItem>Perfil</MenuItem>
+            {" "}
+            <Link to="/perfil">
+              <MenuItem>Perfil</MenuItem>
+            </Link>
             <MenuItem
               onClick={() => {
                 handleLogOut();

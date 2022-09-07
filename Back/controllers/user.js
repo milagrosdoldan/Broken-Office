@@ -31,7 +31,8 @@ user.me = (req, res) => {
 
 user.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    if(!req.body.loginWithGoogle){
+    const { email, password} = req.body;
 
     User.findOne({ email }).then((user) => {
       if (!user) return res.sendStatus(401);
@@ -39,16 +40,42 @@ user.login = async (req, res) => {
       user.validatePassword(password).then((isValid) => {
         if (!isValid) return res.sendStatus(401);
 
-        const token = generateToken({ email });
+        const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
         res.cookie("token", token);
+
         res.send({
           email: user.email,
           name: user.name,
           lastname: user.lastname,
         });
+
       });
     });
-  } catch (error) {
+  } else{
+    const userArr = await User.find({email : req.body.email})
+    if(userArr.length){
+      let user = userArr[0]
+      const token = generateToken({ email : user.email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
+      res.cookie("token", token);
+
+      res.send({
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+      });
+    }else{
+      const user = await User.create(req.body)
+      const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
+      res.cookie("token", token);
+
+      res.send({
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+      });
+    }
+  }
+}catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
@@ -64,11 +91,25 @@ user.all = async (req, res) => {
 
 user.deleteUser = (req, res) => {
   try {
-    User.findByIdAndDelete({ id: req.params.id });
-    res.sendStatus(204);
+    const {id} = req.params
+    User.findByIdAndDelete({id})
+    res.sendStatus(204)
   } catch (error) {
-    res.status(500).json({ message: err.message });
-  };
+    res.status(500).json({ message: error.message });
+  }
 };
+
+user.updateUser = (req, res) => {
+  try {
+    const {id} = req.params
+    User.findByIdAndUpdate({id}, req.body)
+    res.sendStatus(204)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 
 module.exports = user;

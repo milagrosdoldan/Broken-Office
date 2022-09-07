@@ -41,7 +41,7 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.validatePassword = function validatePassword(password){
-  return this.hash(password, this.salt).then(
+  return bcrypt.hash(password, this.salt).then(
     (newHash) => newHash === this.password
   );
 }

@@ -95,7 +95,7 @@ const Login = () => {
               size="md"
               {...register("email", { required: true })}
             />
-            <Box ml="25px">
+            <Box m="25px" >
               {errors.email?.type === "required" && "Email is required"}
             </Box>
           </FormControl>

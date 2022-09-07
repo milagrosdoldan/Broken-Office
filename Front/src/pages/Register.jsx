@@ -121,7 +121,7 @@ const Register = () => {
               </InputRightElement>
             </InputGroup>
             {errors.password?.type === "required" && "Password is required"}
-            {errors.password?.type === "minLength" && "Password is required"}
+            {errors.password?.type === "minLength" && "Minimum ten characters"}
           </FormControl>
           <Button
             fontFamily="body"

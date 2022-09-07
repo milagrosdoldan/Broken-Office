@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <Box
       className="loginView"
-      h={800}
+      h={536}
       bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
     >
       <Box
@@ -78,7 +78,7 @@ const Login = () => {
         borderRadius="10"
         backgroundColor="white"
         p={30}
-        h={400}
+        h={550}
         margin={100}
       >
         <Heading fontSize="35px">Inicia Sesión</Heading>
@@ -91,7 +91,7 @@ const Login = () => {
               size="md"
               {...register("email", { required: true })}
             />
-            <Box ml="25px">
+            <Box mb="15px" ml="25px">
               {errors.email?.type === "required" && "Email is required"}
             </Box>
           </FormControl>
@@ -120,7 +120,7 @@ const Login = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Box ml="25px">
+            <Box mb="15px" ml="25px">
               {errors.password?.type === "required" && "Password is required"}
               {errors.password?.type === "minLength" && "Password is required"}
             </Box>
@@ -142,7 +142,7 @@ const Login = () => {
           </Button>
         </Box> */}
         <Link to="/register">
-          <Text>Need an account? Click here</Text>
+          <Text mt="5px">Need an account? Click here</Text>
         </Link>
       </Box>
     </Box>

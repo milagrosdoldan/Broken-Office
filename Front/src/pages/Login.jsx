@@ -14,6 +14,8 @@ import login from "../style/login.css";
 import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
+import "@fontsource/open-sans";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => dispatch(logIn(data)); 
+  const onSubmit = (data) => dispatch(logIn(data));
 
   return (
     <Box
@@ -53,12 +55,14 @@ const Login = () => {
             <FormLabel textAlign={"center"}>Email</FormLabel>
             <Input
               type="email"
-              placeholder="e-mail"
+              placeholder="Email"
               color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />
-            {errors.email?.type === "required" && "Email is required"}
+            <Box ml="25px">
+              {errors.email?.type === "required" && "Email is required"}
+            </Box>
           </FormControl>
         </Center>
         <Center>
@@ -70,7 +74,7 @@ const Login = () => {
                 pr="4.5rem"
                 size="md"
                 type={show ? "text" : "password"}
-                placeholder="Enter password"
+                placeholder="Password"
                 {...register("password", { required: true, minLength: "10" })}
               />
 
@@ -85,13 +89,17 @@ const Login = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            {errors.password?.type === "required" && "Password is required"}
-            {errors.password?.type === "minLength" && "Password is required"}
+            <Box ml="25px">
+              {errors.password?.type === "required" && "Password is required"}
+              {errors.password?.type === "minLength" && "Password is required"}
+            </Box>
           </FormControl>
         </Center>
-        <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
-          Iniciar Sesión
-        </Button>
+        <Link to="/">
+          <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
+            Iniciar Sesión
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

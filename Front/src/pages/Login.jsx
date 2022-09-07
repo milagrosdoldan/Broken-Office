@@ -17,20 +17,26 @@ import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
+
 import { useEffect } from "react";
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => dispatch(logIn(data));
+  const onSubmit = (data) => {
+    dispatch(logIn(data));
+    navigate("/");
+  };
 
   const handleCallbackResponse = (response) => {
     let userObject = jwt_decode(response.credential);
@@ -83,7 +89,6 @@ const Login = () => {
             <Input
               type="email"
               placeholder="Email"
-              color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />
@@ -105,7 +110,7 @@ const Login = () => {
                 {...register("password", { required: true, minLength: "10" })}
               />
 
-              <InputRightElement width="4.5rem">
+              <InputRightElement width="4.5rem" mr={5}>
                 <Button
                   h="1.75rem"
                   size="sm"
@@ -122,6 +127,7 @@ const Login = () => {
             </Box>
           </FormControl>
         </Center>
+
         <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
           Iniciar Sesión
         </Button>
@@ -139,6 +145,7 @@ const Login = () => {
         <Link to="/register">
           <Text>Need an account? Click here</Text>
         </Link>
+
       </Box>
     </Box>
   );

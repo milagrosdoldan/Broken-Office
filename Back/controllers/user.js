@@ -79,6 +79,7 @@ user.login = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
 user.all = async (req, res) => {
   try {
     const userAll = await User.find({});
@@ -107,6 +108,7 @@ user.updateUser = (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 

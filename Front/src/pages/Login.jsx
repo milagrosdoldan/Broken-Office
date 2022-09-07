@@ -41,7 +41,7 @@ const Login = () => {
         <Center>
           <FormControl className="login" isRequired>
             <FormLabel textAlign={"center"}>Password</FormLabel>
-            <Input type="password" placeholder="password" color="BFD732" />
+            <Input type="password" placeholder="password" />
           </FormControl>
         </Center>
         <Button colorScheme="green">Iniciar Seción</Button>

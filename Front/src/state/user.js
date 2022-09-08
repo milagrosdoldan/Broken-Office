@@ -39,6 +39,7 @@ export const logIn = createAsyncThunk("LOG_IN", async (user) => {
 
 export const sendMe = createAsyncThunk("SEND_ME", async () => {
   const res = await axios.get("/api/user/me");
+  console.log("STATE USER". res.data)
   return res.data;
 });
 
@@ -48,7 +49,7 @@ export const logOut = createAsyncThunk("LOG_OUT", async () => {
 });
 
 export const update = createAsyncThunk("UPDATE", async () => {
-  const res = await axios.post
+  const res = await axios.post("(api/user/");
 });
 
 const userReducer = createReducer([], {
@@ -56,6 +57,7 @@ const userReducer = createReducer([], {
   [logIn.fulfilled]: (state, action) => action.payload,
   [sendMe.fulfilled]: (state, action) => action.payload,
   [logOut.fulfilled]: (state, action) => action.payload,
+  [update.fulfilled]: (state, action) => action.payload,
 });
 
 export default userReducer;

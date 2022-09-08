@@ -140,7 +140,9 @@ const Login = () => {
         </Button>
         <Box id={10}></Box>
         <Link to="/register">
-          <Text mt="5px">Need an account? Click here</Text>
+          <Text textDecoration="underline" mt="5px">
+            Need an account?
+          </Text>
         </Link>
       </Box>
     </Box>

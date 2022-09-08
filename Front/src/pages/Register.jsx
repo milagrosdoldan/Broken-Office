@@ -19,7 +19,6 @@ import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../state/user";
-
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {

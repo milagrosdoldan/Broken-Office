@@ -130,11 +130,10 @@ user.deleteUser = (req, res) => {
   }
 };
 
-user.updateUser = (req, res) => {
+user.updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    User.findByIdAndUpdate({ id }, req.body);
-    res.sendStatus(204);
+    await User.findOneAndUpdate({ _id : req.params._id }, req.body);
+    res.sendStatus(200);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

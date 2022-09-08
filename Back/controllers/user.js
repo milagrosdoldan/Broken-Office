@@ -42,6 +42,7 @@ user.login = async (req, res) => {
           if (!isValid) return res.sendStatus(401);
 
           const token = generateToken({
+
             email: user.email,
             name: user.name,
             lastname: user.lastname,

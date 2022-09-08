@@ -19,7 +19,6 @@ import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useEffect } from "react";
 
 const Login = () => {
@@ -27,6 +26,7 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -38,13 +38,15 @@ const Login = () => {
   };
 
   const handleCallbackResponse = (response) => {
+    console.log(response);
     let userObject = jwt_decode(response.credential);
+    console.log("USER OBJECT", userObject);
     const payload = {
       name: userObject.given_name,
       lastname: userObject.family_name,
       email: userObject.email,
-      userName: userObject.name,
-      loginWithOauth: true,
+      loginWithGoogle: true,
+      picture: userObject.picture,
     };
     dispatch(logIn(payload));
     navigate("/");
@@ -52,7 +54,8 @@ const Login = () => {
 
   useEffect(() => {
     /* global google */ google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      client_id:
+        "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
     google.accounts.id.renderButton(document.getElementById(10), {
@@ -91,10 +94,13 @@ const Login = () => {
               _focusVisible={{ borderColor: "secondary" }}
               type="email"
               placeholder="Email"
+              color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />
+
             <Box mb="15px" ml="25px">
+
               {errors.email?.type === "required" && "Email is required"}
             </Box>
           </FormControl>
@@ -135,16 +141,6 @@ const Login = () => {
           Iniciar Sesión
         </Button>
         <Box id={10}></Box>
-        {/* <Box>
-          <Button borderRadius="30px">
-            <Image
-              boxSize="30px"
-              src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
-              mx={5}
-            />
-            <Text>Login whit Google</Text>
-          </Button>
-        </Box> */}
         <Link to="/register">
           <Text mt="5px">Need an account? Click here</Text>
         </Link>

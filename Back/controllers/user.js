@@ -31,6 +31,7 @@ user.register = async (req, res) => {
       tel: user.tel,
       companyRole: user.companyRole,
       isAdmin: user.isAdmin,
+      picture: user.picture,
     });
 
     newUser.save().then((savedUser) => {
@@ -63,6 +64,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             isAdmin: user.isAdmin,
             id: user.id,
+            picture: user.picture
           });
           res.cookie("token", token);
 
@@ -82,6 +84,8 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
+          picture: user.picture
+
         });
         res.cookie("token", token);
 
@@ -93,10 +97,11 @@ user.login = async (req, res) => {
       } else {
         const user = await User.create(req.body);
         const token = generateToken({
-          email,
+          email: user.email,
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
+          picture: user.picture
         });
         res.cookie("token", token);
 
@@ -104,6 +109,7 @@ user.login = async (req, res) => {
           email: user.email,
           name: user.name,
           lastname: user.lastname,
+
         });
       }
     }
@@ -111,14 +117,11 @@ user.login = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-user.all = async (req, res) => {
-  try {
-    const userAll = await User.find({});
-    res.status(200).json(userAll);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-};
+
+user.logout = (req, res) => {
+  res.clearCookie('token')
+  res.sendStatus(200)
+}
 
 user.deleteUser = (req, res) => {
   try {

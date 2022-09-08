@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { isEmail } = require('validator');
+const validator = require('validator');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter an email'],
     unique: true,
-    validate: [isEmail, 'Please enter a valid email']
+    validate: [validator.default.isEmail, 'Please enter a valid email']
 
   },
   password: {
@@ -35,6 +35,13 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  active:{
+    type: Boolean,
+    default:true
+  },
+  picture:{
+    type: String
+  }
 });
 
 // Schema Hook => has de la password y creacion del salt del usuario

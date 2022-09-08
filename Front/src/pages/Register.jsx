@@ -57,6 +57,7 @@ const Register = () => {
           w="full"
           h="full"
           src="https://fotos.perfil.com/2021/03/03/trim/950/534/globant-20210303-1136704.jpg"
+          alt="imagen de una oficina de globant"
         />
       </Flex>
       <Flex w="full" h="full" alignItems="center" justifyContent="center">

@@ -11,6 +11,9 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  companyRole: {
+    type: String,
+  },
   state: {
     type: String,
     default: "pending",
@@ -22,7 +25,7 @@ const ReportSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  priotiy: {
+  priority: {
     type: number,
   },
 });

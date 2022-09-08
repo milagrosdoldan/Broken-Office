@@ -59,7 +59,7 @@ const Navbar = () => {
         {user.email ? (
           <MenuList>
             {" "}
-            <Link to={`/profile/${user.id}`}>
+            <Link to="/profile">
               <MenuItem>Perfil</MenuItem>
             </Link>
             <MenuItem

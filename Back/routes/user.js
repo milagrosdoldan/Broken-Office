@@ -7,7 +7,6 @@ const {
   register,
   login,
   me,
-  all,
   deleteUser,
   updateUser,
   logout,
@@ -17,7 +16,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/me", validateAuth, me);
 router.post("/logout", logout);
-router.get("/all", validateAuth, validateAdmin, all);
 router.delete("/:_id", validateAuth, validateAdmin, deleteUser);
 router.put("/:_id", updateUser);
 

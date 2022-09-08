@@ -2,6 +2,22 @@ const User = require("../models/User");
 
 const { generateToken } = require("../config/token");
 
+const handleErrors = (err) => {
+  let errors = { email: "", password: "" };
+
+  if (err.code === 11000) {
+    errors.email = "that email is already registered";
+    return errors;
+  }
+
+  if (err.message.includes("user validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+  return errors;
+};
+
 const user = {};
 
 user.register = async (req, res) => {
@@ -21,12 +37,12 @@ user.register = async (req, res) => {
       res.status(201).send(savedUser);
     });
   } catch (err) {
-    return res.status(500).send({ message: err.message });
+    const errors = handleErrors(err);
+    return res.status(400).json({ errors });
   }
 };
 
 user.me = (req, res) => {
-  console.log(req.user)
   res.send(req.user);
 };
 
@@ -41,14 +57,12 @@ user.login = async (req, res) => {
         user.validatePassword(password).then((isValid) => {
           if (!isValid) return res.sendStatus(401);
 
-
           const token = generateToken({
-
-            email: user.email,
+            email,
             name: user.name,
             lastname: user.lastname,
             isAdmin: user.isAdmin,
-            id: user.id
+            id: user.id,
           });
           res.cookie("token", token);
 
@@ -61,7 +75,6 @@ user.login = async (req, res) => {
       });
     } else {
       const userArr = await User.find({ email: req.body.email });
-      console.log("USER ARR", userArr);
       if (userArr.length) {
         let user = userArr[0];
         const token = generateToken({
@@ -69,9 +82,7 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
-          id: user.id
         });
-
         res.cookie("token", token);
 
         res.send({
@@ -80,22 +91,19 @@ user.login = async (req, res) => {
           lastname: user.lastname,
         });
       } else {
-        const user = await new User(req.body);
-        user.save().then((savedUser) => {
-          const token = generateToken({
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-            isAdmin: user.isAdmin,
-            id: user.id
-          });
-          res.cookie("token", token);
+        const user = await User.create(req.body);
+        const token = generateToken({
+          email,
+          name: user.name,
+          lastname: user.lastname,
+          isAdmin: user.isAdmin,
+        });
+        res.cookie("token", token);
 
-          res.status(201).send({
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-          });
+        res.send({
+          email: user.email,
+          name: user.name,
+          lastname: user.lastname,
         });
       }
     }
@@ -103,7 +111,6 @@ user.login = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
 user.all = async (req, res) => {
   try {
     const userAll = await User.find({});
@@ -133,8 +140,4 @@ user.updateUser = (req, res) => {
   }
 };
 
-user.logout = (req, res) => {
-  res.clearCookie("token");
-  res.sendStatus(200);
-};
 module.exports = user;

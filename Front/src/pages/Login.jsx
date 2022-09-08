@@ -40,7 +40,6 @@ const Login = () => {
   const handleCallbackResponse = (response) => {
     console.log(response);
     let userObject = jwt_decode(response.credential);
-    console.log("USER OBJECT", userObject);
     const payload = {
       name: userObject.given_name,
       lastname: userObject.family_name,

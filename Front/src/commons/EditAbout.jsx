@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EditIcon } from "@chakra-ui/icons";
 import {
   Button,
@@ -14,8 +14,11 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import axios from "axios";
+import { sendMe } from "../state/user";
+
 const EditAbout = () => {
   const user = useSelector((state) => state.user);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,15 +29,23 @@ const EditAbout = () => {
   const [email, setEmail] = useState(user.email);
   const [tel, setTel] = useState("");
   const [companyRol, setCompanyRol] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(sendMe());
+  }, []);
+
   const updateUser = (event) => {
     event.preventDefault();
-
+    console.log(user);
     const newData = {
       email,
       tel,
       companyRol,
     };
-    console.log(newData);
+    axios.put(`/api/user/${user.id}`, newData).then((res) => {
+      dispatch();
+    });
     onClose();
   };
 

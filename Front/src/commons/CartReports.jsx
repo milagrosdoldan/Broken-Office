@@ -3,18 +3,18 @@ import React from "react";
 
 const CartReports = () => {
   return (
-    <Box>
-      <Heading ml="10" mt="5">
+    <Box display="flex" flexDir="column" alignItems="center">
+      <Heading ml="10" mt="5" fontSize="25">
         Reports
       </Heading>
       <Box
         display="flex"
         flexDirection="row"
-        mx="10"
+        w={[300, 400, 500]}
         bg="white"
         p="1.5rem"
         borderRadius="10"
-        boxShadow="dark-lg"
+        boxShadow="inner"
       >
         <Text>No reports</Text>
       </Box>

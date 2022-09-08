@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import { Home } from "./pages/Home";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import Perfil from "./pages/Perfil";
 import Register from "./pages/Register";
 import { sendMe } from "./state/user";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/perfil" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/404" element={<NotFound />}></Route>
       </Routes>
     </>
   );

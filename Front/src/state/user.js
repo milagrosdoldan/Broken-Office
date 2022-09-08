@@ -4,15 +4,37 @@ import {
   createAction,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import Swal from "sweetalert2";
 
+// CommonJS
 export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
-  const res = await axios.post("/api/user/register", user);
-  return res.data;
+  try {
+    const res = await axios.post("/api/user/register", user);
+    return res.data;
+  } catch {
+    Swal.fire({
+      text: "Email existente, ingrese otro por favor.",
+      width: 400,
+      showConfirmButton: false,
+      timer: 1500,
+      color: "secondary",
+    });
+  }
 });
 
 export const logIn = createAsyncThunk("LOG_IN", async (user) => {
-  const res = await axios.post("/api/user/login", user);
-  return res.data;
+  try {
+    const res = await axios.post("/api/user/login", user);
+    return res.data;
+  } catch {
+    Swal.fire({
+      text: "Datos incorrectos.",
+      width: 400,
+      showConfirmButton: false,
+      timer: 1500,
+      color: "secondary",
+    });
+  }
 });
 
 export const sendMe = createAsyncThunk("SEND_ME", async () => {
@@ -23,6 +45,10 @@ export const sendMe = createAsyncThunk("SEND_ME", async () => {
 export const logOut = createAsyncThunk("LOG_OUT", async () => {
   const res = await axios.post("/api/user/logout");
   return res.data;
+});
+
+export const update = createAsyncThunk("UPDATE", async () => {
+  const res = await axios.post
 });
 
 const userReducer = createReducer([], {

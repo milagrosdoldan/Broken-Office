@@ -2,11 +2,29 @@ const User = require("../models/User");
 
 const { generateToken } = require("../config/token");
 
+const handleErrors = (err) => {
+  let errors = { email: "", password: "" };
+
+  if (err.code === 11000) {
+    errors.email = "that email is already registered";
+    return errors;
+  }
+
+  if (err.message.includes("user validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+  return errors;
+};
+
 const user = {};
 
 user.register = async (req, res) => {
   try {
-    const user = req.body;
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send("Email already exists");
+
     const newUser = new User({
       name: user.name,
       lastname: user.lastname,
@@ -15,18 +33,19 @@ user.register = async (req, res) => {
       tel: user.tel,
       companyRole: user.companyRole,
       isAdmin: user.isAdmin,
+      picture: user.picture,
     });
 
     newUser.save().then((savedUser) => {
       res.status(201).send(savedUser);
     });
   } catch (err) {
-    return res.status(500).send({ message: err.message });
+    const errors = handleErrors(err);
+    return res.status(400).json({ errors });
   }
 };
 
 user.me = (req, res) => {
-  console.log(req.user)
   res.send(req.user);
 };
 
@@ -42,9 +61,9 @@ user.login = async (req, res) => {
           if (!isValid) return res.sendStatus(401);
 
           const token = generateToken({
-
             email: user.email,
             name: user.name,
+            id: user._id,
             lastname: user.lastname,
             isAdmin: user.isAdmin,
           });
@@ -67,6 +86,7 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
+          picture: user.picture,
         });
         res.cookie("token", token);
 
@@ -76,35 +96,25 @@ user.login = async (req, res) => {
           lastname: user.lastname,
         });
       } else {
-        const user = await new User(req.body);
-        user.save().then((savedUser) => {
-          const token = generateToken({
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-            isAdmin: user.isAdmin,
-          });
-          res.cookie("token", token);
+        const user = await User.create(req.body);
+        const token = generateToken({
+          email: user.email,
+          name: user.name,
+          lastname: user.lastname,
+          isAdmin: user.isAdmin,
+          picture: user.picture,
+        });
+        res.cookie("token", token);
 
-          res.status(201).send({
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-          });
+        res.send({
+          email: user.email,
+          name: user.name,
+          lastname: user.lastname,
         });
       }
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
-  }
-};
-
-user.all = async (req, res) => {
-  try {
-    const userAll = await User.find({});
-    res.status(200).json(userAll);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -118,11 +128,10 @@ user.deleteUser = (req, res) => {
   }
 };
 
-user.updateUser = (req, res) => {
+user.updateUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    User.findByIdAndUpdate({ id }, req.body);
-    res.sendStatus(204);
+    await User.findOneAndUpdate({ _id: req.params._id }, req.body);
+    res.sendStatus(200);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -40,7 +40,7 @@ user.login = async (req, res) => {
       user.validatePassword(password).then((isValid) => {
         if (!isValid) return res.sendStatus(401);
 
-        const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
+        const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin, id: user.id });
         res.cookie("token", token);
 
         res.send({

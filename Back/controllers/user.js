@@ -5,7 +5,7 @@ const { generateToken } = require("../config/token");
 const handleErrors = (err) => {
   let errors = { email: "", password: "" };
 
-  if (err.code === 11000) {
+  if (err.code === "E11000") {
     errors.email = "that email is already registered";
     return errors;
   }
@@ -22,9 +22,10 @@ const user = {};
 
 user.register = async (req, res) => {
   try {
-    let user = await User.findOne({ email: req.body.email });
-    if (user) return res.status(400).send("Email already exists");
+    let usuario = await User.findOne({ email: req.body.email });
+    if (usuario) return res.status(400).send("Email already exists");
 
+    const user = req.body;
     const newUser = new User({
       name: user.name,
       lastname: user.lastname,
@@ -61,19 +62,17 @@ user.login = async (req, res) => {
           if (!isValid) return res.sendStatus(401);
 
           const token = generateToken({
-
             email: user.email,
-
             name: user.name,
             id: user._id,
             lastname: user.lastname,
             isAdmin: user.isAdmin,
-            id: user.id,
-            picture: user.picture
+            picture: user.picture,
           });
           res.cookie("token", token);
 
           res.send({
+            id: user._id,
             email: user.email,
             name: user.name,
             lastname: user.lastname,
@@ -91,16 +90,13 @@ user.login = async (req, res) => {
           isAdmin: user.isAdmin,
 
           picture: user.picture,
-
-    
-
-
         });
         res.cookie("token", token);
 
         res.send({
           email: user.email,
           name: user.name,
+          id: user._id,
           lastname: user.lastname,
         });
       } else {
@@ -110,7 +106,7 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
-
+          id: user._id,
           picture: user.picture,
         });
         res.cookie("token", token);
@@ -118,8 +114,8 @@ user.login = async (req, res) => {
         res.send({
           email: user.email,
           name: user.name,
+          id: user._id,
           lastname: user.lastname,
-
         });
       }
     }
@@ -128,12 +124,10 @@ user.login = async (req, res) => {
   }
 };
 
-
 user.logout = (req, res) => {
-  res.clearCookie('token')
-  res.sendStatus(200)
-}
-
+  res.clearCookie("token");
+  res.sendStatus(200);
+};
 
 user.deleteUser = (req, res) => {
   try {
@@ -147,8 +141,7 @@ user.deleteUser = (req, res) => {
 
 user.updateUser = async (req, res) => {
   try {
-
-    await User.findOneAndUpdate({ _id : req.params._id }, req.body);
+    await User.findOneAndUpdate({ _id: req.params._id }, req.body);
 
     res.sendStatus(200);
   } catch (error) {

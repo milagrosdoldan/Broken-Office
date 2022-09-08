@@ -26,21 +26,52 @@ user.register = async (req, res) => {
 };
 
 user.me = (req, res) => {
+  console.log(req.user)
   res.send(req.user);
 };
 
 user.login = async (req, res) => {
   try {
-    if(!req.body.loginWithGoogle){
-    const { email, password} = req.body;
+    if (!req.body.loginWithGoogle) {
+      const { email, password } = req.body;
 
-    User.findOne({ email }).then((user) => {
-      if (!user) return res.sendStatus(401);
+      User.findOne({ email }).then((user) => {
+        if (!user) return res.sendStatus(401);
 
-      user.validatePassword(password).then((isValid) => {
-        if (!isValid) return res.sendStatus(401);
+        user.validatePassword(password).then((isValid) => {
+          if (!isValid) return res.sendStatus(401);
 
-        const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin, id: user.id });
+
+          const token = generateToken({
+
+            email: user.email,
+            name: user.name,
+            lastname: user.lastname,
+            isAdmin: user.isAdmin,
+            id: user.id
+          });
+          res.cookie("token", token);
+
+          res.send({
+            email: user.email,
+            name: user.name,
+            lastname: user.lastname,
+          });
+        });
+      });
+    } else {
+      const userArr = await User.find({ email: req.body.email });
+      console.log("USER ARR", userArr);
+      if (userArr.length) {
+        let user = userArr[0];
+        const token = generateToken({
+          email: user.email,
+          name: user.name,
+          lastname: user.lastname,
+          isAdmin: user.isAdmin,
+          id: user.id
+        });
+
         res.cookie("token", token);
 
         res.send({
@@ -48,37 +79,31 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
         });
+      } else {
+        const user = await new User(req.body);
+        user.save().then((savedUser) => {
+          const token = generateToken({
+            email: user.email,
+            name: user.name,
+            lastname: user.lastname,
+            isAdmin: user.isAdmin,
+            id: user.id
+          });
+          res.cookie("token", token);
 
-      });
-    });
-  } else{
-    const userArr = await User.find({email : req.body.email})
-    if(userArr.length){
-      let user = userArr[0]
-      const token = generateToken({ email : user.email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
-      res.cookie("token", token);
-
-      res.send({
-        email: user.email,
-        name: user.name,
-        lastname: user.lastname,
-      });
-    }else{
-      const user = await User.create(req.body)
-      const token = generateToken({ email, name : user.name, lastname : user.lastname, isAdmin : user.isAdmin  });
-      res.cookie("token", token);
-
-      res.send({
-        email: user.email,
-        name: user.name,
-        lastname: user.lastname,
-      });
+          res.status(201).send({
+            email: user.email,
+            name: user.name,
+            lastname: user.lastname,
+          });
+        });
+      }
     }
-  }
-}catch (error) {
+  } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
+
 user.all = async (req, res) => {
   try {
     const userAll = await User.find({});
@@ -90,9 +115,9 @@ user.all = async (req, res) => {
 
 user.deleteUser = (req, res) => {
   try {
-    const {id} = req.params
-    User.findByIdAndDelete({id})
-    res.sendStatus(204)
+    const { id } = req.params;
+    User.findByIdAndDelete({ id });
+    res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -100,14 +125,16 @@ user.deleteUser = (req, res) => {
 
 user.updateUser = (req, res) => {
   try {
-    const {id} = req.params
-    User.findByIdAndUpdate({id}, req.body)
-    res.sendStatus(204)
+    const { id } = req.params;
+    User.findByIdAndUpdate({ id }, req.body);
+    res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
-
+user.logout = (req, res) => {
+  res.clearCookie("token");
+  res.sendStatus(200);
+};
 module.exports = user;

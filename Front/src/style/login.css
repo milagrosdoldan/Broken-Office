@@ -29,8 +29,9 @@
 }
 
 .login button {
-  background-color: #bfd732 !important;
-  margin: 10px;
+  /* background-color: #bfd732 !important; */
+  margin: 40px;
+  
 }
 .loginCart {
   display: flex;

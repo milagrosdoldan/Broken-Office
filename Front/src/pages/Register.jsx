@@ -12,27 +12,34 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import { useDispatch } from "react-redux";
 import { signUp } from "../state/user";
-import register from "../style/register.css";
+
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const toast = useToast();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => dispatch(signUp(data));
+  const onSubmit = (data) => {
+    dispatch(signUp(data));
+    navigate("/login");
+  };
 
   return (
-    <HStack w="full" h="100vh">
+    <HStack w="full" h="84.2vh">
       <Flex w="full" h="full" borderRightWidth={1}>
         <Image
           objectFit="cover"
@@ -51,6 +58,8 @@ const Register = () => {
             <FormControl isRequired id="name">
               <FormLabel>Name</FormLabel>
               <Input
+                _focusVisible={{ borderColor: "secondary" }}
+                _hover={{ color: "secondary" }}
                 width={40}
                 placeholder="Name"
                 size="md"
@@ -63,6 +72,7 @@ const Register = () => {
             <FormControl id="lastname" isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
+                _focusVisible={{ borderColor: "secondary"  }}
                 ml={5}
                 width={40}
                 placeholder="Lastname"
@@ -77,6 +87,7 @@ const Register = () => {
           <FormControl isRequired id="email">
             <FormLabel>Email</FormLabel>
             <Input
+              _focusVisible={{ borderColor:"secondary"  }}
               placeholder="Email"
               size="md"
               {...register("email", {
@@ -93,6 +104,7 @@ const Register = () => {
             <FormLabel>Password </FormLabel>
             <InputGroup size="md">
               <Input
+                _focusVisible={{ borderColor: "secondary" }}
                 fontFamily="body"
                 pr="4.5rem"
                 size="md"
@@ -113,15 +125,26 @@ const Register = () => {
               </InputRightElement>
             </InputGroup>
             {errors.password?.type === "required" && "Password is required"}
-            {errors.password?.type === "minLength" && "Password is required"}
+            {errors.password?.type === "minLength" && "Minimum ten characters"}
           </FormControl>
           <Button
             fontFamily="body"
             display="flex"
             mt={4}
-            onClick={handleSubmit(onSubmit)}
+            onClick={() => {
+              handleSubmit(onSubmit);
+              toast({
+                title: "Account created.",
+                description: "We've created your account for you.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              });
+              navigate("/");
+            }}
             borderRadius="40px"
             bg="secondary"
+            _hover={{ bg: "fourth" }}
           >
             Register
           </Button>

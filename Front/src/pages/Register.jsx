@@ -17,7 +17,7 @@ import {
 import { useForm } from "react-hook-form";
 import "@fontsource/open-sans";
 import "@fontsource/heebo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../state/user";
 
 import { useNavigate } from "react-router-dom";
@@ -28,15 +28,26 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
+  const user = useSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     dispatch(signUp(data));
-    navigate("/login");
   };
+  user.email && navigate("/login");
+  // toast({
+  //   title: "Account created.",
+  //   description: "We've created your account for you.",
+  //   status: "success",
+  //   duration: 3000,
+  //   isClosable: true,
+  // });
+  // navigate("/login");
 
   return (
     <HStack w="full" h="84.2vh">
@@ -51,7 +62,7 @@ const Register = () => {
       <Flex w="full" h="full" alignItems="center" justifyContent="center">
         <Stack maxW="lg" spacing={6} p={6}>
           <Heading fontSize="35px" color="third">
-            Registrate
+            Register
           </Heading>
 
           <Box minWidth="100%" display="flex" flexDirection="row">
@@ -72,7 +83,7 @@ const Register = () => {
             <FormControl id="lastname" isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
-                _focusVisible={{ borderColor: "secondary"  }}
+                _focusVisible={{ borderColor: "secondary" }}
                 ml={5}
                 width={40}
                 placeholder="Lastname"
@@ -87,7 +98,7 @@ const Register = () => {
           <FormControl isRequired id="email">
             <FormLabel>Email</FormLabel>
             <Input
-              _focusVisible={{ borderColor:"secondary"  }}
+              _focusVisible={{ borderColor: "secondary" }}
               placeholder="Email"
               size="md"
               {...register("email", {
@@ -110,7 +121,7 @@ const Register = () => {
                 size="md"
                 type={show ? "text" : "password"}
                 placeholder="Enter password"
-                {...register("password", { required: true, minLength: "10" })}
+                {...register("password", { required: true, minLength: "7" })}
               />
 
               <InputRightElement width="4.5rem">
@@ -131,17 +142,7 @@ const Register = () => {
             fontFamily="body"
             display="flex"
             mt={4}
-            onClick={() => {
-              handleSubmit(onSubmit);
-              toast({
-                title: "Account created.",
-                description: "We've created your account for you.",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              });
-              navigate("/");
-            }}
+            onClick={handleSubmit(onSubmit)}
             borderRadius="40px"
             bg="secondary"
             _hover={{ bg: "fourth" }}

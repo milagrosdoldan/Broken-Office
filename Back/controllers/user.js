@@ -22,7 +22,9 @@ const user = {};
 
 user.register = async (req, res) => {
   try {
-    const user = req.body;
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send("Email already exists");
+
     const newUser = new User({
       name: user.name,
       lastname: user.lastname,
@@ -59,8 +61,11 @@ user.login = async (req, res) => {
           if (!isValid) return res.sendStatus(401);
 
           const token = generateToken({
-            email,
+
+            email: user.email,
+
             name: user.name,
+            id: user._id,
             lastname: user.lastname,
             isAdmin: user.isAdmin,
             id: user.id,
@@ -84,7 +89,11 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
-          picture: user.picture
+
+          picture: user.picture,
+
+    
+
 
         });
         res.cookie("token", token);
@@ -101,7 +110,8 @@ user.login = async (req, res) => {
           name: user.name,
           lastname: user.lastname,
           isAdmin: user.isAdmin,
-          picture: user.picture
+
+          picture: user.picture,
         });
         res.cookie("token", token);
 
@@ -118,10 +128,12 @@ user.login = async (req, res) => {
   }
 };
 
+
 user.logout = (req, res) => {
   res.clearCookie('token')
   res.sendStatus(200)
 }
+
 
 user.deleteUser = (req, res) => {
   try {
@@ -135,7 +147,9 @@ user.deleteUser = (req, res) => {
 
 user.updateUser = async (req, res) => {
   try {
+
     await User.findOneAndUpdate({ _id : req.params._id }, req.body);
+
     res.sendStatus(200);
   } catch (error) {
     res.status(500).json({ message: error.message });

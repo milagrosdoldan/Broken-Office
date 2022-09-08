@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/user";
 
@@ -18,9 +18,11 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const toast = useToast();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     dispatch(logOut());
+    navigate("/");
   };
 
   return (
@@ -57,7 +59,7 @@ const Navbar = () => {
         {user.email ? (
           <MenuList>
             {" "}
-            <Link to="/perfil">
+            <Link to={`/profile/${user.id}`}>
               <MenuItem>Perfil</MenuItem>
             </Link>
             <MenuItem
@@ -65,7 +67,6 @@ const Navbar = () => {
                 handleLogOut();
                 toast({
                   title: "Closed account.",
-
                   status: "success",
                   duration: 4000,
                   isClosable: true,

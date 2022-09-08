@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import CartPerfil from "../commons/CartPerfil";
 import CartPermissions from "../commons/CartPermissions";
 import CartReports from "../commons/CartReports";
-import About from "../commons/About";
+
 const Perfil = () => {
   const user = useSelector((state) => state.user);
+
+  
   return (
     <Box bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)">
       <Heading textAlign={"center"} m="30">

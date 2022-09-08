@@ -32,9 +32,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    dispatch(logIn(data));
-    navigate("/");
+  const onSubmit = async (data) => {
+    dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
   const handleCallbackResponse = (response) => {
@@ -85,7 +84,7 @@ const Login = () => {
         margin={100}
       >
         <Heading fontSize="35px" color="third">
-          Inicia Sesión
+          Sig in
         </Heading>
         <Center>
           <FormControl className="login" isRequired>
@@ -100,7 +99,6 @@ const Login = () => {
             />
 
             <Box mb="15px" ml="25px">
-
               {errors.email?.type === "required" && "Email is required"}
             </Box>
           </FormControl>
@@ -138,7 +136,7 @@ const Login = () => {
         </Center>
 
         <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
-          Iniciar Sesión
+          Log In
         </Button>
         <Box id={10}></Box>
         <Link to="/register">

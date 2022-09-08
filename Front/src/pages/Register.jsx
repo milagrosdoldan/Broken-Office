@@ -58,6 +58,7 @@ const Register = () => {
             <FormControl isRequired id="name">
               <FormLabel>Name</FormLabel>
               <Input
+                _focusVisible={{ borderColor: "secondary" }}
                 _hover={{ color: "secondary" }}
                 width={40}
                 placeholder="Name"
@@ -71,6 +72,7 @@ const Register = () => {
             <FormControl id="lastname" isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
+                _focusVisible={{ borderColor: "secondary"  }}
                 ml={5}
                 width={40}
                 placeholder="Lastname"
@@ -85,6 +87,7 @@ const Register = () => {
           <FormControl isRequired id="email">
             <FormLabel>Email</FormLabel>
             <Input
+              _focusVisible={{ borderColor:"secondary"  }}
               placeholder="Email"
               size="md"
               {...register("email", {
@@ -101,6 +104,7 @@ const Register = () => {
             <FormLabel>Password </FormLabel>
             <InputGroup size="md">
               <Input
+                _focusVisible={{ borderColor: "secondary" }}
                 fontFamily="body"
                 pr="4.5rem"
                 size="md"

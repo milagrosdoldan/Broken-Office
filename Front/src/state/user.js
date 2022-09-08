@@ -25,10 +25,6 @@ export const logOut = createAsyncThunk("LOG_OUT", async () => {
   return res.data;
 });
 
-export const ubication = createAsyncThunk("UBICATION", async () => {
-  
-});
-
 const userReducer = createReducer([], {
   [signUp.fulfilled]: (state, action) => action.payload,
   [logIn.fulfilled]: (state, action) => action.payload,

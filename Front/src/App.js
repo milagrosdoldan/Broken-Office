@@ -38,7 +38,7 @@ function App() {
 
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
-  
+
   console.log(location, "location");
   return (
     <>

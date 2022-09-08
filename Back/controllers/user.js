@@ -26,6 +26,7 @@ user.register = async (req, res) => {
 };
 
 user.me = (req, res) => {
+  console.log(req.user)
   res.send(req.user);
 };
 
@@ -41,7 +42,8 @@ user.login = async (req, res) => {
           if (!isValid) return res.sendStatus(401);
 
           const token = generateToken({
-            email,
+
+            email: user.email,
             name: user.name,
             lastname: user.lastname,
             isAdmin: user.isAdmin,
@@ -125,6 +127,7 @@ user.updateUser = (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 user.logout = (req, res) => {
   res.clearCookie("token");
   res.sendStatus(200);

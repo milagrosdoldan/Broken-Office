@@ -67,7 +67,7 @@ const Login = () => {
   return (
     <Box
       className="loginView"
-      h={800}
+      h={[750, 620, 536]}
       bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
     >
       <Box
@@ -77,25 +77,30 @@ const Login = () => {
         justify="center"
         justifyContent="space-between"
         alignItems="center"
-        boxShadow="dark-lg"
+        // boxShadow="dark-lg"
         borderRadius="10"
         backgroundColor="white"
         p={30}
-        h={400}
+        h={550}
         margin={100}
       >
-        <Heading fontSize="35px">Inicia Sesión</Heading>
+        <Heading fontSize="35px" color="third">
+          Inicia Sesión
+        </Heading>
         <Center>
           <FormControl className="login" isRequired>
             <FormLabel textAlign={"center"}>Email</FormLabel>
             <Input
+              _focusVisible={{ borderColor: "secondary" }}
               type="email"
               placeholder="Email"
               color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />
-            <Box m="25px" >
+
+            <Box mb="15px" ml="25px">
+
               {errors.email?.type === "required" && "Email is required"}
             </Box>
           </FormControl>
@@ -105,6 +110,7 @@ const Login = () => {
             <FormLabel textAlign={"center"}>Password</FormLabel>
             <InputGroup size="md">
               <Input
+                _focusVisible={{ borderColor: "secondary" }}
                 fontFamily="body"
                 pr="4.5rem"
                 size="md"
@@ -124,7 +130,7 @@ const Login = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Box ml="25px">
+            <Box mb="15px" ml="25px">
               {errors.password?.type === "required" && "Password is required"}
               {errors.password?.type === "minLength" && "Password is required"}
             </Box>
@@ -136,7 +142,7 @@ const Login = () => {
         </Button>
         <Box id={10}></Box>
         <Link to="/register">
-          <Text>Need an account? Click here</Text>
+          <Text mt="5px">Need an account? Click here</Text>
         </Link>
       </Box>
     </Box>

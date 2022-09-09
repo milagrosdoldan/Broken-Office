@@ -46,8 +46,10 @@ const UserSchema = new mongoose.Schema({
 
 // Schema Hook => has de la password y creacion del salt del usuario
 UserSchema.pre("save", async function () {
-  this.salt = bcrypt.genSaltSync();
-  return (this.password = await bcrypt.hash(this.password, this.salt));
+  if (!this.salt) {
+    this.salt = bcrypt.genSaltSync();
+    return (this.password = await bcrypt.hash(this.password, this.salt));
+  }
 });
 
 UserSchema.methods.validatePassword = function validatePassword(password) {

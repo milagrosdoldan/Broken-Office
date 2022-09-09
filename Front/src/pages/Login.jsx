@@ -20,7 +20,7 @@ import "@fontsource/open-sans";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
@@ -32,7 +32,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async (data) => {
+    data.loginWithGoogle = false;
     dispatch(logIn(data)).then(() => document.cookie && navigate("/profile"));
   };
 
@@ -139,7 +141,7 @@ const Login = () => {
         <Box id={10}></Box>
         <Link to="/register">
           <Text textDecoration="underline" mt="5px">
-            Need an account?
+            Need an account? <ExternalLinkIcon mx="2px" />
           </Text>
         </Link>
       </Box>

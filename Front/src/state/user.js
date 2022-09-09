@@ -13,7 +13,7 @@ export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
     return res.data;
   } catch {
     Swal.fire({
-      text: "Email existente, ingrese otro por favor.",
+      text: "Datos inválidos.",
       width: 400,
       showConfirmButton: false,
       timer: 1500,
@@ -49,7 +49,6 @@ export const logOut = createAsyncThunk("LOG_OUT", async () => {
 
 export const update = createAsyncThunk("UPDATE", async (data, thunk) => {
   const { user } = thunk.getState();
-
   return axios.put(`/api/user/${user.id}`, data).data;
 });
 

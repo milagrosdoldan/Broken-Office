@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const validator = require('validator');
+const validator = require("validator");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -13,20 +13,20 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, 'Please enter an email'],
+    required: [true, "Please enter an email"],
     unique: true,
-    validate: [validator.default.isEmail, 'Please enter a valid email']
-
+    validate: [validator.default.isEmail, "Please enter a valid email"],
   },
   password: {
     type: String,
-    minlength: [7, 'Minimun password length is 7 characters'],
+    minlength: [7, "Minimun password length is 7 characters"],
   },
   tel: {
     type: Number,
   },
   companyRole: {
     type: String,
+    default: "none",
   },
   salt: {
     type: String,
@@ -35,13 +35,13 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  active:{
+  active: {
     type: Boolean,
-    default:true
+    default: true,
   },
-  picture:{
-    type: String
-  }
+  picture: {
+    type: String,
+  },
 });
 
 // Schema Hook => has de la password y creacion del salt del usuario
@@ -50,18 +50,18 @@ UserSchema.pre("save", async function () {
   return (this.password = await bcrypt.hash(this.password, this.salt));
 });
 
-UserSchema.methods.validatePassword = function validatePassword(password){
-  return bcrypt.hash(password, this.salt).then(
-    (newHash) => newHash === this.password
-  );
-}
+UserSchema.methods.validatePassword = function validatePassword(password) {
+  return bcrypt
+    .hash(password, this.salt)
+    .then((newHash) => newHash === this.password);
+};
 
-UserSchema.set('toJSON', {
-  transform: (document, returnedObject)=>{
-    returnedObject.id = returnedObject._id
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
+UserSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
+});
 
 module.exports = mongoose.model("User", UserSchema);

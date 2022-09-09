@@ -15,7 +15,7 @@ import React from "react";
 import login from "../style/login.css";
 import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "@fontsource/open-sans";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,20 +26,19 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-
+  const user = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
+    dispatch(logIn(data)).then(() => document.cookie && navigate("/profile"));
   };
 
   const handleCallbackResponse = (response) => {
-    console.log(response);
     let userObject = jwt_decode(response.credential);
-    console.log("USER OBJECT", userObject);
+
     const payload = {
       name: userObject.given_name,
       lastname: userObject.family_name,
@@ -48,7 +47,7 @@ const Login = () => {
       picture: userObject.picture,
     };
     dispatch(logIn(payload));
-    navigate("/");
+    navigate("/profile");
   };
 
   useEffect(() => {
@@ -76,7 +75,6 @@ const Login = () => {
         justify="center"
         justifyContent="space-between"
         alignItems="center"
-        // boxShadow="dark-lg"
         borderRadius="10"
         backgroundColor="white"
         p={30}

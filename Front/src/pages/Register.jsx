@@ -20,7 +20,8 @@ import "@fontsource/heebo";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../state/user";
 import { useNavigate } from "react-router-dom";
-
+import "@fontsource/open-sans";
+import "@fontsource/heebo";
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -59,7 +60,12 @@ const Register = () => {
           alt="imagen de una oficina de globant"
         />
       </Flex>
-      <Flex w="full" h="full" alignItems="center" justifyContent="center">
+      <Flex
+        w={["full", "full", "full"]}
+        h="full"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Stack maxW="lg" spacing={6} p={6}>
           <Heading fontSize="35px" color="third">
             Register

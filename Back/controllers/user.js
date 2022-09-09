@@ -58,10 +58,10 @@ user.login = async (req, res) => {
 
       User.findOne({ email }).then((user) => {
         if (!user) return res.sendStatus(401);
+        console.log(user, "user");
 
         user.validatePassword(password).then((isValid) => {
           if (!isValid) return res.sendStatus(401);
-
           const token = generateToken({
             email: user.email,
             name: user.name,

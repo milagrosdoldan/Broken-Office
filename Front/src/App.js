@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import Login from "./pages/Login";
 import Perfil from "./pages/Perfil";
 import Register from "./pages/Register";
+import Reports from "./pages/Reports";
 import { setUbication } from "./state/location";
 import { sendMe } from "./state/user";
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/profile" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/admin/reports" element={<Reports />}></Route>
       </Routes>
     </>
   );

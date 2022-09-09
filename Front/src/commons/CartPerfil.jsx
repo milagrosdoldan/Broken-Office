@@ -19,15 +19,15 @@ const CartPerfil = ({ user }) => {
       >
         <Box display="flex" flexDirection="column">
           <Text fontWeight="bold">Email</Text>
-          <Text fontWeight="bold">Works From</Text>
+          <Text fontWeight="bold">Works</Text>
           <Text fontWeight="bold">Phone</Text>
-          <Text fontWeight="bold">Company Rol</Text>
+          <Text fontWeight="bold">Puesto</Text>
         </Box>
         <Box display="flex" flexDirection="column">
           <Text ml="1rem">{`${user.email}`}</Text>
           <Text ml="1rem"> Globant</Text>
-          <Text ml="1rem"> {user.tel}</Text>
-          <Text ml="1rem"> {user.companyRol}</Text> 
+          <Text ml="1rem"> {user.tel || "None"}</Text>
+          <Text ml="1rem"> {user.companyRole || "None"}</Text> 
         </Box>
         <Box display="flex" alignItems="flex-end" mx={[0, 20, 180]}>
           <EditAbout />

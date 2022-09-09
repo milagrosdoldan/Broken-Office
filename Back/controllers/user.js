@@ -70,12 +70,13 @@ user.login = async (req, res) => {
             picture: user.picture,
           });
           res.cookie("token", token);
-
           res.send({
-            id: user._id,
             email: user.email,
             name: user.name,
+            id: user._id,
             lastname: user.lastname,
+            tel: user.tel,
+            companyRole: user.companyRole
           });
         });
       });
@@ -92,12 +93,13 @@ user.login = async (req, res) => {
           picture: user.picture,
         });
         res.cookie("token", token);
-
         res.send({
           email: user.email,
           name: user.name,
           id: user._id,
           lastname: user.lastname,
+          tel: user.tel,
+          companyRole: user.companyRole
         });
       } else {
         const user = await User.create(req.body);
@@ -116,6 +118,8 @@ user.login = async (req, res) => {
           name: user.name,
           id: user._id,
           lastname: user.lastname,
+          tel: user.tel,
+          companyRole: user.companyRole
         });
       }
     }

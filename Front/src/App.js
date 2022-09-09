@@ -12,8 +12,8 @@ import { sendMe } from "./state/user";
 
 function App() {
   const [location, setLocation] = useState([]);
-
   const dispatch = useDispatch();
+  
   useEffect(async () => {
     dispatch(sendMe());
 

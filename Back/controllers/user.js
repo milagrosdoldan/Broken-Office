@@ -46,8 +46,9 @@ user.register = async (req, res) => {
   }
 };
 
-user.me = (req, res) => {
-  res.send(req.user);
+user.me = async (req, res) => {
+  let user = await User.findOne({ email: req.user.email });
+  res.send(user);
 };
 
 user.login = async (req, res) => {
@@ -66,8 +67,8 @@ user.login = async (req, res) => {
             name: user.name,
             id: user._id,
             lastname: user.lastname,
-            isAdmin: user.isAdmin,
-            picture: user.picture,
+            tel: user.tel,
+            companyRole: user.companyRole,
           });
           res.cookie("token", token);
           res.send({
@@ -76,7 +77,7 @@ user.login = async (req, res) => {
             id: user._id,
             lastname: user.lastname,
             tel: user.tel,
-            companyRole: user.companyRole
+            companyRole: user.companyRole,
           });
         });
       });
@@ -87,10 +88,10 @@ user.login = async (req, res) => {
         const token = generateToken({
           email: user.email,
           name: user.name,
+          id: user._id,
           lastname: user.lastname,
-          isAdmin: user.isAdmin,
-
-          picture: user.picture,
+          tel: user.tel,
+          companyRole: user.companyRole,
         });
         res.cookie("token", token);
         res.send({
@@ -99,17 +100,17 @@ user.login = async (req, res) => {
           id: user._id,
           lastname: user.lastname,
           tel: user.tel,
-          companyRole: user.companyRole
+          companyRole: user.companyRole,
         });
       } else {
         const user = await User.create(req.body);
         const token = generateToken({
           email: user.email,
           name: user.name,
-          lastname: user.lastname,
-          isAdmin: user.isAdmin,
           id: user._id,
-          picture: user.picture,
+          lastname: user.lastname,
+          tel: user.tel,
+          companyRole: user.companyRole,
         });
         res.cookie("token", token);
 
@@ -119,7 +120,7 @@ user.login = async (req, res) => {
           id: user._id,
           lastname: user.lastname,
           tel: user.tel,
-          companyRole: user.companyRole
+          companyRole: user.companyRole,
         });
       }
     }
@@ -145,9 +146,14 @@ user.deleteUser = (req, res) => {
 
 user.updateUser = async (req, res) => {
   try {
-    await User.findOneAndUpdate({ _id: req.params._id }, req.body);
-
-    res.sendStatus(200);
+    const usuario = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      req.body
+    );
+    usuario.save();
+    const user = await User.find({ _id: req.params._id });
+    console.log(user, "user");
+    res.status(200).send(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

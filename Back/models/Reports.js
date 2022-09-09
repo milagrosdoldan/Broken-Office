@@ -11,6 +11,9 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  companyRole: {
+    type: String,
+  },
   state: {
     type: String,
     default: "pending",
@@ -27,6 +30,7 @@ const ReportSchema = new mongoose.Schema({
     type: String,
   },
   priority: {
+
     type: Number,
   },
   country: {
@@ -35,6 +39,7 @@ const ReportSchema = new mongoose.Schema({
   coord: {
     type: Array,
     required: false,
+
   },
 });
 

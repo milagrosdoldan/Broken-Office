@@ -39,7 +39,6 @@ export const logIn = createAsyncThunk("LOG_IN", async (user) => {
 
 export const sendMe = createAsyncThunk("SEND_ME", async () => {
   const res = await axios.get("/api/user/me");
-  console.log("STATE USER". res.data)
   return res.data;
 });
 
@@ -48,8 +47,10 @@ export const logOut = createAsyncThunk("LOG_OUT", async () => {
   return res.data;
 });
 
-export const update = createAsyncThunk("UPDATE", async () => {
-  const res = await axios.post("(api/user/");
+export const update = createAsyncThunk("UPDATE", async (data, thunk) => {
+  const { user } = thunk.getState();
+
+  return axios.put(`/api/user/${user.id}`, data).data;
 });
 
 const userReducer = createReducer([], {

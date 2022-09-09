@@ -39,12 +39,9 @@ const EditAbout = () => {
     };
 
     axios.put(`/api/user/${user.id}`, newData);
-    // .then((response) => console.log(response, "actualziado"));
-
+    
     dispatch(sendMe());
-    // dispatch(
-    //   logIn({ email: "milagrosivanadoldan@gmail.com", password: "milagros1." })
-    // );
+   
     onClose();
   };
 

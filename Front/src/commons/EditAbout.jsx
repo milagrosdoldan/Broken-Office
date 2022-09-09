@@ -39,9 +39,9 @@ const EditAbout = () => {
     };
 
     axios.put(`/api/user/${user.id}`, newData);
-    
+
     dispatch(sendMe());
-   
+
     onClose();
   };
 

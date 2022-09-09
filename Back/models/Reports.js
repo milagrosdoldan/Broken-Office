@@ -19,11 +19,22 @@ const ReportSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: Date,
+    required: false,
+  },
   description: {
     type: String,
   },
-  priotiy: {
-    type: number,
+  priority: {
+    type: Number,
+  },
+  country: {
+    type: String,
+  },
+  coord: {
+    type: Array,
+    required: false,
   },
 });
 

@@ -1,3 +1,13 @@
+.css-l49nra {
+  color: black !important;
+}
+.css-l49nra:hover {
+  border-color: #bfd732 !important;
+}
+.css-l49nra:focus-visible {
+  border-color: #bfd732 !important;
+  box-shadow: 0 0 0 1px #bfd732 !important;
+}
 .css-156sogh:hover {
   border-color: #bfd732 !important;
 }
@@ -19,8 +29,9 @@
 }
 
 .login button {
-  background-color: #bfd732 !important;
-  margin: 10px;
+  /* background-color: #bfd732 !important; */
+  margin: 40px;
+  
 }
 .loginCart {
   display: flex;
@@ -32,3 +43,4 @@
   flex-direction: column;
   margin: 0 auto !important;
 }
+

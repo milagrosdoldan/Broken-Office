@@ -114,7 +114,7 @@ const Login = () => {
                 placeholder="Password"
                 {...register("password", { required: true, minLength: "10" })}
               />
-
+      
               <InputRightElement width="4.5rem" mr={5}>
                 <Button
                   h="1.75rem"

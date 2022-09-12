@@ -1,4 +1,4 @@
-import { Box, Button, Flex, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, useToast } from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
@@ -14,6 +14,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/user";
 
+import { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const toast = useToast();
@@ -34,6 +35,7 @@ const Navbar = () => {
       boxShadow="lg"
       rounded="sm"
       bg="white"
+      width="full"
     >
       <Menu bg="red">
         <Link to="/">
@@ -46,15 +48,27 @@ const Navbar = () => {
             src="https://emprendedoresnews.com/wp-content/uploads/2020/01/company_5d7c04ad08a25a53fd4d5987.png"
           ></Image>
         </Link>
-        <MenuButton
-          rightIcon={<ChevronDownIcon />}
-          mr={5}
-          bg="secondary"
-          _hover={{ bg: "fourth" }}
-          as={Button}
-        >
-          <HamburgerIcon />
-        </MenuButton>
+        {user.email ? (
+          <MenuButton
+            leftIcon={<Icon as={FaUserCircle} />}
+            mr={5}
+            bg="secondary"
+            _hover={{ bg: "fourth" }}
+            as={Button}
+          >
+            {user.name}
+          </MenuButton>
+        ) : (
+          <MenuButton
+            rightIcon={<ChevronDownIcon />}
+            mr={5}
+            bg="secondary"
+            _hover={{ bg: "fourth" }}
+            as={Button}
+          >
+            <HamburgerIcon />
+          </MenuButton>
+        )}
 
         {user.email ? (
           <MenuList>

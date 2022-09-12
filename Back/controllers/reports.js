@@ -1,16 +1,27 @@
 //Controllers reports
 
+const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
 
 const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
+      cloudinary.config({
+        cloud_name: "dgmprcco9",
+        api_key: "658267799784839",
+        api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
+      });
+
+      const { image } = req.body;
+      const results = await cloudinary.uploader.upload(image);
+      console.log('RESTLUS',results);
+
       const newReport = await new Reports({
         userId: req.user.id,
         admin: req.body.admin,
         location: req.body.location,
-        image: req.body.image,
+        image: results.data.secure.url,
         country: req.body.country,
         description: req.body.description,
         priority: req.body.priority,

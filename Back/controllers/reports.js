@@ -117,6 +117,39 @@ const Rep = {
     const report = await Reports.find({ state: "solved" });
     res.send(report);
   },
+
+  //Función para que un admin logeado pueda tomar un reporte.
+  catchReport: async function catchReport(req,res){
+    const report = await Reports.update({_id: req.params.id},{admin: req.user.name + " " + req.user.lastname})
+    res.send(report);
+  },
+
+  //Función para mostrar todos los reportes pendientes de un admin logeado.
+  myReportsCatched: async function myReportsCatched(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "pending"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes resueltos de un admin logeado.
+  myReportsFullfilled: async function myReportsFullfilled(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "fullfilled"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes rechazados de un admin logeado.
+  myReportsRejected: async function myReportsRejected(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "rejected"
+    })
+    res.send(report)
+  },
 };
 
 module.exports = Rep;

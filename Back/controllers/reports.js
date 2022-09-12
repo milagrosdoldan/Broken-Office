@@ -3,25 +3,28 @@
 const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
 
+cloudinary.config({
+  cloud_name: "dgmprcco9",
+  api_key: "658267799784839",
+  api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
+});
 const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
-      cloudinary.config({
-        cloud_name: "dgmprcco9",
-        api_key: "658267799784839",
-        api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
-      });
-
       const { image } = req.body;
-      const results = await cloudinary.uploader.upload(image);
-      console.log('RESTLUS',results);
+
+      const results = await cloudinary.uploader.upload(image, {
+        categorization: "google_tagging",
+        auto_tagging: 0.8,
+      });
 
       const newReport = await new Reports({
         userId: req.user.id,
         admin: req.body.admin,
         location: req.body.location,
-        image: results.data.secure.url,
+        image: results.secure_url,
+        tags: results.tags,
         country: req.body.country,
         description: req.body.description,
         priority: req.body.priority,
@@ -30,7 +33,7 @@ const Rep = {
         email: req.body.email,
         lastname: req.body.lastname,
       });
-      console.log(newReport);
+      console.log(newReport, "newReport");
       newReport.save();
       res.status(201).send(newReport);
     } catch (error) {

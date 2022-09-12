@@ -44,6 +44,9 @@ const ReportSchema = new mongoose.Schema({
   coord: {
     type: Array,
   },
+  tags: {
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("Reports", ReportSchema);

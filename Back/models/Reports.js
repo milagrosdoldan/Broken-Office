@@ -11,7 +11,7 @@ const ReportSchema = new mongoose.Schema({
     type: String,
   },
   admin: {
-    type: Number,
+    type: String,
   },
   location: {
     type: String,

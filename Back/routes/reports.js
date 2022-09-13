@@ -21,8 +21,12 @@ const {
     myReportsCatched,
     myReportsFullfilled,
     myReportsRejected,
+    getReportBySearch,
+    deleteAllReports,
 } = require("../controllers/reports");
 
+//Ruta para buscar por SEARCH.
+router.get("/search/:search", validateAuth, getReportBySearch)
 
 //Ruta para traer TODOS los informes.
 router.get("/allreports", validateAuth, getAllReports);
@@ -76,6 +80,9 @@ router.put('/solvereport/:id', validateAuth, reportSolved);
 router.put('/rejectedreport/:id', validateAuth, rejectedReport);
 
 //Ruta para borrar un informe pasado por parámetro.
-router.delete('/removereport/:id', validateAuth, deleteReport);  
+router.delete('/removereport/:id', validateAuth, deleteReport);
+
+//Ruta para borrar todos los informes.
+router.delete('/deleteall', validateAuth, deleteAllReports)
 
 module.exports = router;

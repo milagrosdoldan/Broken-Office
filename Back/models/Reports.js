@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const ReportSchema = new mongoose.Schema({
+  userId: {
+  type: String,
+  },
   name: {
     type: String,
   },
@@ -12,6 +15,7 @@ const ReportSchema = new mongoose.Schema({
   },
   admin: {
     type: String,
+    default: "No admin."
   },
   location: {
     type: String,
@@ -19,6 +23,7 @@ const ReportSchema = new mongoose.Schema({
   },
   companyRole: {
     type: String,
+    required: false,
   },
   state: {
     type: String,
@@ -26,10 +31,10 @@ const ReportSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    // required: true,
+    required: false,
   },
   date: {
-    type: Date,
+    type: String,
     required: false,
   },
   description: {
@@ -43,9 +48,11 @@ const ReportSchema = new mongoose.Schema({
   },
   coord: {
     type: Array,
+    required: false,
   },
   tags: {
     type: Array,
+    required: false,
   },
 });
 

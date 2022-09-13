@@ -78,6 +78,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             tel: user.tel,
             companyRole: user.companyRole,
+            isAdmin: user.isAdmin
           });
         });
       });
@@ -101,6 +102,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
+          isAdmin: user.isAdmin
         });
       } else {
         const user = await User.create(req.body);
@@ -121,6 +123,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
+          isAdmin: user.isAdmin
         });
       }
     }

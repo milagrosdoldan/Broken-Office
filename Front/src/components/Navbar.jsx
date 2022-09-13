@@ -35,7 +35,7 @@ const Navbar = () => {
       boxShadow="lg"
       rounded="sm"
       bg="white"
-      width="full"
+      width="100%"
     >
       <Menu bg="red">
         <Link to="/">
@@ -77,6 +77,12 @@ const Navbar = () => {
             <Link to="/profile">
               <MenuItem alt="Profile.">Profile</MenuItem>
             </Link>
+            {user.isAdmin? (
+              <Link to="/admin/reports">
+              <MenuItem>Reports</MenuItem>
+            </Link>
+            ): ""}
+            
             <MenuItem
               alt="Log out."
               onClick={() => {

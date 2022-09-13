@@ -2,6 +2,7 @@
 
 const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
+const transporter = require("../config/transporter")
 
 cloudinary.config({
   cloud_name: "dgmprcco9",
@@ -9,18 +10,25 @@ cloudinary.config({
   api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
 });
 const Rep = {
+
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
+      const d = new Date();
+      const month = d.getMonth() + 1
+      const date = d.getDate() + "-" + month + "-" + d.getFullYear()
+      
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
         categorization: "google_tagging",
         auto_tagging: 0.8,
-      });
+      })
+     
 
       const newReport = await new Reports({
         userId: req.user.id,
+        date: date,
         admin: req.body.admin,
         location: req.body.location,
         image: results.secure_url,
@@ -34,7 +42,20 @@ const Rep = {
         lastname: req.body.lastname,
         date: req.body.date,
       });
-      console.log(newReport, "newReport");
+
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `
+      })
+
       newReport.save();
       res.status(201).send(newReport);
     } catch (error) {
@@ -63,6 +84,7 @@ const Rep = {
   //Función para mostrar TODOS los informes.
   getAllReports: async function getAllReports(req, res) {
     const report = await Reports.find();
+    console.log(req.user.id)
     res.send(report);
   },
 
@@ -86,9 +108,18 @@ const Rep = {
 
   //Función para mostrar informes del día.
   getDailyReports: async function getDailyReports(req, res) {
-    const date = new Date();
-    const report = await Reports.find({ date: date });
-    res.send(report);
+    const d = new Date();
+    const month = d.getMonth() + 1
+    const date = d.getDate() + "-" + month + "-" + d.getFullYear()
+    
+    const report = await Reports.find({ date: date })
+    .then((repor) => {
+    res.status(200).send(repor)
+    })
+    .catch((err) => {
+      res.status(500).send(err)
+    })
+
   },
 
   //Función para mostrar informes PRIORITARIOS (Prioridad nivel 3).
@@ -131,6 +162,63 @@ const Rep = {
   getAllSolvedReports: async function getAllSolvedReports(req, res) {
     const report = await Reports.find({ state: "solved" });
     res.send(report);
+  },
+
+  //Función para que un admin logeado pueda tomar un reporte.
+  catchReport: async function catchReport(req,res){
+    const report = await Reports.update({_id: req.params.id},{admin: req.user.name + " " + req.user.lastname})
+    res.send(report);
+  },
+
+  //Función para mostrar todos los reportes pendientes de un admin logeado.
+  myReportsCatched: async function myReportsCatched(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "pending"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes resueltos de un admin logeado.
+  myReportsFullfilled: async function myReportsFullfilled(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "fullfilled"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes rechazados de un admin logeado.
+  myReportsRejected: async function myReportsRejected(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "rejected"
+    })
+    res.send(report)
+  },
+
+  //Función para borrar todos los reportes.
+  deleteAllReports: async function deleteAllReports(req,res){
+    const report = await Reports.remove({}, callback)
+    res.send("Deleted all!")
+  },
+
+  //Función para buscar un reporte.
+  getReportBySearch: async function getReportBySearch(req,res){
+    const report = await Reports.find()
+    let filteredReports = []
+
+    report.forEach((reporte) => {
+      if(reporte.name.toLowerCase()
+      .includes(req.params.search.toLowerCase()))filteredReports.push(reporte)
+      else if(reporte.lastname.toLowerCase()
+      .includes(req.params.search.toLowerCase())) filteredReports.push(reporte)
+      else if(reporte.description.toLowerCase()
+      .includes(req.params.search.toLowerCase())) filteredReports.push(reporte)
+      else if(reporte.email.toLowerCase()
+      .includes(req.params.search.toLowerCase())) filteredReports.push(reporte)
+    })
+    res.send(filteredReports)
   },
 };
 

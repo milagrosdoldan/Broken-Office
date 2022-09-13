@@ -52,6 +52,7 @@ const Navbar = () => {
           <MenuButton
             leftIcon={<Icon as={FaUserCircle} />}
             mr={5}
+            alt="Your name."
             bg="secondary"
             _hover={{ bg: "fourth" }}
             as={Button}
@@ -74,9 +75,10 @@ const Navbar = () => {
           <MenuList>
             {" "}
             <Link to="/profile">
-              <MenuItem>Perfil</MenuItem>
+              <MenuItem alt="Profile.">Profile</MenuItem>
             </Link>
             <MenuItem
+              alt="Log out."
               onClick={() => {
                 handleLogOut();
                 toast({
@@ -94,11 +96,11 @@ const Navbar = () => {
           <MenuList>
             <Link to="/login">
               {" "}
-              <MenuItem>Log In</MenuItem>{" "}
+              <MenuItem alt="Log in">Log In</MenuItem>{" "}
             </Link>
             <Link to="/register">
               {" "}
-              <MenuItem>Register</MenuItem>{" "}
+              <MenuItem alt="Register">Register</MenuItem>{" "}
             </Link>
           </MenuList>
         )}

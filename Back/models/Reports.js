@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const ReportSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+  },
   name: {
     type: String,
   },

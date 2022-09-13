@@ -1,49 +1,41 @@
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-
 import "../style/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner, Box, Heading, Grid, Text } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import { sendReport } from "../state/reports";
-
 import Footer from "../components/Footer";
 import ImageList from "@mui/material/ImageList";
 import "@fontsource/heebo/700.css";
 import ImageListItem from "@mui/material/ImageListItem";
-import { useState } from "react";
 import FormRequest from "../components/FormRequest";
+
+
+
+const itemData = [
+  {
+    img: "https://brand.globant.com/wp-content/uploads/2021/10/print-18.jpg",
+    title:
+      "Photo of a man working and behind him there is a frame which is painted 'Where globant is innovation design and engineering meet scale.'",
+    rows: 2,
+    cols: 2,
+  },
+  {
+    img: "https://brand.globant.com/wp-content/uploads/2021/10/cards.jpg",
+    title: "Building a new way of being digital",
+  },
+  {
+    img: "https://brand.globant.com/wp-content/uploads/2021/10/aqua.jpg",
+    rows: 2,
+    title: "Photo of a frame saying globant.",
+  },
+  {
+    img: "https://brand.globant.com/wp-content/uploads/2021/10/showcase-22.jpg",
+    title: "Three people sitting in a sofa working",
+  },
+];
+
 export const Home = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const [imageSrc, setImageSrc] = useState();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    data.coord = location;
-    data.name = user.name;
-    data.lastname = user.lastname;
-    data.email = user.email;
-    data.image = imageSrc;
-    console.log(data);
-    dispatch(sendReport(data));
-  };
-
-  function handleOnChange(changeEvent) {
-    const reader = new FileReader();
-
-    reader.onload = function (onLoadEvent) {
-      setImageSrc(onLoadEvent.target.result);
-    };
-
-    reader.readAsDataURL(changeEvent.target.files[0]);
-  }
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBXoLVUJ4X76sJwsjEnuJoQYK1-VQtVR3Q",
@@ -57,36 +49,60 @@ export const Home = () => {
       }&fit=crop&auto=format&dpr=2 2x`,
     };
   }
+
+
   return (
     <>
-      <Box display="flex" flexDirection="row">
+      <Box
+        className="box-mapa"
+        display="flex"
+        flexDirection={{
+          base: "column", // 0-48em
+          md: "row",
+          lg: "row", // 48em-80em,
+          xl: "row", // 80em+
+        }}
+        alignItems={{ base: "center", md: "center" }}
+      >
         <Box
           width="50%"
           display="flex"
           flexDirection="column"
-          justifyContent="center"
+          // justifyContent="center"
           alignItems="center"
+          pt={{ base: "70px", md: "70px" }}
+          mb={{ xl: "150px", lg: "150px" }}
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignContent="center"
-            justifyContent="center"
-            alignItems="center"
+          <Heading
+            fontFamily="heading"
+            color="black"
+            textAlign="left"
+            fontSize={41}
           >
-            {" "}
-            <Heading fontFamily={"@fontsource/heebo/700.css"}>
-              Your location
-            </Heading>{" "}
-            <Text>You can see where you are here.</Text>
-          </Box>
+            Your location.
+          </Heading>{" "}
+          <Text
+            fontFamily="heading"
+            color="black"
+            textAlign="left"
+            fontSize={20}
+            pl={{ xl: "175px", lg: "92px", md: "43px" }}
+            pr={{ xl: "115px", lg: "100px", md: "43px" }}
+          >
+            In this map, you can see where you are!
+          </Text>
         </Box>
         <Box
-          width="50%"
+          width={{ xl: "50%", lg: "50%", md: "50%", base: "80%" }}
           height="500px"
           display="flex"
-          justifyContent="flex-end"
-          mr={40}
+          justifyContent={{
+            xl: "flex-end",
+            lg: "flex-end",
+            md: "center",
+            base: "center",
+          }}
+          mr={{ md: 40, lg: 40, xl: 40 }}
           mt={90}
         >
           {isLoaded ? (
@@ -107,9 +123,9 @@ export const Home = () => {
           )}
         </Box>
       </Box>
-      <Grid mt={-75} mb={50}>
+      <Grid mt={-50} mb={50}>
         <ImageList
-          sx={{ width: "full", height: 250 }}
+          sx={{ width: "full", height: 246 }}
           variant="quilted"
           cols={4}
           rowHeight={121}
@@ -129,31 +145,8 @@ export const Home = () => {
           ))}
         </ImageList>
       </Grid>
-
       <FormRequest />
       <Footer />
     </>
   );
 };
-
-const itemData = [
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/print-18.jpg",
-    title: "Breakfast",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/cards.jpg",
-    title: "Burger",
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/aqua.jpg",
-    rows: 2,
-    title: "Camera",
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/showcase-22.jpg",
-    title: "Coffee",
-  },
-];

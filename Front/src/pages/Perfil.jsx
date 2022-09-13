@@ -1,12 +1,17 @@
 import { Box, Heading, Image, Text, useDisclosure } from "@chakra-ui/react";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CartPerfil from "../commons/CartPerfil";
 import CartReports from "../commons/CartReports";
 import NotFound from "./NotFound";
-
+import { myReport } from "../state/reports";
 const Perfil = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(myReport());
+  }, []);
 
   if (user.email) {
     return (
@@ -14,14 +19,12 @@ const Perfil = () => {
         bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
         h="86.5vh"
       >
-        <Heading textAlign={"center"} m="5">
-          Mi perfil
-        </Heading>
         <Box
           display="flex"
           flexDirection="row"
           alignItems="center"
-          justifyContent="space-evenly"
+          justifyContent="center"
+          mt={8}
         >
           <Image
             borderRadius="full"
@@ -34,7 +37,6 @@ const Perfil = () => {
             mx="2"
           />
           <Text
-            mx="1px"
             fontSize="27"
             fontWeight="bold"
           >{`${user.name} ${user.lastname}`}</Text>

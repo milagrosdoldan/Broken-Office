@@ -24,7 +24,7 @@ const Reports = () => {
 
   useEffect(() => {
     axios
-      .get("/api/report/allreports")
+      .get("http://localhost:3001/api/report/allreports")
       .then((res) => {
         setReports(res.data);
       })
@@ -35,17 +35,17 @@ const Reports = () => {
     const value = e.target.outerText;
 
     if (value === "PENDING") {
-      axios.get("/api/report/getpendingreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getpendingreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "FULFILLED") {
-      axios.get("/api/report/getsolvedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getsolvedreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "REJECTED") {
-      axios.get("/api/report/getrejectedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getrejectedreports").then((res) => {
         setReports(res.data);
       });
     }

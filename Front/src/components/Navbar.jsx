@@ -35,7 +35,7 @@ const Navbar = () => {
       boxShadow="lg"
       rounded="sm"
       bg="white"
-      width="full"
+      width="100%"
     >
       <Menu bg="red">
         <Link to="/">

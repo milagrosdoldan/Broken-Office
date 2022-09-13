@@ -17,13 +17,24 @@ const {
     getAllRejectedReports,
     getAllSolvedReports,
     getReportById,
-} = require("../controllers/reports")
+    catchReport,
+    myReportsCatched,
+    myReportsFullfilled,
+    myReportsRejected,
+} = require("../controllers/reports");
 
-//Ruta para crear un informe.
-router.post("/addreport", validateAuth, createReport);
 
 //Ruta para traer TODOS los informes.
 router.get("/allreports", validateAuth, getAllReports);
+
+//Ruta para traer los reportes tomados por un admin logeado.
+router.get("/catchedreports", validateAuth, myReportsCatched);
+
+//Ruta para traer todos los reportes solucionados por admin logeado.
+router.get('/myreportsfullfilled', validateAuth, myReportsFullfilled)
+
+//Ruta para traer todos los reportes rechazados por admin logeado.
+router.get('/myreportsrejected', validateAuth, myReportsRejected);
 
 //Ruta para traer los informes de un usuario pasado por parámetro.(Funcion ADMIN)
 router.get("/reportsbyuserid/:id", validateAuth, getReportByUserId);
@@ -48,6 +59,12 @@ router.get('/getrejectedreports',  validateAuth, getAllRejectedReports);
 
 //Ruta para traer informes RESUELTOS.
 router.get('/getsolvedreports',  validateAuth, getAllSolvedReports);
+
+//Ruta para crear un informe.
+router.post("/addreport", validateAuth, createReport);
+
+//Ruta para que un admin pueda tomar un reporte.
+router.put('/catchreport/:id', validateAuth, catchReport)
 
 //Ruta para que un usuario modifique su informe.
 router.put('/modifyreport', validateAuth, modifyReport);

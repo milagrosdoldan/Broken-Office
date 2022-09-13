@@ -1,16 +1,31 @@
 //Controllers reports
 
+const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
+const transporter = require("../config/transporter")
 
+cloudinary.config({
+  cloud_name: "dgmprcco9",
+  api_key: "658267799784839",
+  api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
+});
 const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
+      const { image } = req.body;
+
+      const results = await cloudinary.uploader.upload(image, {
+        categorization: "google_tagging",
+        auto_tagging: 0.8,
+      });
+
       const newReport = await new Reports({
         userId: req.user.id,
         admin: req.body.admin,
         location: req.body.location,
-        image: req.body.image,
+        image: results.secure_url,
+        tags: results.tags,
         country: req.body.country,
         description: req.body.description,
         priority: req.body.priority,
@@ -19,7 +34,20 @@ const Rep = {
         email: req.body.email,
         lastname: req.body.lastname,
       });
-      console.log(newReport);
+      
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `
+      })
+
       newReport.save();
       res.status(201).send(newReport);
     } catch (error) {
@@ -116,6 +144,39 @@ const Rep = {
   getAllSolvedReports: async function getAllSolvedReports(req, res) {
     const report = await Reports.find({ state: "solved" });
     res.send(report);
+  },
+
+  //Función para que un admin logeado pueda tomar un reporte.
+  catchReport: async function catchReport(req,res){
+    const report = await Reports.update({_id: req.params.id},{admin: req.user.name + " " + req.user.lastname})
+    res.send(report);
+  },
+
+  //Función para mostrar todos los reportes pendientes de un admin logeado.
+  myReportsCatched: async function myReportsCatched(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "pending"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes resueltos de un admin logeado.
+  myReportsFullfilled: async function myReportsFullfilled(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "fullfilled"
+    })
+    res.send(report)
+  },
+
+  //Función para mostrar todos los reportes rechazados de un admin logeado.
+  myReportsRejected: async function myReportsRejected(req,res){
+    const report = await Reports.find({
+      admin: req.user.name + " " + req.user.lastname,
+      state: "rejected"
+    })
+    res.send(report)
   },
 };
 

@@ -2,6 +2,7 @@
 
 const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
+const transporter = require("../config/transporter")
 
 cloudinary.config({
   cloud_name: "dgmprcco9",
@@ -40,6 +41,20 @@ const Rep = {
         email: req.body.email,
         lastname: req.body.lastname,
       });
+
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `
+      })
+
       newReport.save();
       res.status(201).send(newReport);
     } catch (error) {

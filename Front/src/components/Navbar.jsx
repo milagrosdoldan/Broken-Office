@@ -77,12 +77,13 @@ const Navbar = () => {
             <Link to="/profile">
               <MenuItem alt="Profile.">Profile</MenuItem>
             </Link>
-            {user.isAdmin? (
+            {user.isAdmin ? (
               <Link to="/admin/reports">
-              <MenuItem>Reports</MenuItem>
-            </Link>
-            ): ""}
-            
+                <MenuItem>Reports</MenuItem>
+              </Link>
+            ) : (
+              ""
+            )}
             <MenuItem
               alt="Log out."
               onClick={() => {

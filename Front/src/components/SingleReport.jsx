@@ -22,14 +22,23 @@ import ReportData from "../commons/ReportData";
 
 const SingleReport = () => {
   const [report, setReport] = useState({});
-  console.log("🚀 ~ file: SingleReport.jsx ~ line 25 ~ SingleReport ~ report", report)
+  console.log(
+    "🚀 ~ file: SingleReport.jsx ~ line 25 ~ SingleReport ~ report",
+    report
+  );
   const params = useParams();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
+
+    async function getReportbyId() {
+      axios
+       .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
       .then((res) => setReport(res.data[0]));
+    }
+    getReportbyId();
+
   }, [report.admin]);
 
   const acceptReport = async (e) => {
@@ -83,8 +92,7 @@ const SingleReport = () => {
             >
               Aceptar
             </Button>
-          ) : (
-            (report.state === "pending")?
+          ) : report.state === "pending" ? (
             <Button
               m="3"
               borderRadius="40px"
@@ -94,7 +102,13 @@ const SingleReport = () => {
             >
               Resolve Report
             </Button>
-            : <Button borderRadius="40px" colorScheme={(report.state === "solved")? "green" : "red"}>{report.state}</Button>
+          ) : (
+            <Button
+              borderRadius="40px"
+              colorScheme={report.state === "solved" ? "green" : "red"}
+            >
+              {report.state}
+            </Button>
           )}
         </Box>
       </Box>

@@ -38,16 +38,13 @@ const EditAbout = () => {
       companyRole,
     };
 
+
     axios.put(`http://localhost:3001/api/user/${user.id}`, newData);
     
+
     dispatch(sendMe());
-   
     onClose();
   };
-
-  // useEffect(() => {
-  //   dispatch(sendMe());
-  // }, [dispatch]);
 
   const handlerEmail = (e) => {
     setEmail(e.target.value);

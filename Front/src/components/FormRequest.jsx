@@ -29,6 +29,7 @@ import { sendReport } from "../state/reports";
 import { Link } from "react-router-dom";
 import "../style/login.css";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 const FormRequest = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
@@ -64,15 +65,18 @@ const FormRequest = () => {
     } catch {}
   };
 
-  React.useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        compañyRole: "",
-        description: "",
-        priority: "",
-      });
-      setImageSrc("");
+  useEffect(() => {
+    async function cleanInputs() {
+      if (formState.isSubmitSuccessful) {
+        reset({
+          compañyRole: "",
+          description: "",
+          priority: "",
+        });
+        setImageSrc("");
+      }
     }
+    cleanInputs();
   }, [formState, reset]);
 
   function handleOnChange(changeEvent) {

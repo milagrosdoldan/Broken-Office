@@ -24,13 +24,19 @@ import NotFound from "./NotFound";
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
+
   useEffect(() => {
-    axios
+
+    async function allReports() {
+     axios
       .get("http://localhost:3001/api/report/allreports")
       .then((res) => {
         setReports(res.data);
       })
       .catch((err) => console.log(err));
+    }
+    allReports();
+
   }, []);
 
   const handlerReports = (e) => {

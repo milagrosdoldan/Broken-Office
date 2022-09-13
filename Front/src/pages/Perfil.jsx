@@ -10,15 +10,15 @@ const Perfil = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(myReport());
+    async function dispatchReport() {
+      dispatch(myReport());
+    }
+    dispatchReport();
   }, []);
 
   if (user.email) {
     return (
-      <Box
-        bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
-        h="86.5vh"
-      >
+      <>
         <Box
           display="flex"
           flexDirection="row"
@@ -43,7 +43,7 @@ const Perfil = () => {
         </Box>
         <CartPerfil user={user} />
         <CartReports />
-      </Box>
+      </>
     );
   } else {
     return <NotFound />;
@@ -51,3 +51,8 @@ const Perfil = () => {
 };
 
 export default Perfil;
+
+/*<Box
+        bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
+        h="86.5vh"
+      >*/

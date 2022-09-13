@@ -26,32 +26,34 @@ const Reports = () => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
+
     async function allReports() {
-      axios
-        .get("/api/report/allreports")
-        .then((res) => {
-          setReports(res.data);
-        })
-        .catch((err) => console.log(err));
+     axios
+      .get("http://localhost:3001/api/report/allreports")
+      .then((res) => {
+        setReports(res.data);
+      })
+      .catch((err) => console.log(err));
     }
     allReports();
+
   }, []);
 
   const handlerReports = (e) => {
     const value = e.target.outerText;
 
     if (value === "PENDING") {
-      axios.get("/api/report/getpendingreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getpendingreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "FULFILLED") {
-      axios.get("/api/report/getsolvedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getsolvedreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "REJECTED") {
-      axios.get("/api/report/getrejectedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getrejectedreports").then((res) => {
         setReports(res.data);
       });
     }

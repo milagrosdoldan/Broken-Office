@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 // CommonJS.
 export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
   try {
-    const res = await axios.post("/api/user/register", user);
+    const res = await axios.post("http://localhost:3001/api/user/register", user);
     return res.data;
   } catch {
     Swal.fire({
@@ -24,7 +24,7 @@ export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
 
 export const logIn = createAsyncThunk("LOG_IN", async (user) => {
   try {
-    const res = await axios.post("/api/user/login", user);
+    const res = await axios.post("http://localhost:3001/api/user/login", user);
     return res.data;
   } catch {
     Swal.fire({
@@ -38,18 +38,18 @@ export const logIn = createAsyncThunk("LOG_IN", async (user) => {
 });
 
 export const sendMe = createAsyncThunk("SEND_ME", async () => {
-  const res = await axios.get("/api/user/me");
+  const res = await axios.get("http://localhost:3001/api/user/me");
   return res.data;
 });
 
 export const logOut = createAsyncThunk("LOG_OUT", async () => {
-  const res = await axios.post("/api/user/logout");
+  const res = await axios.post("http://localhost:3001/api/user/logout");
   return res.data;
 });
 
 export const update = createAsyncThunk("UPDATE", async (data, thunk) => {
   const { user } = thunk.getState();
-  return axios.put(`/api/user/${user.id}`, data).data;
+  return axios.put(`http://localhost:3001/api/user/${user.id}`, data).data;
 });
 
 const userReducer = createReducer([], {

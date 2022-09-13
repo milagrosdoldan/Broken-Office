@@ -31,12 +31,14 @@ const SingleReport = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
     async function getReportbyId() {
       axios
-        .get(`/api/report/getreportbyid/${params.id}`)
-        .then((res) => setReport(res.data[0]));
+       .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
+      .then((res) => setReport(res.data[0]));
     }
     getReportbyId();
+
   }, [report.admin]);
 
   const acceptReport = async (e) => {

@@ -37,7 +37,11 @@ const EditAbout = () => {
       tel,
       companyRole,
     };
-    axios.put(`/api/user/${user.id}`, newData);
+
+
+    axios.put(`http://localhost:3001/api/user/${user.id}`, newData);
+    
+
     dispatch(sendMe());
     onClose();
   };

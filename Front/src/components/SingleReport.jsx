@@ -28,7 +28,7 @@ const SingleReport = () => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`/api/report/getreportbyid/${params.id}`)
+      .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
       .then((res) => setReport(res.data[0]));
   }, [report.admin]);
 

@@ -21,13 +21,14 @@ import {
   Heading,
   Image,
 } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { sendReport } from "../state/reports";
 import { Link } from "react-router-dom";
 import "../style/login.css";
-
+import Swal from "sweetalert2";
 const FormRequest = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
@@ -36,18 +37,43 @@ const FormRequest = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    reset,
+    formState,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm({ defaultValues: { compañyRole: "" } });
 
-  const onSubmit = (data) => {
-    data.coord = location;
-    data.name = user.name;
-    data.lastname = user.lastname;
-    data.email = user.email;
-    data.image = imageSrc;
-    console.log(data);
-    dispatch(sendReport(data));
+  const onSubmit = async (data) => {
+    try {
+      data.coord = location;
+      data.name = user.name;
+      data.lastname = user.lastname;
+      data.email = user.email;
+      data.image = imageSrc;
+      data.date = new Date();
+
+      dispatch(sendReport(data));
+
+      Swal.fire({
+        text: "Your report was success!",
+        icon: "success",
+        width: 400,
+        showConfirmButton: false,
+        timer: 1500,
+        color: "secondary",
+      });
+    } catch {}
   };
+
+  React.useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({
+        compañyRole: "",
+        description: "",
+        priority: "",
+      });
+      setImageSrc("");
+    }
+  }, [formState, reset]);
 
   function handleOnChange(changeEvent) {
     const reader = new FileReader();
@@ -68,11 +94,11 @@ const FormRequest = () => {
       pb="35px"
       pt="35px"
       margin="0 auto"
-      width={["40vh", "50vh", "65vh", "70vh", "80vh", "90vh"]}
+      width={["full", "full", "full", "80vh", "80vh", "90vh"]}
       height="full"
     >
       <Heading textAlign="center" mb={-7}>
-        Did you have any problems? Tell us!
+        Do you have any problem? Tell us!
       </Heading>
 
       <Stack spacing={6} p={6}>
@@ -95,56 +121,81 @@ const FormRequest = () => {
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverBody fontSize={17} mt={2} textAlign="center">
+            <PopoverBody
+              alt=" Tell us what you have broken in your office, and we will help you!"
+              fontSize={17}
+              mt={2}
+              textAlign="center"
+            >
               Tell us what you have broken in your office, and we will help you!
             </PopoverBody>
           </PopoverContent>
         </Popover>
         <FormControl isRequired textAlign="center">
-          <FormLabel textAlign="center">Compañy role:</FormLabel>
+          <FormLabel textAlign="center">Company role:</FormLabel>
           <Input
-            _focusVisible={{ borderColor: "secondary" }}
+            alt="Your company role in the company."
+            _focusVisible={{ borderColor: "third" }}
             textAlign="initial"
-            width={["200px", "250px", "330px", "350px", "400px"]}
-            placeholder="Compañy role"
+            width={["200px", "200px", "330px", "250px", "400px"]}
+            placeholder="Company role"
             {...register("compañyRole", { required: true })}
           ></Input>
-          {errors.compañyRole?.type === "required" &&
-            "Compañy role is required."}
+          <Box>
+            {errors.compañyRole?.type === "required" &&
+              "Company role is required."}
+          </Box>
         </FormControl>
         <FormControl isRequired textAlign="center">
           <FormLabel textAlign="center">Description:</FormLabel>
           <Input
-            _focusVisible={{ borderColor: "secondary" }}
+            alt="The description about the problem you have"
+            _focusVisible={{ borderColor: "third" }}
             textAlign="initial"
             placeholder="Description"
-            width={["200px", "250px", "330px", "350px", "400px"]}
+            width={["200px", "200px", "330px", "250px", "400px"]}
             {...register("description", { required: true })}
           />
-          {errors.descripcion?.type === "required" &&
-            "Descripcion is required."}
+          <Box>
+            {errors.description?.type === "required" &&
+              "Description is required."}
+          </Box>
         </FormControl>
-        <FormControl isRequired textAlign="center">
+        <FormControl id="priority" isRequired textAlign="center">
           <FormLabel textAlign="center">Priority</FormLabel>
+
           <Select
+            alt="Select the priority of your problem."
             m="0 auto"
             textAlign="center"
-            _focusVisible={{ borderColor: "secondary" }}
-            width={["200px", "250px", "330px", "350px", "400px"]}
+            _focusVisible={{ borderColor: "third" }}
+            width={["200px", "200px", "330px", "250px", "400px"]}
             placeholder="Select level:"
           >
             <option {...register("priority", { required: true })}>High</option>
             <option {...register("priority", { required: true })}>
               Medium
             </option>
-            <option {...register("priority", { required: true })}>Low</option>
+            <option {...register("priority", { required: true })}>Low </option>
           </Select>
+          <Box>
+            {errors.priority?.type === "required" && "Priority is required."}
+          </Box>
         </FormControl>
-        <FormControl>
-          <FormLabel>Foto</FormLabel>
-          <Input onChange={handleOnChange} type="file" />
+        <FormControl textAlign="center" isRequired>
+          <FormLabel textAlign="center">Add file</FormLabel>
+          <Input
+            textAlign="center"
+            m="0 auto"
+            width={["200px", "200px", "330px", "250px", "400px"]}
+            alt="Add the photos."
+            onChange={handleOnChange}
+            id="image"
+            type="file"
+            placeholder="Add a photo"
+          />
         </FormControl>
-        <Image src={imageSrc} />
+        <Image src={imageSrc} maxWidth="50%" />
       </Stack>
 
       {user.email ? (
@@ -153,6 +204,7 @@ const FormRequest = () => {
             fontFamily="body"
             display="flex"
             m="0 auto"
+            alt="Submit request."
             width={125}
             onClick={handleSubmit(onSubmit)}
             borderRadius="20px"
@@ -168,7 +220,7 @@ const FormRequest = () => {
           <AlertTitle>You have to be logged!</AlertTitle>
           <AlertDescription>
             <Link style={{ textDecoration: "underline" }} to="/login">
-              Log in here!
+              Log in here! <ExternalLinkIcon ml="5px" mb="4px" />
             </Link>
           </AlertDescription>
         </Alert>

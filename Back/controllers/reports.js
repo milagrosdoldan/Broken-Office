@@ -40,6 +40,7 @@ const Rep = {
         name: req.body.name,
         email: req.body.email,
         lastname: req.body.lastname,
+        date: req.body.date,
       });
 
       await transporter.sendMail({

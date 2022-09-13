@@ -11,9 +11,12 @@ const ResolveReport = () => {
   const params = useParams();
 
   useEffect(() => {
-    axios
-      .get(`/api/report/getreportbyid/${params.id}`)
-      .then((res) => setReport(res.data[0]));
+    async function getReportbyId() {
+      axios
+        .get(`/api/report/getreportbyid/${params.id}`)
+        .then((res) => setReport(res.data[0]));
+    }
+    getReportbyId();
   }, []);
 
   const rejectedReport = (e) => {
@@ -31,7 +34,7 @@ const ResolveReport = () => {
   };
   const resolveReport = async () => {
     try {
-      await axios.put(`/api/report/solvereport/${params.id}`)
+      await axios.put(`/api/report/solvereport/${params.id}`);
       Swal.fire({
         icon: "success",
         text: "Reporte resuelto",
@@ -41,7 +44,9 @@ const ResolveReport = () => {
         color: "secondary",
       });
       navigate("/admin/reports");
-    } catch {console.error("no se pudo resolver")}
+    } catch {
+      console.error("no se pudo resolver");
+    }
   };
   return (
     <>
@@ -70,9 +75,8 @@ const ResolveReport = () => {
         </Button>
       </Box>
       <Link to="/admin/reports">
-      <Button>Back</Button>
+        <Button>Back</Button>
       </Link>
-      
     </>
   );
 };

@@ -54,15 +54,18 @@ const Login = () => {
   };
 
   useEffect(() => {
-    /* global google */ google.accounts.id.initialize({
-      client_id:
-        "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById(10), {
-      theme: "outline",
-      size: "large",
-    });
+    async function loginGoogle() {
+      /* global google */ google.accounts.id.initialize({
+        client_id:
+          "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+      google.accounts.id.renderButton(document.getElementById(10), {
+        theme: "outline",
+        size: "large",
+      });
+    }
+    loginGoogle();
   }, []);
 
   return (
@@ -136,7 +139,11 @@ const Login = () => {
           </FormControl>
         </Center>
 
-        <Button alt="Sign up in the app." onClick={handleSubmit(onSubmit)} colorScheme="green">
+        <Button
+          alt="Sign up in the app."
+          onClick={handleSubmit(onSubmit)}
+          colorScheme="green"
+        >
           Log In
         </Button>
         <Box id={10}></Box>

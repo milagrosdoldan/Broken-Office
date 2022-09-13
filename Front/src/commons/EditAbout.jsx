@@ -37,17 +37,10 @@ const EditAbout = () => {
       tel,
       companyRole,
     };
-
     axios.put(`/api/user/${user.id}`, newData);
-    
     dispatch(sendMe());
-   
     onClose();
   };
-
-  // useEffect(() => {
-  //   dispatch(sendMe());
-  // }, [dispatch]);
 
   const handlerEmail = (e) => {
     setEmail(e.target.value);

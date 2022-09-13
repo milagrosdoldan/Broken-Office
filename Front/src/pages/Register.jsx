@@ -40,14 +40,7 @@ const Register = () => {
     dispatch(signUp(data));
   };
   user.email && navigate("/login");
-  // toast({
-  //   title: "Account created.",
-  //   description: "We've created your account for you.",
-  //   status: "success",
-  //   duration: 3000,
-  //   isClosable: true,
-  // });
-  // navigate("/login");
+ 
 
   return (
     <HStack

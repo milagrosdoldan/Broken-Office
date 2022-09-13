@@ -9,7 +9,7 @@ const Maps = ({ location }) => {
   });
 
   return (
-    <Box w={["300px","500px","800px"]} h="300px" m="5" maxWidth="90%">
+    <Box w={["300px", "500px", "800px"]} h="300px" m="5" maxWidth="90%">
       {isLoaded ? (
         <GoogleMap
           mapContainerStyle={{ width: "100%", height: "300px" }}
@@ -27,7 +27,7 @@ const Maps = ({ location }) => {
       )}
     </Box>
   );
-      console.log("🚀 ~ file: Maps.jsx ~ line 32 ~ Maps ~ isLoaded", isLoaded)
+  console.log("🚀 ~ file: Maps.jsx ~ line 32 ~ Maps ~ isLoaded", isLoaded);
 };
 
 export default Maps;

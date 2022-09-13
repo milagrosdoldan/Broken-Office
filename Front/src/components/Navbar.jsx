@@ -76,6 +76,12 @@ const Navbar = () => {
             <Link to="/profile">
               <MenuItem>Perfil</MenuItem>
             </Link>
+            {user.isAdmin? (
+              <Link to="/admin/reports">
+              <MenuItem>Reports</MenuItem>
+            </Link>
+            ): ""}
+            
             <MenuItem
               onClick={() => {
                 handleLogOut();

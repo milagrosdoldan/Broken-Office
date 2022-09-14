@@ -1,3 +1,4 @@
+
 import {
   Box,
   Button,
@@ -6,8 +7,6 @@ import {
   IconButton,
   useToast,
   useColorMode,
-} from "@chakra-ui/react";
-import {
   Menu,
   MenuButton,
   MenuList,
@@ -17,9 +16,9 @@ import {
   useColorModeValue,
   Image,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/user";
 
@@ -108,9 +107,15 @@ const Navbar = () => {
               <MenuItem alt="Profile.">Profile</MenuItem>
             </Link>
             {user.isAdmin ? (
-              <Link to="/admin/reports">
-                <MenuItem>Reports</MenuItem>
-              </Link>
+              <>
+                {" "}
+                <Link to="/admin/reports">
+                  <MenuItem>Reports</MenuItem>
+                </Link>
+                <Link to={"/admin/myreports"}>
+                  <MenuItem>My reports</MenuItem>
+                </Link>
+              </>
             ) : (
               ""
             )}

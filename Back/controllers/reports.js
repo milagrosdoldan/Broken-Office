@@ -13,18 +13,17 @@ const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
-      console.log("primero");
       const d = new Date();
       const month = d.getMonth() + 1;
       const date = d.getDate() + "-" + month + "-" + d.getFullYear();
-      console.log("segundo");
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
         categorization: "google_tagging",
         auto_tagging: 0.8,
       });
-      console.log("tercero");
+
+
       const newReport = await new Reports({
         userId: req.user.id,
         date: date,
@@ -41,7 +40,7 @@ const Rep = {
         lastname: req.body.lastname,
         date: req.body.date,
       });
-      console.log("4");
+
       await transporter.sendMail({
         from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
         to: req.user.email,
@@ -56,7 +55,6 @@ const Rep = {
       });
 
       newReport.save();
-      console.log("5 ", newReport);
       res.status(201).send(newReport);
     } catch (error) {
       res.send(error).status(500);
@@ -129,10 +127,10 @@ const Rep = {
   },
 
   //Función para cerrar un informe solucionado.
-  reportSolved: async function reportSolved(req, res) {
+  reportFullfilled: async function reportFullfilled(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { state: "solved" }
+      { state: "fullfilled" }
     );
     res.send("Report solved");
   },
@@ -159,8 +157,8 @@ const Rep = {
   },
 
   //Función para mostrar TODOS los informes pendientes.
-  getAllSolvedReports: async function getAllSolvedReports(req, res) {
-    const report = await Reports.find({ state: "solved" });
+  getAllFullfilledReports: async function getAllFullfilledReports(req, res) {
+    const report = await Reports.find({ state: "fullfilled" });
     res.send(report);
   },
 
@@ -168,7 +166,7 @@ const Rep = {
   catchReport: async function catchReport(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { admin: req.user.name + " " + req.user.lastname }
+      { admin: req.user.name + " " + req.user.lastname}
     );
     res.send(report);
   },
@@ -202,7 +200,7 @@ const Rep = {
 
   //Función para borrar todos los reportes.
   deleteAllReports: async function deleteAllReports(req, res) {
-    const report = await Reports.remove({}, callback);
+    const report = await Reports.remove({});
     res.send("Deleted all!");
   },
 
@@ -230,6 +228,33 @@ const Rep = {
         filteredReports.push(reporte);
     });
     res.send(filteredReports);
+  },
+
+  //Funcion para traer todos los reportes que no tengan un administrador asignado
+  getReportWithoutAdmin: async function getReportWithoutAdmin(req, res) {
+    const report = await Reports.find({ admin: "No admin." });
+    res.send(report);
+  },
+
+  shareReport: async function shareReport(req, res) {
+    try {
+      const report = await Reports.find({ _id: req.params._id });
+    
+      await transporter.sendMail({
+        from: req.user.email,
+        to: req.body.email,
+        subject: req.body.subject,
+        html: `
+      <h1>Hello, it's ${req.user.name}!</h1><br/>
+      <p>${req.body.message}</p><br/>
+      <img src=${report[0].image}/><br/>
+      <p>${report[0].description}</p>
+      `,
+      });
+      res.status(200).send("email sent");
+    } catch (err) {
+      res.status(401).send(err);
+    }
   },
 };
 

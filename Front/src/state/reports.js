@@ -7,7 +7,7 @@ export const sendReport = createAsyncThunk("SEND_REPORT", async (data) => {
 });
 
 export const myReport = createAsyncThunk("MY_REPORT", async () => {
-  const res = await axios.get(`/api/report/myreports`);
+  const res = await axios.get("/api/report/myreports");
   return res.data;
 });
 

@@ -1,6 +1,15 @@
 const User = require("../models/User");
 
 const { generateToken } = require("../config/token");
+const Reports = require("../models/Reports");
+
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dgmprcco9",
+  api_key: "658267799784839",
+  api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
+});
 
 const handleErrors = (err) => {
   let errors = { email: "", password: "" };
@@ -160,5 +169,34 @@ user.updateUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+user.search = async(req,res) => {
+  const user = await User.find()
+  let filterUsers = []
+
+  user.forEach((users) => {
+    if(users.name.toLowerCase()
+    .includes(req.params.search.toLowerCase())) filterUsers.push(users)
+    else if(users.lastname.toLowerCase()
+    .includes(req.params.search.toLowerCase())) filterUsers.push(users)
+  })
+
+  res.send(filterUsers)
+};
+
+user.updatePicture = async (req,res) => {
+  try{
+    const { image } = req.body;
+
+    const results = await cloudinary.uploader.upload(image)
+    
+    const img = await User.update({_id: req.user.id},{picture: results.secure_url})
+
+    res.send("Updated!")
+  }
+  catch{
+    res.status(500).send('falla')
+  }
+}
 
 module.exports = user;

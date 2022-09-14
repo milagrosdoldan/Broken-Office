@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const { validateAuth } = require("../middleware/auth");
 const {
-
     createReport,
     modifyReport,
     deleteReport,
@@ -26,14 +25,13 @@ const {
     deleteAllReports,
     getReportWithoutAdmin,
     shareReport
-
 } = require("../controllers/reports");
 
 //Ruta para buscar reportes sin administrador.
 router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin)
 
 //Ruta para buscar por SEARCH.
-router.get("/search/:search", validateAuth, getReportBySearch)
+router.get("/search/:search", validateAuth, getReportBySearch);
 
 //Ruta para traer TODOS los informes.
 router.get("/allreports", validateAuth, getAllReports);
@@ -42,10 +40,10 @@ router.get("/allreports", validateAuth, getAllReports);
 router.get("/catchedreports", validateAuth, myReportsCatched);
 
 //Ruta para traer todos los reportes solucionados por admin logeado.
-router.get('/myreportsfullfilled', validateAuth, myReportsFullfilled)
+router.get("/myreportsfullfilled", validateAuth, myReportsFullfilled);
 
 //Ruta para traer todos los reportes rechazados por admin logeado.
-router.get('/myreportsrejected', validateAuth, myReportsRejected);
+router.get("/myreportsrejected", validateAuth, myReportsRejected);
 
 //Ruta para traer los informes de un usuario pasado por parámetro.(Funcion ADMIN)
 router.get("/reportsbyuserid/:id", validateAuth, getReportByUserId);
@@ -75,7 +73,7 @@ router.get("/getsolvedreports", validateAuth, getAllSolvedReports);
 router.post("/addreport", validateAuth, createReport);
 
 //Ruta para que un admin pueda tomar un reporte.
-router.put('/catchreport/:id', validateAuth, catchReport)
+router.put("/catchreport/:id", validateAuth, catchReport);
 
 //Ruta para que un usuario modifique su informe.
 router.put("/modifyreport", validateAuth, modifyReport);
@@ -87,6 +85,7 @@ router.put("/solvereport/:id", validateAuth, reportSolved);
 router.put("/rejectedreport/:id", validateAuth, rejectedReport);
 
 //Ruta para borrar un informe pasado por parámetro.
+
 router.delete('/removereport/:id', validateAuth, deleteReport);
 
 //Ruta para borrar todos los informes.
@@ -99,5 +98,6 @@ router.delete('/deleteall', validateAuth, deleteAllReports)
 //subject : (el asunto del mensaje, que sea corto para que no de problemas con los diferentes sistemas de mail)
 //message : (Un mensaje personalizado que quiera enviar a la persona quien recibirá el email)
 router.post('/share/:_id', validateAuth, shareReport)
+
 
 module.exports = router;

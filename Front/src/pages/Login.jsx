@@ -10,10 +10,10 @@ import {
   InputGroup,
   Image,
   Text,
+  useColorModeValue,
   textDecoration,
 } from "@chakra-ui/react";
 import React from "react";
-import login from "../style/login.css";
 import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -63,6 +63,7 @@ const Login = () => {
       google.accounts.id.renderButton(document.getElementById(10), {
         theme: "outline",
         size: "large",
+        color: "black",
       });
     }
     loginGoogle();
@@ -71,7 +72,7 @@ const Login = () => {
   return (
     <Box
       className="loginView"
-      h={{ xl: 536, lg: 536, md: 536, base: 795 }}
+      h={{ xl: 546, lg: 546, md: 536, base: 795 }}
       bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
     >
       <Box
@@ -82,12 +83,16 @@ const Login = () => {
         justifyContent="space-between"
         alignItems="center"
         borderRadius="10"
-        backgroundColor="white"
+        backgroundColor={useColorModeValue("white", "#1a202c")}
         p={30}
         h={550}
         margin={100}
       >
-        <Heading fontSize="35px" color="third">
+        <Heading
+          color={useColorModeValue("third", "white")}
+          textAlign="center"
+          fontSize="35px"
+        >
           Sig in
         </Heading>
         <Center>
@@ -138,15 +143,21 @@ const Login = () => {
             </Box>
           </FormControl>
         </Center>
-
         <Button
-          alt="Sign up in the app."
+          color="black"
+          fontFamily="body"
+          display="flex"
+          m="0 auto"
+          alt="Submit request."
+          width={125}
           onClick={handleSubmit(onSubmit)}
-          colorScheme="green"
+          borderRadius="20px"
+          bg="secondary"
+          _hover={{ bg: "fourth" }}
         >
-          Log In
+          Submit
         </Button>
-        <Box id={10}></Box>
+        <Box backgroundColor="black" id={10}></Box>
 
         <Text alt="This link allows you to register in the app" mt="5px">
           Need an account? You can register{" "}

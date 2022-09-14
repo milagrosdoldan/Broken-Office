@@ -12,7 +12,10 @@ import { setUbication } from "./state/location";
 import { sendMe } from "./state/user";
 import SingleReport from "./components/SingleReport";
 import ResolveReport from "./commons/ResolveReport";
-import MyReports from "./components/MyReports";
+
+import ReportData from "./commons/ReportData";
+import ReportDataById from "./commons/ReportDataById";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ function App() {
         <Route path="/profile" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/report/:id" element={<ReportDataById />}></Route>
         <Route path="/admin/reports" element={<Reports />}></Route>
         <Route path="/admin/myreports" element={<MyReports />}></Route>
         <Route path="/admin/reports/:id" element={<SingleReport />}></Route>

@@ -1,10 +1,16 @@
-import { Box, Divider, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import React from "react";
 import EditAbout from "./EditAbout";
 
 const CartPerfil = ({ user }) => {
   return (
-    <Box display="flex" flexDir="column" alignItems="center">
+    <Box mt={5} display="flex" flexDir="column" alignItems="center">
       <Heading mt={5} fontSize="25">
         About
       </Heading>
@@ -17,8 +23,8 @@ const CartPerfil = ({ user }) => {
           md: "none",
           base: "center",
         }}
-        w={{ xl: 400, lg: 600 }}
-        bg="white"
+        w={{ xl: "80vh", lg: 600 }}
+        bg={useColorModeValue("white", "black")}
         p="1.5rem"
         borderRadius="10"
         boxShadow="inner"

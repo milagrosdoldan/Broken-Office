@@ -18,13 +18,17 @@ const Perfil = () => {
 
   if (user.email) {
     return (
-      <>
+      <Box
+        bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
+        h="120vh"
+      >
         <Box
           display="flex"
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
           mt={8}
+          
         >
           <Image
             borderRadius="full"
@@ -43,7 +47,7 @@ const Perfil = () => {
         </Box>
         <CartPerfil user={user} />
         <CartReports />
-      </>
+      </Box>
     );
   } else {
     return <NotFound />;

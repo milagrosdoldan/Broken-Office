@@ -11,6 +11,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  useColorModeValue,
   Stack,
   useToast,
 } from "@chakra-ui/react";
@@ -40,12 +41,11 @@ const Register = () => {
     dispatch(signUp(data));
   };
   user.email && navigate("/login");
- 
 
   return (
     <HStack
       w="full"
-      h="84.2vh"
+      h="85.7vh"
       flexDirection={{ xl: "row", lg: "row", md: "row", base: "column" }}
     >
       <Flex w="full" h="full">
@@ -64,7 +64,7 @@ const Register = () => {
         justifyContent="center"
       >
         <Stack maxW="full" spacing={6} p={6}>
-          <Heading fontSize="35px" color="third">
+          <Heading fontSize="35px" color={useColorModeValue("third", "white")}>
             Register
           </Heading>
 

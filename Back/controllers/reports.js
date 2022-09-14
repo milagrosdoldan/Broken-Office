@@ -40,6 +40,7 @@ const Rep = {
         lastname: req.body.lastname,
         date: req.body.date,
       });
+
       await transporter.sendMail({
         from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
         to: req.user.email,
@@ -94,6 +95,7 @@ const Rep = {
   //Función para mostrar informes por ID.
   getReportById: async function getReportById(req, res) {
     const report = await Reports.find({ _id: req.params.id });
+    console.log("report", report);
     res.send(report);
   },
 

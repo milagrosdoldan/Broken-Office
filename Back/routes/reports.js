@@ -3,32 +3,32 @@ const express = require("express");
 const router = express.Router();
 const { validateAuth } = require("../middleware/auth");
 const {
-    createReport,
-    modifyReport,
-    deleteReport,
-    getAllReports,
-    getReportByUserId,
-    getPriorityReports,
-    getDailyReports,
-    reportSolved,
-    getUserReports,
-    rejectedReport,
-    getAllPendingReports,
-    getAllRejectedReports,
-    getAllSolvedReports,
-    getReportById,
-    catchReport,
-    myReportsCatched,
-    myReportsFullfilled,
-    myReportsRejected,
-    getReportBySearch,
-    deleteAllReports,
-    getReportWithoutAdmin,
-    shareReport
+  createReport,
+  modifyReport,
+  deleteReport,
+  getAllReports,
+  getReportByUserId,
+  getPriorityReports,
+  getDailyReports,
+  reportFullfilled,
+  getUserReports,
+  rejectedReport,
+  getAllPendingReports,
+  getAllRejectedReports,
+  getAllFullfilledReports,
+  getReportById,
+  catchReport,
+  myReportsCatched,
+  myReportsFullfilled,
+  myReportsRejected,
+  getReportBySearch,
+  deleteAllReports,
+  getReportWithoutAdmin,
+  shareReport,
 } = require("../controllers/reports");
 
 //Ruta para buscar reportes sin administrador.
-router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin)
+router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
 
 //Ruta para buscar por SEARCH.
 router.get("/search/:search", validateAuth, getReportBySearch);
@@ -67,7 +67,7 @@ router.get("/getpendingreports", validateAuth, getAllPendingReports);
 router.get("/getrejectedreports", validateAuth, getAllRejectedReports);
 
 //Ruta para traer informes RESUELTOS.
-router.get("/getsolvedreports", validateAuth, getAllSolvedReports);
+router.get("/getsolvedreports", validateAuth, getAllFullfilledReports);
 
 //Ruta para crear un informe.
 router.post("/addreport", validateAuth, createReport);
@@ -79,17 +79,17 @@ router.put("/catchreport/:id", validateAuth, catchReport);
 router.put("/modifyreport", validateAuth, modifyReport);
 
 //Ruta para marcar un informe como resuelto pasado por parámetro.
-router.put("/solvereport/:id", validateAuth, reportSolved);
+router.put("/solvereport/:id", validateAuth, reportFullfilled);
 
 //Ruta para marcar un informe como rechazado.
 router.put("/rejectedreport/:id", validateAuth, rejectedReport);
 
 //Ruta para borrar un informe pasado por parámetro.
 
-router.delete('/removereport/:id', validateAuth, deleteReport);
+router.delete("/removereport/:id", validateAuth, deleteReport);
 
 //Ruta para borrar todos los informes.
-router.delete('/deleteall', validateAuth, deleteAllReports)
+router.delete("/deleteall", validateAuth, deleteAllReports);
 
 //Ruta para compratir un informe.
 //En su parametro _id necesita el id del reporte a compartir

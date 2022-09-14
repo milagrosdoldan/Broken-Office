@@ -56,6 +56,10 @@ const ReportSchema = new mongoose.Schema({
     type: Array,
     required: false,
   },
+  messages: {
+    type: Array,
+    required : false,
+  }
 });
 
 module.exports = mongoose.model("Reports", ReportSchema);

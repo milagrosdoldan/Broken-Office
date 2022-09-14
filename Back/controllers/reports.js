@@ -24,6 +24,7 @@ const Rep = {
         categorization: "google_tagging",
         auto_tagging: 0.8,
       })
+
      
 
       const newReport = await new Reports({
@@ -54,6 +55,7 @@ const Rep = {
         <p>An administrator will contact you soon</p>
         `
       })
+
 
       newReport.save();
       res.status(201).send(newReport);
@@ -218,6 +220,10 @@ const Rep = {
       .includes(req.params.search.toLowerCase())) filteredReports.push(reporte)
     })
     res.send(filteredReports)
+  },
+  getReportWithoutAdmin: async function getReportWithoutAdmin(req,res){
+    const report = await Reports.find({admin: "No admin."})
+    res.send(report)
   },
 };
 

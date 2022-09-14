@@ -48,21 +48,6 @@ const CartReports = () => {
                 </Tr>
               </Thead>
               <Tbody>
-<<<<<<< HEAD
-                <Tr>
-                  {report ? (
-                    report?.map((e) => {
-                      return (
-                        <>
-                          <Td alt={e.date.slice(0, 10)} fontSize={13}>
-                            {e.date.slice(0, 10)}
-                          </Td>
-                          <Td alt={e.description} fontSize={13}>
-                            {e.description}
-                          </Td>
-                          <Td>
-                            <Button textAlign="center" size="sm" mt={2}>
-=======
                 {report ? (
                   report.map((e) => {
                     return (
@@ -81,7 +66,6 @@ const CartReports = () => {
                               size="sm"
                               mt={2}
                             >
->>>>>>> 52be2a3a93e1a56b00bdbc9f7dffa1af4455915d
                               +
                             </Button>
                           </Link>

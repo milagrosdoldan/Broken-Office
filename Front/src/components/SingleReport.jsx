@@ -1,27 +1,15 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Image,
-  Table,
-  TableContainer,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
-import axios, { Axios } from "axios";
+import { Box, Button } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import ResolveReport from "../commons/ResolveReport";
 import NotFound from "../pages/NotFound";
 import ReportData from "../commons/ReportData";
 
 const SingleReport = () => {
   const [report, setReport] = useState({});
+  console.log("🚀 ~ file: SingleReport.jsx ~ line 12 ~ SingleReport ~ report", report)
   const params = useParams();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -48,6 +36,7 @@ const SingleReport = () => {
         timer: 1500,
         color: "secondary",
       });
+      
       axios
         .get(`/api/report/getreportbyid/${params.id}`)
         .then((res) => setReport(res.data[0]));
@@ -76,7 +65,7 @@ const SingleReport = () => {
               Atrás
             </Button>
           </Link>
-          {!report.admin ? (
+          {!report.admin || report.admin === "No admin."? (
             <Button
               m="3"
               borderRadius="40px"

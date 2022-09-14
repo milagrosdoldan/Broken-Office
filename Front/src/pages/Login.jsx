@@ -36,7 +36,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     data.loginWithGoogle = false;
-    dispatch(logIn(data)).then(() => document.cookie && navigate("/profile"));
+    dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
   const handleCallbackResponse = (response) => {

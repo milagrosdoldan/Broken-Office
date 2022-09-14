@@ -24,8 +24,12 @@ const {
     myReportsRejected,
     getReportBySearch,
     deleteAllReports,
+    getReportWithoutAdmin,
 
 } = require("../controllers/reports");
+
+//Ruta para buscar reportes sin administrador.
+router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin)
 
 //Ruta para buscar por SEARCH.
 router.get("/search/:search", validateAuth, getReportBySearch)

@@ -22,32 +22,18 @@ import ReportData from "../commons/ReportData";
 
 const SingleReport = () => {
   const [report, setReport] = useState({});
-<<<<<<< HEAD
-=======
-  console.log(
-    "🚀 ~ file: SingleReport.jsx ~ line 25 ~ SingleReport ~ report",
-    report
-  );
->>>>>>> 52be2a3a93e1a56b00bdbc9f7dffa1af4455915d
   const params = useParams();
   const user = useSelector((state) => state.user);
-  
   const navigate = useNavigate();
 
   useEffect(() => {
-
     async function getReportbyId() {
       axios
-       .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
-      .then((res) => setReport(res.data[0]));
-<<<<<<< HEAD
-  }, []);
-=======
+        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
+        .then((res) => setReport(res.data[0]));
     }
     getReportbyId();
-
-  }, [report.admin]);
->>>>>>> 52be2a3a93e1a56b00bdbc9f7dffa1af4455915d
+  }, []);
 
   const acceptReport = async (e) => {
     try {

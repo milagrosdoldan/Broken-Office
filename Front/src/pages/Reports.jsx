@@ -24,31 +24,40 @@ import NotFound from "./NotFound";
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 52be2a3a93e1a56b00bdbc9f7dffa1af4455915d
   useEffect(() => {
-    axios
-      .get("/api/report/allreports")
+
+    async function allReports() {
+     axios
+      .get("http://localhost:3001/api/report/allreports")
       .then((res) => {
         setReports(res.data);
       })
       .catch((err) => console.log(err));
+    }
+    allReports();
+
   }, []);
 
   const handlerReports = (e) => {
     const value = e.target.outerText;
 
     if (value === "PENDING") {
-      axios.get("/api/report/getpendingreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getpendingreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "FULFILLED") {
-      axios.get("/api/report/getsolvedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getsolvedreports").then((res) => {
         setReports(res.data);
       });
     }
     if (value === "REJECTED") {
-      axios.get("/api/report/getrejectedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getrejectedreports").then((res) => {
         setReports(res.data);
       });
     }

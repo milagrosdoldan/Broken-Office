@@ -17,6 +17,7 @@ import { useSelect } from "@mui/base";
 import React from "react";
 
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CartReports = () => {
   const report = useSelector((state) => state.report);
@@ -29,10 +30,11 @@ const CartReports = () => {
       <Box
         display="flex"
         flexDirection="row"
-        w={{ xl: 400, lg: 600 }}
+        w={{ xl: 500, lg: 700 }}
         bg="white"
         p="1.5rem"
         borderRadius="10"
+        h="full"
         boxShadow="inner"
       >
         <Box>
@@ -42,9 +44,11 @@ const CartReports = () => {
                 <Tr>
                   <Th>Date:</Th>
                   <Th>Description:</Th>
+                  <Th>More info:</Th>
                 </Tr>
               </Thead>
               <Tbody>
+<<<<<<< HEAD
                 <Tr>
                   {report ? (
                     report?.map((e) => {
@@ -58,16 +62,38 @@ const CartReports = () => {
                           </Td>
                           <Td>
                             <Button textAlign="center" size="sm" mt={2}>
+=======
+                {report ? (
+                  report.map((e) => {
+                    return (
+                      <Tr key={e.id}>
+                        <Td alt={e.date.slice(0, 10)} fontSize={13}>
+                          {e.date.slice(0, 10)}
+                        </Td>
+                        <Td alt={e.description} fontSize={13}>
+                          {e.description}
+                        </Td>
+                        <Td>
+                          <Link to={`/report/${e.id}`}>
+                            <Button
+                              bg="secondary"
+                              textAlign="center"
+                              size="sm"
+                              mt={2}
+                            >
+>>>>>>> 52be2a3a93e1a56b00bdbc9f7dffa1af4455915d
                               +
                             </Button>
-                          </Td>
-                        </>
-                      );
-                    })
-                  ) : (
+                          </Link>
+                        </Td>
+                      </Tr>
+                    );
+                  })
+                ) : (
+                  <Tr>
                     <Td>SIN DATOS</Td>
-                  )}
-                </Tr>{" "}
+                  </Tr>
+                )}
               </Tbody>
             </Table>
           </TableContainer>

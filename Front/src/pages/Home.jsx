@@ -8,8 +8,6 @@ import "@fontsource/heebo/700.css";
 import ImageListItem from "@mui/material/ImageListItem";
 import FormRequest from "../components/FormRequest";
 
-
-
 const itemData = [
   {
     img: "https://brand.globant.com/wp-content/uploads/2021/10/print-18.jpg",
@@ -36,6 +34,7 @@ const itemData = [
 export const Home = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBXoLVUJ4X76sJwsjEnuJoQYK1-VQtVR3Q",
@@ -49,7 +48,6 @@ export const Home = () => {
       }&fit=crop&auto=format&dpr=2 2x`,
     };
   }
-
 
   return (
     <>

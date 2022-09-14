@@ -23,8 +23,11 @@ const Rep = {
       const results = await cloudinary.uploader.upload(image, {
         categorization: "google_tagging",
         auto_tagging: 0.8,
-      });
-      console.log("tercero");
+
+      })
+
+
+
       const newReport = await new Reports({
         userId: req.user.id,
         date: date,
@@ -54,6 +57,7 @@ const Rep = {
       //   <p>An administrator will contact you soon</p>
       //   `
       // })
+
 
       newReport.save();
       console.log("5 ", newReport);
@@ -229,6 +233,10 @@ const Rep = {
         filteredReports.push(reporte);
     });
     res.send(filteredReports);
+  },
+  getReportWithoutAdmin: async function getReportWithoutAdmin(req,res){
+    const report = await Reports.find({admin: "No admin."})
+    res.send(report)
   },
 };
 

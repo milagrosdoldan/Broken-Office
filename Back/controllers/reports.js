@@ -13,18 +13,16 @@ const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
   createReport: async function createReport(req, res) {
     try {
-      console.log("primero");
       const d = new Date();
       const month = d.getMonth() + 1;
       const date = d.getDate() + "-" + month + "-" + d.getFullYear();
-      console.log("segundo");
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
         categorization: "google_tagging",
         auto_tagging: 0.8,
+      });
 
-      })
 
       const newReport = await new Reports({
         userId: req.user.id,
@@ -42,23 +40,20 @@ const Rep = {
         lastname: req.body.lastname,
         date: req.body.date,
       });
-      console.log("4");
-      // await transporter.sendMail({
-      //   from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
-      //   to: req.user.email,
-      //   subject: "Report sent!",
-      //   html: `
-      //   <h1>Hello ${req.body.name}!</h1><br/>
-      //   <p>Your report has been sent</p><br/>
-      //   <img src=${req.body.secure_url}/><br/>
-      //   <p>${req.body.description}</p><br/>
-      //   <p>An administrator will contact you soon</p>
-      //   `
-      // })
-
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `,
+      });
 
       newReport.save();
-      console.log("5 ", newReport);
       res.status(201).send(newReport);
     } catch (error) {
       res.send(error).status(500);
@@ -203,7 +198,7 @@ const Rep = {
 
   //Función para borrar todos los reportes.
   deleteAllReports: async function deleteAllReports(req, res) {
-    const report = await Reports.remove({}, callback);
+    const report = await Reports.remove({});
     res.send("Deleted all!");
   },
 
@@ -232,10 +227,33 @@ const Rep = {
     });
     res.send(filteredReports);
   },
-  getReportWithoutAdmin: async function getReportWithoutAdmin(req,res){
-    const report = await Reports.find({admin: "No admin."})
+
+  //Funcion para traer todos los reportes que no tengan un administrador asignado
+  getReportWithoutAdmin: async function getReportWithoutAdmin(req, res) {
+    const report = await Reports.find({ admin: "No admin." });
     res.send(report);
   },
+
+  shareReport: async function shareReport(req, res){
+    try{
+    const report = await Reports.find({_id : req.params._id})
+    console.log(report[0])
+    await transporter.sendMail({
+      from: req.user.email,
+      to: req.body.email,
+      subject: req.body.subject,
+      html: `
+      <h1>Hello, it's ${req.user.name}!</h1><br/>
+      <p>${req.body.message}</p><br/>
+      <img src=${report[0].image}/><br/>
+      <p>${report[0].description}</p>
+      `,
+    });
+    res.status(200).send("email sent")}
+    catch(err){
+      res.status(401).send(err)
+    }
+  }
 };
 
 module.exports = Rep;

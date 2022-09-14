@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// CommonJS
+// CommonJS.
 export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
   try {
     const res = await axios.post("/api/user/register", user);

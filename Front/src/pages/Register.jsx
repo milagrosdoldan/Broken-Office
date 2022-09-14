@@ -40,24 +40,21 @@ const Register = () => {
     dispatch(signUp(data));
   };
   user.email && navigate("/login");
-  // toast({
-  //   title: "Account created.",
-  //   description: "We've created your account for you.",
-  //   status: "success",
-  //   duration: 3000,
-  //   isClosable: true,
-  // });
-  // navigate("/login");
+ 
 
   return (
-    <HStack w="full" h="84.2vh">
-      <Flex w="full" h="full" borderRightWidth={1}>
+    <HStack
+      w="full"
+      h="84.2vh"
+      flexDirection={{ xl: "row", lg: "row", md: "row", base: "column" }}
+    >
+      <Flex w="full" h="full">
         <Image
           objectFit="cover"
           w="full"
           h="full"
           src="https://fotos.perfil.com/2021/03/03/trim/950/534/globant-20210303-1136704.jpg"
-          alt="imagen de una oficina de globant"
+          alt="Imagen de una oficina de globant"
         />
       </Flex>
       <Flex
@@ -66,7 +63,7 @@ const Register = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Stack maxW="lg" spacing={6} p={6}>
+        <Stack maxW="full" spacing={6} p={6}>
           <Heading fontSize="35px" color="third">
             Register
           </Heading>
@@ -75,7 +72,7 @@ const Register = () => {
             <FormControl isRequired id="name">
               <FormLabel>Name</FormLabel>
               <Input
-                _focusVisible={{ borderColor: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
                 _hover={{ color: "secondary" }}
                 width={40}
                 placeholder="Name"
@@ -89,7 +86,7 @@ const Register = () => {
             <FormControl id="lastname" isRequired>
               <FormLabel ml={5}>Lastname </FormLabel>
               <Input
-                _focusVisible={{ borderColor: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
                 ml={5}
                 width={40}
                 placeholder="Lastname"
@@ -104,7 +101,7 @@ const Register = () => {
           <FormControl isRequired id="email">
             <FormLabel>Email</FormLabel>
             <Input
-              _focusVisible={{ borderColor: "secondary" }}
+              _focusVisible={{ borderColor: "third" }}
               placeholder="Email"
               size="md"
               {...register("email", {
@@ -121,7 +118,7 @@ const Register = () => {
             <FormLabel>Password </FormLabel>
             <InputGroup size="md">
               <Input
-                _focusVisible={{ borderColor: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
                 fontFamily="body"
                 pr="4.5rem"
                 size="md"

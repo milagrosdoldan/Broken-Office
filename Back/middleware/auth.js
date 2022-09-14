@@ -1,6 +1,7 @@
 const { validateToken } = require("../config/token");
 
 function validateAuth(req, res, next) {
+  console.log(JSON.parse(JSON.stringify(req.cookies)));
   const token = req.cookies.token;
   if (!token) return res.sendStatus(401);
 

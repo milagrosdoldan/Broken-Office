@@ -4,12 +4,7 @@ import React from "react";
 const NotFound = () => {
   return (
     <>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alingItems="center"
-        alignItems="center"
-      >
+      <Box display="flex" flexDirection="column" alignItems="center">
         <Heading fontSize="20vh">404!</Heading>
         <Text mb="20" mx="10">
           Lo sentimos, no se pudo encontrar la página que buscas.

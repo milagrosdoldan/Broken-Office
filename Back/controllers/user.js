@@ -67,7 +67,6 @@ user.login = async (req, res) => {
 
       User.findOne({ email }).then((user) => {
         if (!user) return res.sendStatus(401);
-        console.log(user, "user");
 
         user.validatePassword(password).then((isValid) => {
           if (!isValid) return res.sendStatus(401);
@@ -87,7 +86,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             tel: user.tel,
             companyRole: user.companyRole,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin,
           });
         });
       });
@@ -111,7 +110,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
       } else {
         const user = await User.create(req.body);
@@ -132,7 +131,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
       }
     }

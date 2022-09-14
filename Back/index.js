@@ -11,13 +11,17 @@ require("dotenv").config();
 
 //middelware
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", routes);
-
 
 app.listen(process.env.PORT, () => {
   console.log("api working!...");

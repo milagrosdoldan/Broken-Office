@@ -10,6 +10,7 @@ import {
   InputGroup,
   Image,
   Text,
+  textDecoration,
 } from "@chakra-ui/react";
 import React from "react";
 import login from "../style/login.css";
@@ -35,7 +36,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     data.loginWithGoogle = false;
-    dispatch(logIn(data)).then(() => document.cookie && navigate("/profile"));
+    dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
   const handleCallbackResponse = (response) => {
@@ -53,21 +54,24 @@ const Login = () => {
   };
 
   useEffect(() => {
-    /* global google */ google.accounts.id.initialize({
-      client_id:
-        "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById(10), {
-      theme: "outline",
-      size: "large",
-    });
+    async function loginGoogle() {
+      /* global google */ google.accounts.id.initialize({
+        client_id:
+          "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+      google.accounts.id.renderButton(document.getElementById(10), {
+        theme: "outline",
+        size: "large",
+      });
+    }
+    loginGoogle();
   }, []);
 
   return (
     <Box
       className="loginView"
-      h={[750, 620, 536]}
+      h={{ xl: 536, lg: 536, md: 536, base: 795 }}
       bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
     >
       <Box
@@ -90,7 +94,7 @@ const Login = () => {
           <FormControl className="login" isRequired>
             <FormLabel textAlign={"center"}>Email</FormLabel>
             <Input
-              _focusVisible={{ borderColor: "secondary" }}
+              _focusVisible={{ borderColor: "third" }}
               type="email"
               placeholder="Email"
               color="#BFD732"
@@ -108,7 +112,7 @@ const Login = () => {
             <FormLabel textAlign={"center"}>Password</FormLabel>
             <InputGroup size="md">
               <Input
-                _focusVisible={{ borderColor: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
                 fontFamily="body"
                 pr="4.5rem"
                 size="md"
@@ -116,7 +120,7 @@ const Login = () => {
                 placeholder="Password"
                 {...register("password", { required: true, minLength: "10" })}
               />
-      
+
               <InputRightElement width="4.5rem" mr={5}>
                 <Button
                   h="1.75rem"
@@ -135,15 +139,26 @@ const Login = () => {
           </FormControl>
         </Center>
 
-        <Button onClick={handleSubmit(onSubmit)} colorScheme="green">
+        <Button
+          alt="Sign up in the app."
+          onClick={handleSubmit(onSubmit)}
+          colorScheme="green"
+        >
           Log In
         </Button>
         <Box id={10}></Box>
-        <Link to="/register">
-          <Text textDecoration="underline" mt="5px">
-            Need an account? <ExternalLinkIcon mx="2px" />
-          </Text>
-        </Link>
+
+        <Text alt="This link allows you to register in the app" mt="5px">
+          Need an account? You can register{" "}
+          <Link
+            to="/register"
+            style={{ color: "#2759be", textDecoration: "underline" }}
+          >
+            {" "}
+            here!
+            <ExternalLinkIcon ml="5px" mb="4px" />
+          </Link>
+        </Text>
       </Box>
     </Box>
   );

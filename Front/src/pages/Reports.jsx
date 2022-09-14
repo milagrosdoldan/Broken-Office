@@ -24,6 +24,7 @@ import NotFound from "./NotFound";
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
+  
   useEffect(() => {
     axios
       .get("/api/report/allreports")

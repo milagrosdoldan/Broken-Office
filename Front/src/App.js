@@ -27,7 +27,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Perfil />}></Route>

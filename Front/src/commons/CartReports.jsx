@@ -47,7 +47,7 @@ const CartReports = () => {
               <Tbody>
                 <Tr>
                   {report ? (
-                    report.map((e) => {
+                    report?.map((e) => {
                       return (
                         <>
                           <Td alt={e.date.slice(0, 10)} fontSize={13}>

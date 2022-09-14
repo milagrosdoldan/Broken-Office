@@ -37,7 +37,7 @@ router.get("/search/:search", validateAuth, getReportBySearch)
 //Ruta para traer TODOS los informes.
 router.get("/allreports", validateAuth, getAllReports);
 
-//Ruta para traer los reportes tomados por un admin logeado.
+//Ruta para traer los reportes pendientes de un admin logeado.
 router.get("/catchedreports", validateAuth, myReportsCatched);
 
 //Ruta para traer todos los reportes solucionados por admin logeado.
@@ -86,7 +86,6 @@ router.put("/solvereport/:id", validateAuth, reportSolved);
 router.put("/rejectedreport/:id", validateAuth, rejectedReport);
 
 //Ruta para borrar un informe pasado por parámetro.
-
 router.delete('/removereport/:id', validateAuth, deleteReport);
 
 //Ruta para borrar todos los informes.

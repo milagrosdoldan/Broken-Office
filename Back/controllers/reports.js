@@ -233,26 +233,26 @@ const Rep = {
     res.send(report);
   },
 
-  shareReport: async function shareReport(req, res){
-    try{
-    const report = await Reports.find({_id : req.params._id})
-    console.log(report[0])
-    await transporter.sendMail({
-      from: req.user.email,
-      to: req.body.email,
-      subject: req.body.subject,
-      html: `
+  shareReport: async function shareReport(req, res) {
+    try {
+      const report = await Reports.find({ _id: req.params._id });
+    
+      await transporter.sendMail({
+        from: req.user.email,
+        to: req.body.email,
+        subject: req.body.subject,
+        html: `
       <h1>Hello, it's ${req.user.name}!</h1><br/>
       <p>${req.body.message}</p><br/>
       <img src=${report[0].image}/><br/>
       <p>${report[0].description}</p>
       `,
-    });
-    res.status(200).send("email sent")}
-    catch(err){
-      res.status(401).send(err)
+      });
+      res.status(200).send("email sent");
+    } catch (err) {
+      res.status(401).send(err);
     }
-  }
+  },
 };
 
 module.exports = Rep;

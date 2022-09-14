@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import ReportData from "./ReportData";
+import SendEmail from "./SendEmail";
 
 const ResolveReport = () => {
   const [report, setReport] = useState({});
@@ -70,9 +71,8 @@ const ResolveReport = () => {
         >
           Resolver
         </Button>
-        <Button m="3" borderRadius="40px">
-          Send Email
-        </Button>
+        <SendEmail report={report}/>
+        
       </Box>
       <Link to="/admin/reports">
         <Button>Back</Button>

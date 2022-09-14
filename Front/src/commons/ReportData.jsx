@@ -1,9 +1,11 @@
 import {
   Box,
   Heading,
+  HStack,
   Image,
   Table,
   TableContainer,
+  Tag,
   Td,
   Text,
   Th,
@@ -36,6 +38,13 @@ const ReportData = ({ report }) => {
           maxWidth="30%"
           borderRadius="10"
         />
+        <HStack spacing={4} m="5">
+          {report?.tags?.map((size,i) => (
+            <Tag size={["sm", "md", "lg"]} key={i} variant="solid" colorScheme="green">
+              {size}
+            </Tag>
+          ))}
+        </HStack>
         <Box>
           <Text fontWeight="bold" mt="5">
             Description

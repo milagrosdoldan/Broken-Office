@@ -23,6 +23,7 @@ const Rep = {
         auto_tagging: 0.8,
       });
 
+
       const newReport = await new Reports({
         userId: req.user.id,
         date: date,
@@ -124,10 +125,10 @@ const Rep = {
   },
 
   //Función para cerrar un informe solucionado.
-  reportSolved: async function reportSolved(req, res) {
+  reportFullfilled: async function reportFullfilled(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { state: "solved" }
+      { state: "fullfilled" }
     );
     res.send("Report solved");
   },
@@ -154,8 +155,8 @@ const Rep = {
   },
 
   //Función para mostrar TODOS los informes pendientes.
-  getAllSolvedReports: async function getAllSolvedReports(req, res) {
-    const report = await Reports.find({ state: "solved" });
+  getAllFullfilledReports: async function getAllFullfilledReports(req, res) {
+    const report = await Reports.find({ state: "fullfilled" });
     res.send(report);
   },
 
@@ -163,7 +164,7 @@ const Rep = {
   catchReport: async function catchReport(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { admin: req.user.name + " " + req.user.lastname }
+      { admin: req.user.name + " " + req.user.lastname}
     );
     res.send(report);
   },

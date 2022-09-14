@@ -11,11 +11,17 @@ export const myReport = createAsyncThunk("MY_REPORT", async () => {
   return res.data;
 });
 
+export const reportById = createAsyncThunk("REPORT_BY_ID", async (id) => {
+  const res = await axios.get(`/api/report/getreportbyid/${id}`);
+  return res.data;
+});
+
 const reportReducer = createReducer(
   {},
   {
     [sendReport.fulfilled]: (state, action) => action.payload,
     [myReport.fulfilled]: (state, action) => action.payload,
+    [reportById.fulfilled]: (state, action) => action.payload,
   }
 );
 

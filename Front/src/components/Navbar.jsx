@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Icon, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Icon,
+  IconButton,
+  useToast,
+  useColorMode,
+} from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
@@ -6,6 +14,7 @@ import {
   MenuItem,
   MenuDivider,
   Spacer,
+  useColorModeValue,
   Image,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
@@ -14,13 +23,23 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/user";
 
+import { BiSun, BiMoon } from "react-icons/bi";
 import { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
+import { light } from "@mui/material/styles/createPalette";
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  // customizacion del darkmode.
+  const { colorMode, toggleColorMode } = useColorMode();
+  const color = useColorModeValue("white", "black");
+  const bg = useColorModeValue("white", "black");
+  const img = useColorModeValue(
+    "https://emprendedoresnews.com/wp-content/uploads/2020/01/company_5d7c04ad08a25a53fd4d5987.png",
+    "https://i.ibb.co/SxKhWCJ/Captura-desde-2022-09-14-16-08-00.png"
+  );
+  //log out.
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/");
@@ -34,8 +53,8 @@ const Navbar = () => {
       justifyContent="space-between"
       boxShadow="lg"
       rounded="sm"
-      bg="white"
-      width="100%"
+      bg={bg}
+      width="full"
     >
       <Menu bg="red">
         <Link to="/">
@@ -44,10 +63,20 @@ const Navbar = () => {
             objectFit="cover"
             alt="Globant logo"
             minW={"fit-content"}
-            ml="10px"
-            src="https://emprendedoresnews.com/wp-content/uploads/2020/01/company_5d7c04ad08a25a53fd4d5987.png"
+            w={15}
+            h={90}
+            ml="ml"
+            src={img}
           ></Image>
         </Link>
+        <IconButton
+          textAlign="center"
+          onClick={toggleColorMode}
+          marginInlineStart="auto"
+          mr={3}
+          isRound="true"
+          icon={colorMode === "light" ? <BiSun /> : <BiMoon />}
+        ></IconButton>
         {user.email ? (
           <MenuButton
             leftIcon={<Icon as={FaUserCircle} />}
@@ -56,6 +85,7 @@ const Navbar = () => {
             bg="secondary"
             _hover={{ bg: "fourth" }}
             as={Button}
+            color="black"
           >
             {user.name}
           </MenuButton>

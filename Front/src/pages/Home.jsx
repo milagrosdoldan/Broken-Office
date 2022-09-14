@@ -1,12 +1,22 @@
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import "../style/login.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner, Box, Heading, Grid, Text } from "@chakra-ui/react";
+import {
+  Spinner,
+  Box,
+  Heading,
+  Grid,
+  Text,
+  useColorModeValue,
+  Button,
+  Tooltip,
+} from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import ImageList from "@mui/material/ImageList";
 import "@fontsource/heebo/700.css";
 import ImageListItem from "@mui/material/ImageListItem";
 import FormRequest from "../components/FormRequest";
+import { useEffect, useState } from "react";
 
 const itemData = [
   {
@@ -34,7 +44,8 @@ const itemData = [
 export const Home = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
-
+  const [setIsReadyForInstall, setSetIsReadyForInstall] = useState(false);
+  const color = useColorModeValue("black", "white");
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBXoLVUJ4X76sJwsjEnuJoQYK1-VQtVR3Q",
@@ -49,8 +60,50 @@ export const Home = () => {
     };
   }
 
+  async function donwloadApp() {
+    console.log("ok, butinstall-clicked");
+    const promptEvent = window.deferredPrompt;
+    if (!promptEvent) {
+      console.log("oops, no prompt event guardado en window");
+      return;
+    }
+    promptEvent.prompt();
+
+    const result = await promptEvent.userChoice;
+    console.log("ok, user choice", result);
+    window.deferredPrompt = null;
+
+    setIsReadyForInstall(false);
+  }
+  useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      console.log("funca");
+      window.deferredPrompt = event;
+
+      setIsReadyForInstall(true);
+    });
+  });
+
   return (
     <>
+      <Box
+        mt={3}
+        mr={5}
+        alignItems="center"
+        display="flex"
+        justifyContent="center"
+      >
+        {setIsReadyForInstall && (
+          <Tooltip
+            bg="gray.300"
+            color="black"
+            label="You can download the page in your phone."
+          >
+            <Button>Download</Button>
+          </Tooltip>
+        )}
+      </Box>
       <Box
         className="box-mapa"
         display="flex"
@@ -73,7 +126,7 @@ export const Home = () => {
         >
           <Heading
             fontFamily="heading"
-            color="black"
+            color={color}
             textAlign="left"
             fontSize={41}
           >
@@ -81,7 +134,7 @@ export const Home = () => {
           </Heading>{" "}
           <Text
             fontFamily="heading"
-            color="black"
+            color={color}
             textAlign="left"
             fontSize={20}
             pl={{ xl: "175px", lg: "92px", md: "43px" }}

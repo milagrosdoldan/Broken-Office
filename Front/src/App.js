@@ -12,17 +12,22 @@ import { setUbication } from "./state/location";
 import { sendMe } from "./state/user";
 import SingleReport from "./components/SingleReport";
 import ResolveReport from "./commons/ResolveReport";
+import ReportData from "./commons/ReportData";
+import ReportDataById from "./commons/ReportDataById";
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(async () => {
-    dispatch(sendMe());
+  useEffect(() => {
+    async function persistence() {
+      dispatch(sendMe());
 
-    function success(pos) {
-      dispatch(setUbication([pos.coords.latitude, pos.coords.longitude]));
-      // dispatch(setUbication(pos.coords.latitude));
+      function success(pos) {
+        dispatch(setUbication([pos.coords.latitude, pos.coords.longitude]));
+        // dispatch(setUbication(pos.coords.latitude));
+      }
+      navigator.geolocation.getCurrentPosition(success);
     }
-    navigator.geolocation.getCurrentPosition(success);
+    persistence();
   }, []);
 
   return (
@@ -33,6 +38,7 @@ function App() {
         <Route path="/profile" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/report/:id" element={<ReportDataById />}></Route>
         <Route path="/admin/reports" element={<Reports />}></Route>
         <Route path="/admin/reports/:id" element={<SingleReport />}></Route>
         <Route

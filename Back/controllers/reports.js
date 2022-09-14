@@ -42,18 +42,18 @@ const Rep = {
         date: req.body.date,
       });
       console.log("4");
-      // await transporter.sendMail({
-      //   from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
-      //   to: req.user.email,
-      //   subject: "Report sent!",
-      //   html: `
-      //   <h1>Hello ${req.body.name}!</h1><br/>
-      //   <p>Your report has been sent</p><br/>
-      //   <img src=${req.body.secure_url}/><br/>
-      //   <p>${req.body.description}</p><br/>
-      //   <p>An administrator will contact you soon</p>
-      //   `
-      // })
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `,
+      });
 
       newReport.save();
       console.log("5 ", newReport);
@@ -97,6 +97,7 @@ const Rep = {
   //Función para mostrar informes por ID.
   getReportById: async function getReportById(req, res) {
     const report = await Reports.find({ _id: req.params.id });
+    console.log("report", report);
     res.send(report);
   },
 

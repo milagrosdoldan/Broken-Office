@@ -93,11 +93,10 @@ router.delete("/deleteall", validateAuth, deleteAllReports);
 
 //Ruta para compratir un informe.
 //En su parametro _id necesita el id del reporte a compartir
-//En su req.body necesita: 
+//En su req.body necesita:
 //email : (email del destinatario)
 //subject : (el asunto del mensaje, que sea corto para que no de problemas con los diferentes sistemas de mail)
 //message : (Un mensaje personalizado que quiera enviar a la persona quien recibirá el email)
-router.post('/share/:_id', validateAuth, shareReport)
-
+router.post("/share/:_id", validateAuth, shareReport);
 
 module.exports = router;

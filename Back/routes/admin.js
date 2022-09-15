@@ -5,7 +5,10 @@ const { validateAuth, validateAdmin } = require("../middleware/auth");
 
 const {
   promote,
-  demote, all, activate, deactivate,
+  demote,
+  all,
+  activate,
+  deactivate,
 } = require("../controllers/admin");
 
 router.put("/promote/:userId", validateAuth, validateAdmin, promote);

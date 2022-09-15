@@ -19,15 +19,15 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { sendReport } from "../state/reports";
-import { Link } from "react-router-dom";
-import "../style/login.css";
-import Swal from "sweetalert2";
+import { useState } from "react";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { sendReport } from "../state/reports";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import Swal from "sweetalert2";
+import "../style/login.css";
 const FormRequest = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();

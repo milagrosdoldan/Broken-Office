@@ -17,9 +17,9 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { logIn, sendMe, update } from "../state/user";
+import { sendMe } from "../state/user";
 import axios from "axios";
-import { useEffect } from "react";
+
 const EditAbout = () => {
   const user = useSelector((state) => state.user);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,9 +38,7 @@ const EditAbout = () => {
       companyRole,
     };
 
-
-    axios.put(`http://localhost:3001/api/user/${user.id}`, newData);
-    
+    axios.put(`/api/user/${user.id}`, newData);
 
     dispatch(sendMe());
     onClose();
@@ -78,8 +76,8 @@ const EditAbout = () => {
                 placeholder="Email"
                 value={email}
                 onChange={handlerEmail}
-                _focusVisible={{ borderColor: "secondary" }}
-                _hover={{ color: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
+                _hover={{ color: "black" }}
                 isRequired
               />
               <FormLabel>Edit Phone</FormLabel>
@@ -88,15 +86,15 @@ const EditAbout = () => {
                 placeholder="Tel"
                 value={tel}
                 onChange={handlerTel}
-                _focusVisible={{ borderColor: "secondary" }}
-                _hover={{ color: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
+                _hover={{ color: "black" }}
               />
               <FormLabel>Edit Company Role</FormLabel>
               <Input
                 ref={initialRef}
                 placeholder="Rol"
-                _focusVisible={{ borderColor: "secondary" }}
-                _hover={{ color: "secondary" }}
+                _focusVisible={{ borderColor: "third" }}
+                _hover={{ color: "third" }}
                 value={companyRole}
                 onChange={handlerRole}
               />

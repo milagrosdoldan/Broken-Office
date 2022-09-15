@@ -9,7 +9,10 @@ import ReportData from "../commons/ReportData";
 
 const SingleReport = () => {
   const [report, setReport] = useState({});
-  console.log("🚀 ~ file: SingleReport.jsx ~ line 12 ~ SingleReport ~ report", report)
+  console.log(
+    "🚀 ~ file: SingleReport.jsx ~ line 12 ~ SingleReport ~ report",
+    report
+  );
   const params = useParams();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ const SingleReport = () => {
   useEffect(() => {
     async function getReportbyId() {
       axios
-        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
+        .get(`/api/report/getreportbyid/${params.id}`)
         .then((res) => setReport(res.data[0]));
     }
     getReportbyId();
@@ -36,7 +39,7 @@ const SingleReport = () => {
         timer: 1500,
         color: "secondary",
       });
-      
+
       axios
         .get(`/api/report/getreportbyid/${params.id}`)
         .then((res) => setReport(res.data[0]));
@@ -65,7 +68,7 @@ const SingleReport = () => {
               Atrás
             </Button>
           </Link>
-          {!report.admin || report.admin === "No admin."? (
+          {!report.admin || report.admin === "No admin." ? (
             <Button
               m="3"
               borderRadius="40px"

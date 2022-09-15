@@ -23,7 +23,7 @@ const CartPerfil = ({ user }) => {
           md: "none",
           base: "center",
         }}
-        w={{ xl: "80vh", lg: 600 }}
+        w={{ xl: 600, lg: 600 }}
         bg={useColorModeValue("white", "black")}
         p="1.5rem"
         borderRadius="10"

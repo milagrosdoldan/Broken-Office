@@ -15,6 +15,7 @@ import ResolveReport from "./commons/ResolveReport";
 import MyReports from "./components/MyReports";
 import ReportData from "./commons/ReportData";
 import ReportDataById from "./commons/ReportDataById";
+import Chat from "./commons/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
+        <Route path="/chat" element={<Chat />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>

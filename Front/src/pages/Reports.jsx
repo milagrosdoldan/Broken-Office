@@ -79,9 +79,8 @@ const Reports = () => {
             Fulfilled
           </Badge>
         </Stack>
-        <ReportList reports={reports}/>
+        <ReportList reports={reports} />
         <div>
-          
           <ScrollToTop
             smooth
             color="black"
@@ -89,7 +88,7 @@ const Reports = () => {
             style={{
               backgroundColor: "#bfd732",
               width: "10",
-              borderRadius:"15px",
+              borderRadius: "15px",
             }}
           />
         </div>

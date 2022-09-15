@@ -71,8 +71,7 @@ const ResolveReport = () => {
         >
           Resolver
         </Button>
-        <SendEmail report={report}/>
-        
+        <SendEmail report={report} />
       </Box>
       <Link to="/admin/reports">
         <Button>Back</Button>

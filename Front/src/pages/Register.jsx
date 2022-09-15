@@ -144,6 +144,7 @@ const Register = () => {
             fontFamily="body"
             display="flex"
             mt={4}
+            color="black"
             onClick={handleSubmit(onSubmit)}
             borderRadius="40px"
             bg="secondary"

@@ -40,21 +40,23 @@ const CartReports = () => {
       <Box
         display="flex"
         flexDirection="row"
-        w={{ xl: 500, lg: 700 }}
+        w={{ xl: 600, lg: 600, md: 380, base: 380 }}
         bg={useColorModeValue("white", "black")}
         p="1.5rem"
+        borderRadius="10"
+        boxShadow="inner"
         h="full"
         justifyContent="center"
       >
         <Box>
           <Accordion
-            width={{ xl: "70vh", lg: "80vh", base: "40vh" }}
+            width={{ xl: 600, lg: 600, md: 380, base: "40vh" }}
             allowToggle
           >
             <AccordionItem>
               <AccordionButton>
                 <Box
-                  width={{ xl: "70vh", lg: "80vh", base: "40vh" }}
+                  width={{ xl: 600, lg: 600, md: 380, base: "40vh" }}
                   justifyContent="center"
                 >
                   Reportes
@@ -63,7 +65,7 @@ const CartReports = () => {
               </AccordionButton>
               <AccordionPanel>
                 <TableContainer
-                  width={{ xl: "70vh", lg: "70vh", md: "70vh", base: "60vh" }}
+                  width={{ xl: 600, lg: 600, md: "70vh", base: "60vh" }}
                 >
                   <Table variant="simple">
                     <Thead>
@@ -119,4 +121,3 @@ const CartReports = () => {
 };
 
 export default CartReports;
-

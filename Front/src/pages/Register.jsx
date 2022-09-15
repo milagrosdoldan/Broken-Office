@@ -15,14 +15,13 @@ import {
   Stack,
   useToast,
 } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-import "@fontsource/open-sans";
-import "@fontsource/heebo";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "../state/user";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "../state/user";
 import "@fontsource/open-sans";
 import "@fontsource/heebo";
+
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);

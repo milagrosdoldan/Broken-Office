@@ -1,8 +1,6 @@
-
 import {
   Box,
   Button,
-  Flex,
   Icon,
   IconButton,
   useToast,
@@ -11,8 +9,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
-  Spacer,
   useColorModeValue,
   Image,
 } from "@chakra-ui/react";
@@ -21,10 +17,9 @@ import { ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../state/user";
-
 import { BiSun, BiMoon } from "react-icons/bi";
 import { FaUserCircle } from "@react-icons/all-files/fa/FaUserCircle";
-import { light } from "@mui/material/styles/createPalette";
+
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const toast = useToast();
@@ -69,6 +64,7 @@ const Navbar = () => {
           ></Image>
         </Link>
         <IconButton
+          alt="dark mode"
           textAlign="center"
           onClick={toggleColorMode}
           marginInlineStart="auto"

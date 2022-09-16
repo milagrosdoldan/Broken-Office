@@ -13,8 +13,8 @@ import { sendMe } from "./state/user";
 import SingleReport from "./components/SingleReport";
 import ResolveReport from "./commons/ResolveReport";
 import MyReports from "./components/MyReports";
-import ReportData from "./commons/ReportData";
 import ReportDataById from "./commons/ReportDataById";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ function App() {
           path="/admin/reports/resolve/:id"
           element={<ResolveReport />}
         ></Route>
+        <Route path="/404" element={<NotFound/>}></Route>
       </Routes>
     </>
   );

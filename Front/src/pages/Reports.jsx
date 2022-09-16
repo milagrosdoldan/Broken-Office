@@ -1,37 +1,68 @@
-import { Badge, Box, Stack } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import {
+  Badge,
+  Box,
+  IconButton,
+  Input,
+  Spinner,
+  Stack,
+  Tab,
+  TabList,
+  Tabs,
+} from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 import ReportList from "../commons/ReportList";
-import NotFound from "./NotFound";
-
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm();
 
   useEffect(() => {
-    async function allReports() {
-      axios
-        .get("/api/report/allreports")
-        .then((res) => {
-          setReports(res.data);
-        })
-        .catch((err) => console.log(err));
+    async function cleanInputs() {
+      if (formState.isSubmitSuccessful) {
+        reset({
+          search: "",
+        });
+      }
     }
-    allReports();
-  }, []);
+    cleanInputs();
+  }, [formState, reset]);
+  const navigate = useNavigate();
+
+  async function allReports() {
+    axios
+      .get("/api/report/getpendingreports")
+      .then((res) => {
+        setReports(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }
 
   const handlerReports = (e) => {
-    const value = e.target.outerText;
+    const value = e.target.value;
 
     if (value === "PENDING") {
       axios.get("/api/report/getpendingreports").then((res) => {
         setReports(res.data);
       });
     }
-    if (value === "FULFILLED") {
+    if (value === "FULLFIELD") {
       axios.get("/api/report/getsolvedreports").then((res) => {
         setReports(res.data);
       });
@@ -42,62 +73,73 @@ const Reports = () => {
       });
     }
   };
-  if (user.isAdmin) {
-    return (
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Stack direction="row" alignItems="center" m="1">
-          <Badge
-            key={"rejected"}
-            my="5"
-            colorScheme="red"
-            px="7"
-            py="4"
-            borderRadius="10px"
+
+  const handlerSearch = async (data) => {
+    const reportes = await axios.get(`/api/report/search/${data.search}`);
+    setReports(reportes.data);
+  };
+
+  if (isLoading) {
+    user?.isAdmin ? allReports() : navigate("/404");
+    return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+  }
+
+  return (
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Box mt="5" display="flex" flexDir={"row"} alignItems="center">
+        <Input
+          placeholder="Search reports..."
+          _focusVisible={{ borderColor: "third" }}
+          {...register("search")}
+        />
+        <IconButton
+          onClick={handleSubmit(handlerSearch)}
+          aria-label="Search database"
+          mt="0px"
+          icon={<SearchIcon />}
+        />
+      </Box>
+
+      <Tabs m="3">
+        <TabList display="flex" justifyContent="center">
+          <Tab
+            value={"REJECTED"}
+            _selected={{ color: "white", bg: "red" }}
             onClick={handlerReports}
           >
             Rejected
-          </Badge>
-          <Badge
-            key={"pending"}
-            px="7"
-            py="4"
-            borderRadius="10px"
-            my="5"
+          </Tab>
+          <Tab
+            value={"PENDING"}
+            _selected={{ color: "white", bg: "gray" }}
             onClick={handlerReports}
           >
-            Pending
-          </Badge>
-          <Badge
-            key={"fullfilled"}
-            my="5"
-            colorScheme="green"
-            px="7"
-            py="4"
-            borderRadius="10px"
+            In Progress
+          </Tab>
+          <Tab
+            value={"FULLFIELD"}
+            _selected={{ color: "white", bg: "secondary" }}
             onClick={handlerReports}
           >
-            Fulfilled
-          </Badge>
-        </Stack>
-        <ReportList reports={reports}/>
-        <div>
-          
-          <ScrollToTop
-            smooth
-            color="black"
-            bg="#bfd732 "
-            style={{
-              backgroundColor: "#bfd732",
-              width: "10",
-              borderRadius:"15px",
-            }}
-          />
-        </div>
-      </Box>
-    );
-  } else {
-    return <NotFound />;
-  }
+            Fullfield
+          </Tab>
+        </TabList>
+      </Tabs>
+      <ReportList reports={reports} />
+      <div>
+        <ScrollToTop
+          smooth
+          color="black"
+          bg="#bfd732 "
+          style={{
+            backgroundColor: "#bfd732",
+            width: "10",
+            borderRadius: "15px",
+          }}
+        />
+      </div>
+    </Box>
+  );
 };
 
 export default Reports;

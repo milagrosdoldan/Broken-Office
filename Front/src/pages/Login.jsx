@@ -51,7 +51,7 @@ const Login = () => {
       picture: userObject.picture,
     };
     dispatch(logIn(payload));
-    navigate("/profile");
+    navigate("/");
   };
 
   useEffect(() => {

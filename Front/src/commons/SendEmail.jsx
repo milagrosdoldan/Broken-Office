@@ -30,22 +30,24 @@ function SendEmail({ report }) {
   const [message, setMessage] = useState("");
 
   const sendEmail = () => {
-    axios.post(`/api/report/share/${params.id}`, {
-      email: report.email,
-      subject,
-      message,
-    }).then(()=>{
-      Swal.fire({
-        icon: "success",
-        text: "Email enviado",
-        width: 300,
-        showConfirmButton: false,
-        timer: 1500,
-        color: "secondary",
+    axios
+      .post(`/api/report/share/${params.id}`, {
+        email: report.email,
+        subject,
+        message,
+      })
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          text: "Email enviado",
+          width: 300,
+          showConfirmButton: false,
+          timer: 1500,
+          color: "secondary",
+        });
+        setMessage("");
+        setSubject("");
       });
-      setMessage("");
-      setSubject("");
-    })
   };
   const handlerMessage = (e) => {
     setMessage(e.target.value);

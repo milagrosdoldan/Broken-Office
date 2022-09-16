@@ -14,6 +14,7 @@ import {
   PopoverCloseButton,
   Divider,
   Box,
+  useColorMode,
   Heading,
   useColorModeValue,
   Image,
@@ -34,6 +35,9 @@ const FormRequest = () => {
   const user = useSelector((state) => state.user);
   const [imageSrc, setImageSrc] = useState();
   const color = useColorModeValue("black", "white");
+  const focusVisible = useColorModeValue("white", "white");
+  const [input, setInput] = useState(null);
+  const [anotherInput, setAnotherInput] = useState(null);
   const {
     register,
     handleSubmit,
@@ -49,8 +53,8 @@ const FormRequest = () => {
       data.lastname = user.lastname;
       data.email = user.email;
       data.image = imageSrc;
-      data.date = new Date();
 
+      console.log(data);
       dispatch(sendReport(data));
 
       Swal.fire({
@@ -63,16 +67,20 @@ const FormRequest = () => {
       });
     } catch {}
   };
-
+  const { colorMode, toggleColorMode } = useColorMode();
+  
   useEffect(() => {
     async function cleanInputs() {
       if (formState.isSubmitSuccessful) {
         reset({
           compañyRole: "",
           description: "",
-          priority: "",
+          priority: null,
         });
         setImageSrc("");
+        let randomString = Math.random().toString(36);
+        setInput(randomString);
+        setAnotherInput(randomString);
       }
     }
     cleanInputs();
@@ -136,10 +144,26 @@ const FormRequest = () => {
           <>
             {" "}
             <FormControl isRequired textAlign="center">
+              <FormLabel textAlign="center">Title:</FormLabel>
+              <Input
+                alt="The title of your report."
+                _focusVisible={focusVisible}
+                borderColor="ActiveBorder"
+                textAlign="initial"
+                width={["200px", "200px", "330px", "250px", "400px"]}
+                placeholder="Title"
+                {...register("title", { required: true })}
+              ></Input>
+              <Box>
+                {errors.title?.type === "required" && "Title is required."}
+              </Box>
+            </FormControl>
+            <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Company role:</FormLabel>
               <Input
+                borderColor="ActiveBorder"
                 alt="Your company role in the company."
-                _focusVisible={{ borderColor: "third" }}
+                _focusVisible={colorMode === "light" ? "third" : "white"}
                 textAlign="initial"
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 placeholder="Company role"
@@ -153,8 +177,10 @@ const FormRequest = () => {
             <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Description:</FormLabel>
               <Input
+                _hover="ActiveBorder"
+                borderColor="ActiveBorder"
                 alt="The description about the problem you have"
-                _focusVisible={{ borderColor: "third" }}
+                _focusVisible={focusVisible}
                 textAlign="initial"
                 placeholder="Description"
                 width={["200px", "200px", "330px", "250px", "400px"]}
@@ -169,10 +195,12 @@ const FormRequest = () => {
               <FormLabel textAlign="center">Priority</FormLabel>
 
               <Select
+                key={anotherInput || ""}
+                borderColor="ActiveBorder"
                 alt="Select the priority of your problem."
                 m="0 auto"
                 textAlign="center"
-                _focusVisible={{ borderColor: "third" }}
+                _focusVisible={focusVisible}
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 placeholder="Select level:"
               >
@@ -194,8 +222,10 @@ const FormRequest = () => {
             <FormControl textAlign="center" isRequired>
               <FormLabel textAlign="center">Add file</FormLabel>
               <Input
+                borderColor="ActiveBorder"
                 textAlign="center"
                 m="0 auto"
+                key={input || ""}
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 alt="Add the photos."
                 onChange={handleOnChange}
@@ -205,13 +235,19 @@ const FormRequest = () => {
               />
             </FormControl>
             {imageSrc && (
-              <Image alt="your post image" src={imageSrc} maxWidth="50%" />
+              <Image
+                maxW={15}
+                alignSelf="center"
+                alt="your post image"
+                src={imageSrc}
+              />
             )}
             <Button
+              textAlign="center"
               color="black"
               fontFamily="body"
               display="flex"
-              m="0 auto"
+              alignSelf="center"
               alt="Submit request."
               width={125}
               onClick={handleSubmit(onSubmit)}
@@ -226,7 +262,7 @@ const FormRequest = () => {
           <Text fontFamily="body" textAlign="center">
             If you want to add a report, you have to be logged! You can log in{" "}
             <Link
-              style={{ textDecoration: "underline", color: "#909090" }}
+              style={{ textDecoration: "underline", color: "blue" }}
               to="/login"
             >
               here!

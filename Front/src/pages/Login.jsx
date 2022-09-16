@@ -37,6 +37,9 @@ const Login = () => {
     dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
+  
+
+
   const handleCallbackResponse = (response) => {
     let userObject = jwt_decode(response.credential);
 

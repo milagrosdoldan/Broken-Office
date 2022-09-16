@@ -13,10 +13,7 @@ import { sendMe } from "./state/user";
 import SingleReport from "./components/SingleReport";
 import ResolveReport from "./commons/ResolveReport";
 import MyReports from "./components/MyReports";
-import ReportData from "./commons/ReportData";
 import ReportDataById from "./commons/ReportDataById";
-import Chat from "./commons/Chat";
-import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();

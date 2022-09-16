@@ -1,6 +1,13 @@
 {
   "short_name": "Broken Office",
   "name": "Broken Office Team Globant P5",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "*://*/*"
+  ],
   "categories": ["Problem solving", "office", "Globant", "Comunication"],
   "description": "Una aplicación para reportar los errores y problemas que tengas en tu espacio de trabajo a tus empleadores.",
   "dir": "ltr",

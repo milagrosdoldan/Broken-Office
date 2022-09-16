@@ -65,6 +65,7 @@ const Navbar = () => {
         </Link>
         <IconButton
           alt="dark mode"
+          aria-label="mode"
           textAlign="center"
           onClick={toggleColorMode}
           marginInlineStart="auto"
@@ -89,8 +90,10 @@ const Navbar = () => {
             rightIcon={<ChevronDownIcon />}
             mr={5}
             bg="secondary"
+            alt="menu button"
             _hover={{ bg: "fourth" }}
             as={Button}
+            aria-label="Menu options"
           >
             <HamburgerIcon />
           </MenuButton>
@@ -100,16 +103,16 @@ const Navbar = () => {
           <MenuList>
             {" "}
             <Link to="/profile">
-              <MenuItem alt="Profile.">Profile</MenuItem>
+              <MenuItem aria-label="profile">Profile</MenuItem>
             </Link>
             {user.isAdmin ? (
               <>
                 {" "}
                 <Link to="/admin/reports">
-                  <MenuItem>Reports</MenuItem>
+                  <MenuItem aria-label="admin reports">Reports</MenuItem>
                 </Link>
                 <Link to={"/admin/myreports"}>
-                  <MenuItem>My reports</MenuItem>
+                  <MenuItem aria-label="admin my reports">My reports</MenuItem>
                 </Link>
               </>
             ) : (
@@ -134,11 +137,11 @@ const Navbar = () => {
           <MenuList>
             <Link to="/login">
               {" "}
-              <MenuItem alt="Log in">Log In</MenuItem>{" "}
+              <MenuItem aria-label="Log in">Log In</MenuItem>{" "}
             </Link>
             <Link to="/register">
               {" "}
-              <MenuItem alt="Register">Register</MenuItem>{" "}
+              <MenuItem aria-label="Register">Register</MenuItem>{" "}
             </Link>
           </MenuList>
         )}

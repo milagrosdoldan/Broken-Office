@@ -16,6 +16,7 @@ import MyReports from "./components/MyReports";
 import ReportData from "./commons/ReportData";
 import ReportDataById from "./commons/ReportDataById";
 import Chat from "./commons/Chat";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ function App() {
 
       function success(pos) {
         dispatch(setUbication([pos.coords.latitude, pos.coords.longitude]));
-        // dispatch(setUbication(pos.coords.latitude));
       }
       navigator.geolocation.getCurrentPosition(success);
     }
@@ -49,6 +49,7 @@ function App() {
           path="/admin/reports/resolve/:id"
           element={<ResolveReport />}
         ></Route>
+        <Route path="/404" element={<NotFound />}></Route>
       </Routes>
     </>
   );

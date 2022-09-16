@@ -51,11 +51,9 @@ const ReportDataById = () => {
           alignItems="center"
         >
           <Heading my="5" textAlign="center">
-            Report:
+            Your report:
           </Heading>
-          <Text mb="3" textAlign="center" fontWeight="bold" fontSize="25">
-            {report._id}
-          </Text>
+
           <Box
             display="flex"
             flexDirection={["column", "row", "row"]}
@@ -81,7 +79,15 @@ const ReportDataById = () => {
               <Text
                 ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
                 fontWeight="bold"
-                mt="5"
+              >
+                Title:
+              </Text>
+              <Text ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}>
+                {report.title}
+              </Text>
+              <Text
+                ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
+                fontWeight="bold"
               >
                 Description:
               </Text>

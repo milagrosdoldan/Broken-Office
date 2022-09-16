@@ -158,7 +158,7 @@ export const Home = () => {
         >
           {isLoaded ? (
             <GoogleMap
-              mapContainerClassName="map"
+             
               mapContainerStyle={{ width: "90%", height: "60%" }}
               center={{
                 lat: location[0],

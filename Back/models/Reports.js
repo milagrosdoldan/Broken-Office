@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const ReportSchema = new mongoose.Schema({
   userId: {
-
     type: String,
-
   },
   name: {
     type: String,
@@ -15,9 +13,15 @@ const ReportSchema = new mongoose.Schema({
   email: {
     type: String,
   },
+  name: {
+    type: String,
+  },
+  title: {
+    type: String,
+  },
   admin: {
     type: String,
-    default: "No admin."
+    default: "No admin.",
   },
   location: {
     type: String,
@@ -58,7 +62,10 @@ const ReportSchema = new mongoose.Schema({
   },
   messages: {
     type: Array,
-    required : false,
+    required: false,
+  },
+  profilephoto:{
+    
   }
 });
 

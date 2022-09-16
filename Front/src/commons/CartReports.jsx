@@ -59,12 +59,13 @@ const CartReports = () => {
                   width={{ xl: 600, lg: 600, md: 380, base: "40vh" }}
                   justifyContent="center"
                 >
-                  Reportes
+                  Reports
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel>
                 <TableContainer
+                  alignSelf="center"
                   width={{ xl: 600, lg: 600, md: "70vh", base: "60vh" }}
                 >
                   <Table variant="simple">

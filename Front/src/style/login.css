@@ -55,15 +55,31 @@ html, body {
   padding: 0;
 }
 
-/* .box-mapa{
-
-  
-
-
+.sent {
+  background-color:#92c64e  ;
+  color: black;
+  display: flex;
+  text-align: right;
+  flex-direction:column ;
+  border-radius: 15px;
+  margin-left: 40%;
+  margin-bottom: 5px ;
+  margin-top: 5px ;
+}
+.receive{
+  background-color: #e5e5ea;
+  color: black;
+  display: flex;
+  text-align: left;
+  flex-direction:column ;
+  border-radius: 15px;
+  margin-right: 40%;
+  margin-bottom: 5px ;
+  margin-top: 5px ;
+  padding: 4px;
 }
 
-@media screen and (min-width: 30em) {
-  .box-mapa {
-    width: 50%;
-  }
-} */
+.messages {
+  padding: 2 3;
+  margin: -4;
+}

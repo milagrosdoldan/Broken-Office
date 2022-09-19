@@ -13,6 +13,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import Chat from "../components/Chat";
 import Maps from "./Maps";
 
 const ReportData = ({ report }) => {
@@ -39,8 +40,13 @@ const ReportData = ({ report }) => {
           borderRadius="10"
         />
         <HStack spacing={4} m="5">
-          {report?.tags?.map((size,i) => (
-            <Tag size={["sm", "md", "lg"]} key={i} variant="solid" colorScheme="green">
+          {report?.tags?.map((size, i) => (
+            <Tag
+              size={["sm", "md", "lg"]}
+              key={i}
+              variant="solid"
+              colorScheme="green"
+            >
               {size}
             </Tag>
           ))}
@@ -74,6 +80,7 @@ const ReportData = ({ report }) => {
               </Thead>
             </Table>
           </TableContainer>
+          <Chat report={report} />
         </Box>
       </Box>
       <Maps location={report.coord} />

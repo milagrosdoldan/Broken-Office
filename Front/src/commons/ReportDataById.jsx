@@ -17,6 +17,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Chat from "../components/Chat";
 import Maps from "./Maps";
 
 const ReportDataById = () => {
@@ -122,6 +123,7 @@ const ReportDataById = () => {
               </TableContainer>
             </Box>
           </Box>
+          <Chat report={report} />
           <Maps location={report.coord} />
         </Box>
       </>

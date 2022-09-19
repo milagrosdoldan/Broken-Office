@@ -18,11 +18,9 @@ const Rep = {
       const date = d.getDate() + "-" + month + "-" + d.getFullYear();
       const { image } = req.body;
 
-      const results = await cloudinary.uploader.upload(image, {
-        categorization: "google_tagging",
-        auto_tagging: 0.8,
-      });
-
+      const results = await cloudinary.uploader.upload(image);
+      // categorization: "google_tagging",
+      // auto_tagging: 0.8,
 
       const newReport = await new Reports({
         userId: req.user.id,
@@ -30,7 +28,7 @@ const Rep = {
         admin: req.body.admin,
         location: req.body.location,
         image: results.secure_url,
-        tags: results.tags,
+        tags: results.tags || [],
         country: req.body.country,
         description: req.body.description,
         priority: req.body.priority,
@@ -76,58 +74,56 @@ const Rep = {
   //El usuario PUEDE eliminar su informe.
   deleteReport: async function deleteReport(req, res) {
     const report = await Reports.deleteOne({ _id: req.params.id })
-    .then((reporte) => {
-      res.status(200).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(200).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar TODOS los informes.
   getAllReports: async function getAllReports(req, res) {
     const report = await Reports.find()
-    .then((reporte) => {
-      res.status(200).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
-    
+      .then((reporte) => {
+        res.status(200).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar informes de UN usuario
   getReportByUserId: async function getReportByUserId(req, res) {
     const report = await Reports.find({ userId: req.params.id })
-    .then((reporte) => {
-      res.status(200).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(200).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar informes por ID.
   getReportById: async function getReportById(req, res) {
     const report = await Reports.find({ _id: req.params.id })
-    .then((reporte) => {
-      res.status(200).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
-
+      .then((reporte) => {
+        res.status(200).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar informes de UN usuario logeado
   getUserReports: async function getUserReports(req, res) {
     const report = await Reports.find({ userId: req.user.id })
-    .then((reporte) => {
-      res.status(200).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(200).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar informes del día.
@@ -157,12 +153,12 @@ const Rep = {
       { _id: req.params.id },
       { state: "fullfilled" }
     )
-    .then((reporte) => {
-      res.status(201).send("Report solved!")
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send("Report solved!");
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para cerrar un informe como rechazado.
@@ -171,59 +167,59 @@ const Rep = {
       { _id: req.params.id },
       { state: "rejected" }
     )
-    .then((reporte) => {
-      res.status(201).send("Report rejected!")
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send("Report rejected!");
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar TODOS los informes pendientes.
   getAllPendingReports: async function getAllPendingReports(req, res) {
     const report = await Reports.find({ state: "pending" })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar TODOS los informes rechazados.
   getAllRejectedReports: async function getAllRejectedReports(req, res) {
     const report = await Reports.find({ state: "rejected" })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar TODOS los informes pendientes.
   getAllFullfilledReports: async function getAllFullfilledReports(req, res) {
     const report = await Reports.find({ state: "fullfilled" })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para que un admin logeado pueda tomar un reporte.
   catchReport: async function catchReport(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { admin: req.user.name + " " + req.user.lastname}
+      { admin: req.user.name + " " + req.user.lastname }
     )
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar todos los reportes pendientes de un admin logeado.
@@ -232,12 +228,12 @@ const Rep = {
       admin: req.user.name + " " + req.user.lastname,
       state: "pending",
     })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar todos los reportes resueltos de un admin logeado.
@@ -246,12 +242,12 @@ const Rep = {
       admin: req.user.name + " " + req.user.lastname,
       state: "fullfilled",
     })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para mostrar todos los reportes rechazados de un admin logeado.
@@ -260,23 +256,23 @@ const Rep = {
       admin: req.user.name + " " + req.user.lastname,
       state: "rejected",
     })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para borrar todos los reportes.
   deleteAllReports: async function deleteAllReports(req, res) {
     const report = await Reports.remove({})
-    .then((reporte) => {
-      res.status(201).send("Deleted all!")
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send("Deleted all!");
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para buscar un reporte.
@@ -308,19 +304,19 @@ const Rep = {
   //Funcion para traer todos los reportes que no tengan un administrador asignado
   getReportWithoutAdmin: async function getReportWithoutAdmin(req, res) {
     const report = await Reports.find({ admin: "No admin." })
-    .then((reporte) => {
-      res.status(201).send(reporte)
-    })
-    .catch((error) => {
-      res.status(500).send(reporte)
-    })
+      .then((reporte) => {
+        res.status(201).send(reporte);
+      })
+      .catch((error) => {
+        res.status(500).send(reporte);
+      });
   },
 
   //Función para compartir un reporte por mail.
   shareReport: async function shareReport(req, res) {
     try {
       const report = await Reports.find({ _id: req.params._id });
-    
+
       await transporter.sendMail({
         from: req.user.email,
         to: req.body.email,

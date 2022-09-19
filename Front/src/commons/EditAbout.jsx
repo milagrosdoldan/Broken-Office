@@ -34,6 +34,8 @@ const EditAbout = () => {
   const [companyRole, setCompanyRole] = useState(user.companyRole);
   const [imageSrc, setImageSrc] = useState();
   const dispatch = useDispatch();
+  console.log(imageSrc);
+
   const updateUser = (event) => {
     event.preventDefault();
 
@@ -85,9 +87,11 @@ const EditAbout = () => {
 
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel mb={imageSrc ? -3 : 3}>Photo:</FormLabel>
+              <FormLabel mb={imageSrc || user.picture ? -3 : 3}>
+                Photo:
+              </FormLabel>
               <Box
-                mb={imageSrc ? -7 : "none"}
+                mb={imageSrc || user.picture ? -7 : "none"}
                 justifyContent="space-between"
                 alignItems="center"
                 display="flex"
@@ -95,34 +99,56 @@ const EditAbout = () => {
               >
                 <Input
                   key={input || ""}
-                  w={imageSrc ? 60 : "full"}
+                  w={imageSrc || user.picture ? 60 : "full"}
                   type="file"
                   onChange={handleOnChange}
                 />
-
-                {imageSrc ||
-                  (user.picture && (
-                    <>
-                      <Image
-                        mt={3}
-                        borderRadius="60px"
-                        alt="your post image"
-                        src={imageSrc || user.picture}
-                        maxWidth="20%"
-                        maxHeight="10%"
-                      />
-                      <Button
-                        onClick={() => {
-                          let randomString = Math.random().toString(36);
-                          setInput(randomString);
-                          setImageSrc("");
-                        }}
-                      >
-                        {" "}
-                        x{" "}
-                      </Button>
-                    </>
-                  ))}
+                {user.picture && (
+                  <>
+                    <Image
+                      mt={3}
+                      borderRadius="60px"
+                      alt="your post image"
+                      src={user.picture}
+                      maxWidth="20%"
+                      maxHeight="10%"
+                      alignSelf="center"
+                    />
+                    <Button
+                      onClick={() => {
+                        let randomString = Math.random().toString(36);
+                        setInput(randomString);
+                        setImageSrc("");
+                      }}
+                    >
+                      {" "}
+                      x{" "}
+                    </Button>
+                  </>
+                )}
+                {imageSrc && (
+                  <>
+                    <Image
+                      mt={3}
+                      borderRadius="60px"
+                      alt="your post image"
+                      src={imageSrc}
+                      maxWidth="20%"
+                      maxHeight="10%"
+                      alignSelf="center"
+                    />
+                    <Button
+                      onClick={() => {
+                        let randomString = Math.random().toString(36);
+                        setInput(randomString);
+                        setImageSrc("");
+                      }}
+                    >
+                      {" "}
+                      x{" "}
+                    </Button>
+                  </>
+                )}
               </Box>
             </FormControl>
             <FormControl>
@@ -180,3 +206,26 @@ const EditAbout = () => {
   );
 };
 export default EditAbout;
+
+/*  {imageSrc ||
+                  (user.picture && (
+                    <>
+                      <Image
+                        mt={3}
+                        borderRadius="60px"
+                        alt="your post image"
+                        src={imageSrc || user.picture}
+                        maxWidth="20%"
+                        maxHeight="10%"
+                      />
+                      <Button
+                        onClick={() => {
+                          let randomString = Math.random().toString(36);
+                          setInput(randomString);
+                          setImageSrc("");
+                        }}
+                      >
+                        {" "}
+                        x{" "}
+                      </Button>
+                    </>*/

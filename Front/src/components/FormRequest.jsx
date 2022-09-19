@@ -68,7 +68,7 @@ const FormRequest = () => {
     } catch {}
   };
   const { colorMode, toggleColorMode } = useColorMode();
-  
+
   useEffect(() => {
     async function cleanInputs() {
       if (formState.isSubmitSuccessful) {
@@ -236,7 +236,7 @@ const FormRequest = () => {
             </FormControl>
             {imageSrc && (
               <Image
-                maxW={15}
+                maxWidth="50%"
                 alignSelf="center"
                 alt="your post image"
                 src={imageSrc}

@@ -199,4 +199,14 @@ user.updatePicture = async (req,res) => {
   }
 }
 
+user.removePicture = async (req,res) => {
+  try{
+  const report = await Reports.update({_id: req.user.id}, {picture: undefined})
+res.status(200).send("Imagen borrada!")
+}
+  catch{
+    res.status(500).send('Error')
+  }
+}
+
 module.exports = user;

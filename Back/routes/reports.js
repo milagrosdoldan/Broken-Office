@@ -85,7 +85,6 @@ router.put("/solvereport/:id", validateAuth, reportFullfilled);
 router.put("/rejectedreport/:id", validateAuth, rejectedReport);
 
 //Ruta para borrar un informe pasado por parámetro.
-
 router.delete("/removereport/:id", validateAuth, deleteReport);
 
 //Ruta para borrar todos los informes.

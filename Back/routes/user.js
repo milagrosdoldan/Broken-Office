@@ -12,15 +12,17 @@ const {
   logout,
   updatePicture,
   search,
+  removePicture,
 } = require("../controllers/user");
 
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", validateAuth, me);
-router.get("/search/:search", validateAuth, search)
+router.get("/search/:search", validateAuth, search);
 router.post("/logout", logout);
 router.delete("/:_id", validateAuth, validateAdmin, deleteUser);
 router.put("/:_id", updateUser);
-router.put("/picture", validateAuth, updatePicture)
+router.put("/picture", validateAuth, updatePicture);
+router.post("/removePicture", validateAuth, removePicture);
 
 module.exports = router;

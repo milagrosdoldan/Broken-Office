@@ -27,7 +27,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   // customizacion del darkmode.
   const { colorMode, toggleColorMode } = useColorMode();
-  const color = useColorModeValue("white", "black");
   const bg = useColorModeValue("white", "black");
   const img = useColorModeValue(
     "https://emprendedoresnews.com/wp-content/uploads/2020/01/company_5d7c04ad08a25a53fd4d5987.png",
@@ -108,6 +107,7 @@ const Navbar = () => {
             {user.isAdmin ? (
               <>
                 {" "}
+                <Link to="/admin/users"><MenuItem aria-label="admin reports">Users</MenuItem></Link>
                 <Link to="/admin/reports">
                   <MenuItem aria-label="admin reports">Reports</MenuItem>
                 </Link>

@@ -16,7 +16,7 @@ import MyReports from "./components/MyReports";
 import ReportDataById from "./commons/ReportDataById";
 import NotFound from "./pages/NotFound";
 import Chat from "./components/Chat";
-
+import Users from "./components/Users";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -48,6 +48,7 @@ function App() {
           path="/admin/reports/resolve/:id"
           element={<ResolveReport />}
         ></Route>
+        <Route path="/admin/users" element={<Users />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
     </>

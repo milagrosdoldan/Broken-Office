@@ -9,6 +9,7 @@ import store from "./state/store";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import theme from "./styles/theme";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <BrowserRouter>
     <Provider store={store}>

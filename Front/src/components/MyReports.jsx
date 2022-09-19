@@ -2,12 +2,10 @@ import {
   Heading,
   Tab,
   TabList,
-  TabPanel,
-  TabPanels,
   Tabs,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import ReportList from "../commons/ReportList";
 

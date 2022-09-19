@@ -77,6 +77,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             tel: user.tel,
             companyRole: user.companyRole,
+            isAdmin: user.isAdmin
           });
           res.cookie("token", token);
           res.send({
@@ -102,6 +103,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
+          isAdmin: user.isAdmin
         });
         res.cookie("token", token);
         res.send({
@@ -123,6 +125,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
+          isAdmin: user.isAdmin
         });
         res.cookie("token", token);
 

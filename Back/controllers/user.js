@@ -85,6 +85,7 @@ user.login = async (req, res) => {
             id: user._id,
             lastname: user.lastname,
             tel: user.tel,
+            picture: user.picture,
             companyRole: user.companyRole,
             isAdmin: user.isAdmin,
           });
@@ -111,6 +112,7 @@ user.login = async (req, res) => {
           tel: user.tel,
           companyRole: user.companyRole,
           isAdmin: user.isAdmin,
+          picture: user.picture,
         });
       } else {
         const user = await User.create(req.body);
@@ -132,6 +134,7 @@ user.login = async (req, res) => {
           tel: user.tel,
           companyRole: user.companyRole,
           isAdmin: user.isAdmin,
+          picture: user.picture,
         });
       }
     }
@@ -170,33 +173,37 @@ user.updateUser = async (req, res) => {
   }
 };
 
-user.search = async(req,res) => {
-  const user = await User.find()
-  let filterUsers = []
+user.search = async (req, res) => {
+  const user = await User.find();
+  let filterUsers = [];
 
   user.forEach((users) => {
-    if(users.name.toLowerCase()
-    .includes(req.params.search.toLowerCase())) filterUsers.push(users)
-    else if(users.lastname.toLowerCase()
-    .includes(req.params.search.toLowerCase())) filterUsers.push(users)
-  })
+    if (users.name.toLowerCase().includes(req.params.search.toLowerCase()))
+      filterUsers.push(users);
+    else if (
+      users.lastname.toLowerCase().includes(req.params.search.toLowerCase())
+    )
+      filterUsers.push(users);
+  });
 
-  res.send(filterUsers)
+  res.send(filterUsers);
 };
 
-user.updatePicture = async (req,res) => {
-  try{
+user.updatePicture = async (req, res) => {
+  try {
     const { image } = req.body;
 
-    const results = await cloudinary.uploader.upload(image)
-    
-    const img = await User.update({_id: req.user.id},{picture: results.secure_url})
+    const results = await cloudinary.uploader.upload(image);
 
-    res.send("Updated!")
+    const img = await User.update(
+      { _id: req.user.id },
+      { picture: results.secure_url }
+    );
+
+    res.send("Updated!");
+  } catch {
+    res.status(500).send("falla");
   }
-  catch{
-    res.status(500).send('falla')
-  }
-}
+};
 
 module.exports = user;

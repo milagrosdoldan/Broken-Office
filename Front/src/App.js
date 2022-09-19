@@ -14,6 +14,7 @@ import SingleReport from "./components/SingleReport";
 import ResolveReport from "./commons/ResolveReport";
 import MyReports from "./components/MyReports";
 import ReportDataById from "./commons/ReportDataById";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +34,6 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/chat" element={<Chat />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Perfil />}></Route>
         <Route path="/register" element={<Register />}></Route>

@@ -48,7 +48,6 @@ app.use(
 );
 
 const server = http.createServer(app);
-const io = socketio(server);
 
 server.listen(process.env.PORT, () => {
   console.log("api working!...");

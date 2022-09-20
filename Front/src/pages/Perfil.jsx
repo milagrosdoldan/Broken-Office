@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartPerfil from "../commons/CartPerfil";
 import CartReports from "../commons/CartReports";
 import { myReport } from "../state/reports";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Perfil = () => {
   const user = useSelector((state) => state.user);

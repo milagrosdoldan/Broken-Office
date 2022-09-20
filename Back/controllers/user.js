@@ -29,6 +29,8 @@ const handleErrors = (err) => {
 
 const user = {};
 
+//create user
+
 user.register = async (req, res) => {
   try {
     let usuario = await User.findOne({ email: req.body.email });
@@ -214,7 +216,6 @@ user.removePicture = async (req, res) => {
     const report = await Reports.update(
       { _id: req.user.id },
       { picture: undefined }
-
     );
     res.status(200).send("Imagen borrada!");
   } catch {
@@ -248,6 +249,7 @@ user.userSearch = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 user.allUsers = async (req, res) => {
   try {
     let users = [];
@@ -260,6 +262,5 @@ user.allUsers = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
 
 module.exports = user;

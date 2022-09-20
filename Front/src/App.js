@@ -17,6 +17,7 @@ import ReportDataById from "./commons/ReportDataById";
 import NotFound from "./pages/NotFound";
 import Chat from "./components/Chat";
 import Users from "./components/Users";
+import UserData from "./commons/UserData";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/report/:id" element={<ReportDataById />}></Route>
         <Route path="/admin/reports" element={<Reports />}></Route>
         <Route path="/admin/myreports" element={<MyReports />}></Route>
+        <Route path="/user/:id" element={<UserData/>}></Route>
         <Route path="/admin/reports/:id" element={<SingleReport />}></Route>
         <Route
           path="/admin/reports/resolve/:id"

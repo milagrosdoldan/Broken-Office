@@ -218,5 +218,36 @@ res.status(200).send("Imagen borrada!")
     res.status(500).send('Error')
   }
 }
+user.userSearch = async (req,res) => {
+  try{
+    const users = await User.find();
+    let filteredUsers = []
+
+    users.forEach((user) => {
+      if (user.name.toLowerCase().includes(req.params.search.toLowerCase()))
+      filteredUsers.push(user)
+      else if (
+        user.lastname.toLowerCase().includes(req.params.search.toLowerCase())
+      )
+      filteredUsers.push(user)
+      else if (
+        user.companyRole
+          .toLowerCase()
+          .includes(req.params.search.toLowerCase())
+      )
+      filteredUsers.push(user)
+      else if (
+        user.email.toLowerCase().includes(req.params.search.toLowerCase())
+      )
+      filteredUsers.push(user);
+    });
+    res.status(200).send(filteredUsers)
+
+  }
+  catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+}
 
 module.exports = user;

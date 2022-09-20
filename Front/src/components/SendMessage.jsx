@@ -4,7 +4,6 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { Button, FormControl, Input } from "@chakra-ui/react";
 
-
 const style = {
   form: `h-14 w-full max-w-[728px]  flex text-xl absolute bottom-0`,
 
@@ -14,7 +13,6 @@ const style = {
 const SendMessage = ({ scroll, report }) => {
   const [input, setInput] = useState("");
   const user = useSelector((state) => state.user);
-
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -26,7 +24,7 @@ const SendMessage = ({ scroll, report }) => {
     const { _id } = report;
     await addDoc(collection(db, "messages"), {
       text: input,
-      name: `${user.name}${user.lastname}`,
+      name: `${user.name} ${user.lastname}`,
       userId: id,
       reportId: _id,
       timestamp: serverTimestamp(),
@@ -56,7 +54,6 @@ const SendMessage = ({ scroll, report }) => {
       >
         Send
       </Button>
-   
     </FormControl>
   );
 };

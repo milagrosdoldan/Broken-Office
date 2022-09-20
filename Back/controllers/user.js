@@ -29,6 +29,8 @@ const handleErrors = (err) => {
 
 const user = {};
 
+//create user
+
 user.register = async (req, res) => {
   try {
     let usuario = await User.findOne({ email: req.body.email });
@@ -169,7 +171,7 @@ user.updateUser = async (req, res) => {
     );
     usuario.save();
     const user = await User.find({ _id: req.params._id });
-    console.log(user, "user");
+
     res.status(200).send(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -250,7 +252,7 @@ user.userSearch = async (req, res) => {
 
 user.allUsers = async (req, res) => {
   try {
-    console.log(req.params)
+    console.log(req.params);
     let users = [];
     req.params.role === "ADMIN"
       ? (users = await User.find({ isAdmin: true }))

@@ -64,8 +64,3 @@ const Perfil = () => {
 };
 
 export default Perfil;
-
-/*<Box
-        bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
-        h="86.5vh"
-      >*/

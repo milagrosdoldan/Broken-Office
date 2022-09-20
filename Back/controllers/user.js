@@ -201,7 +201,7 @@ user.updatePicture = async (req, res) => {
     const results = await cloudinary.uploader.upload(image);
 
     const img = await User.update(
-      { _id: req.user.id },
+      { _id: req.params.id },
       { picture: results.secure_url }
     );
 

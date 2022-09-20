@@ -27,12 +27,12 @@ const Reports = () => {
     handleSubmit,
     reset,
     formState,
-    formState: { errors, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
   } = useForm();
 
   useEffect(() => {
     async function cleanInputs() {
-      if (formState.isSubmitSuccessful) {
+      if (isSubmitSuccessful) {
         reset({
           search: "",
         });

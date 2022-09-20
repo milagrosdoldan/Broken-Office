@@ -20,6 +20,8 @@ import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
+import FacebookLogin from "react-facebook-login";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
@@ -36,6 +38,22 @@ const Login = () => {
     data.loginWithGoogle = false;
     dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
+
+
+  const responseFacebook = (response) => {
+  
+    let nombre = response.name.split(" ")
+    const payload = {
+      name: nombre[0],
+      lastname: nombre[1],
+      email: response.email,
+      loginWithGoogle: true,
+      picture: response.picture.data.url,
+    };
+    dispatch(logIn(payload));
+    navigate("/");
+  };
+
 
   const handleCallbackResponse = (response) => {
     let userObject = jwt_decode(response.credential);
@@ -154,7 +172,15 @@ const Login = () => {
           Submit
         </Button>
         <Box backgroundColor="black" id={10}></Box>
-
+        <Box backgroundColor="black">
+          <FacebookLogin
+            appId="627379595701369"
+            autoLoad={false}
+            fields="name,email,picture"
+            /* onClick={componentClicked} */
+            callback={responseFacebook}
+          />
+        </Box>
         <Text alt="This link allows you to register in the app" mt="5px">
           Need an account? You can register{" "}
           <Link

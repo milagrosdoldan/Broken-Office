@@ -6,14 +6,10 @@ import {
   AccordionPanel,
   Box,
   Button,
-  Heading,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -24,7 +20,6 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ReportData from "./ReportData";
 
 const CartReports = () => {
   const report = useSelector((state) => state.report);

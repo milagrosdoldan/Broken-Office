@@ -1,8 +1,15 @@
+import { SearchIcon } from "@chakra-ui/icons";
 import {
+  Box,
+  IconButton,
+  Input,
   Spinner,
   Switch,
+  Tab,
   Table,
   TableContainer,
+  TabList,
+  Tabs,
   Tbody,
   Td,
   Th,
@@ -11,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -20,15 +28,34 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const getUsers = () => {
-    axios.get("/api/admin/all").then((res) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState,
+    formState: { isSubmitSuccessful },
+  } = useForm();
+
+  const getAllUsers = () => {
+    axios.get(`/api/user/allUsers/${"USER"}`).then((res) => {
       setUsers(res.data);
       setIsLoading(false);
     });
   };
 
   useEffect(() => {
-    getUsers();
+    async function cleanInputs() {
+      if (isSubmitSuccessful) {
+        reset({
+          search: "",
+        });
+      }
+    }
+    cleanInputs();
+  }, [formState, reset]);
+
+  useEffect(() => {
+    getAllUsers();
   }, []);
 
   const handlerAdmin = (id, isAdmin) => {
@@ -46,14 +73,27 @@ const Users = () => {
         } else {
           axios.put(`/api/admin/promote/${id}`);
         }
-        getUsers();
+        getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");
       }
     });
   };
 
+  const handlerSearch = async (data) => {
+    const reportes = await axios.get(`/api/user/search/${data.search}`);
+    setUsers(reportes.data);
+  };
+
+  const handlerReports = (e) => {
+    const value = e.target.value;
+    const obj = { role: value };
+    axios.get(`/api/user/allUsers/${value}`).then((res) => {
+      setUsers(res.data);
+    });
+  };
+
   if (isLoading) {
-    user?.isAdmin ? getUsers() : navigate("/404");
+    user.isAdmin ? getAllUsers() : navigate("/404");
     return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
   }
 
@@ -68,6 +108,37 @@ const Users = () => {
       p="2"
       fontSize={["18", "18"]}
     >
+      <Box my="5" display="flex" flexDir={"row"} alignItems="center">
+        <Input
+          placeholder="Search reports..."
+          _focusVisible={{ borderColor: "third" }}
+          {...register("search")}
+        />
+        <IconButton
+          onClick={handleSubmit(handlerSearch)}
+          aria-label="Search database"
+          mt="0px"
+          icon={<SearchIcon />}
+        />
+      </Box>
+      <Tabs m="3">
+        <TabList display="flex" justifyContent="center">
+          <Tab
+            value={"USER"}
+            _selected={{ color: "white", bg: "gray" }}
+            onClick={handlerReports}
+          >
+            USERS
+          </Tab>
+          <Tab
+            value={"ADMIN"}
+            _selected={{ color: "white", bg: "secondary" }}
+            onClick={handlerReports}
+          >
+            ADMINS
+          </Tab>
+        </TabList>
+      </Tabs>
       <Table size="s">
         <Thead>
           <Tr>

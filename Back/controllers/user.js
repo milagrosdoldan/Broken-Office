@@ -252,7 +252,6 @@ user.userSearch = async (req, res) => {
 
 user.allUsers = async (req, res) => {
   try {
-    console.log(req.params);
     let users = [];
     req.params.role === "ADMIN"
       ? (users = await User.find({ isAdmin: true }))

@@ -169,7 +169,7 @@ user.updateUser = async (req, res) => {
     );
     usuario.save();
     const user = await User.find({ _id: req.params._id });
-    console.log(user, "user");
+
     res.status(200).send(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -214,6 +214,7 @@ user.removePicture = async (req, res) => {
     const report = await Reports.update(
       { _id: req.user.id },
       { picture: undefined }
+
     );
     res.status(200).send("Imagen borrada!");
   } catch {
@@ -260,5 +261,6 @@ user.allUsers = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 
 module.exports = user;

@@ -7,7 +7,6 @@ import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
-
 // Puedes desactivar el precaching reemplazand esta línea
 precacheAndRoute(self.__WB_MANIFEST);
 // por esta otra:
@@ -34,20 +33,20 @@ registerRoute(
 );
 
 registerRoute(
-    // Add in any other file extensions or routing criteria as needed.
-    ({ url }) =>
-      url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-    new StaleWhileRevalidate({
-      cacheName: "images",
-      plugins: [
-        // Ensure that once this runtime cache reaches a maximum size the
-        // least-recently used images are removed.
-        new ExpirationPlugin({ maxEntries: 50 }),
-      ],
-    })
-  );
-  self.addEventListener("message", (event) => {
-    if (event.data && event.data.type === "SKIP_WAITING") {
-      self.skipWaiting();
-    }
-  });
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) =>
+    url.origin === self.location.origin && url.pathname.endsWith(".png"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: "images",
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ],
+  })
+);
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});

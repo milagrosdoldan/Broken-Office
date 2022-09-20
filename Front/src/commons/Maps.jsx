@@ -5,7 +5,7 @@ import { Box, Spinner } from "@chakra-ui/react";
 const Maps = ({ location }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBXoLVUJ4X76sJwsjEnuJoQYK1-VQtVR3Q",
+    googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_API_KEY,
   });
 
   return (

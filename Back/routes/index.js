@@ -271,7 +271,7 @@ const Report = require("./reports");
  * /api/report/deleteall:
  *  delete:
  *    summary: delete all reports 
- *    tag: [Reports] * 
+ *    tag: [Reports] 
  *    responses:
  *      201:
  *        description: Deleted all!

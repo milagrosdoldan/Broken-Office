@@ -4,6 +4,127 @@ const User = require("./user");
 const Admin = require("./admin");
 const Report = require("./reports");
 
+
+/**
+ * @swagger
+ * /api/report/myreports:
+ *  get:
+ *    summary: get all pending reports
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return all you reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/getreportbyid/{id}:
+ *  get:
+ *    summary: get report by id
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the report id
+ *    responses:
+ *      200:
+ *       description: return report by id
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ */
+
+/**
+ * @swagger
+ * /api/report/getpendingreports:
+ *  get:
+ *    summary: get all pending reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all pending reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ * 
+ */
+
+/**
+ * @swagger
+ * /api/report/getrejectedreports:
+ *  get:
+ *    summary: get all rejected reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all rejected reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/getsolvedreports:
+ *  get:
+ *    summary: get all fullfilled reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all fullfilled reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/addreport:
+ *  post:
+ *    summary: created report
+ *    tag: [Reports]
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *    responses:
+ *      200:
+ *        description: new report created!
+ *      401: 
+ *        description: Unauthorized
+ */
+
 /**
  * @swagger
  * /api/report/catchreport/{id}:

@@ -28,7 +28,7 @@ const Rep = {
         date: date,
         admin: req.body.admin,
         location: req.body.location,
-        image: results.secure_url,
+        image: results.secure_url||"",
         tags: results.tags || [],
         country: req.body.country,
         description: req.body.description,

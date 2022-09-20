@@ -35,3 +35,5 @@ io.on("connection", (socket)=>{
 server.listen(process.env.PORT, () => {
   console.log("api working!...");
 });
+
+module.exports = server

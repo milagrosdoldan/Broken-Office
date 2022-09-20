@@ -1,9 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import locationReducer from "./location";
-import photoReducer from "./PerfilPhoto";
 import reportReducer from "./reports";
-
 import userReducer from "./user";
 
 const store = configureStore({
@@ -12,7 +10,6 @@ const store = configureStore({
     user: userReducer,
     location: locationReducer,
     report: reportReducer,
-    photo: photoReducer,
   },
 });
 

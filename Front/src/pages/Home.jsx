@@ -48,7 +48,7 @@ export const Home = () => {
   const color = useColorModeValue("black", "white");
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyBXoLVUJ4X76sJwsjEnuJoQYK1-VQtVR3Q",
+    googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_API_KEY,
   });
 
   function srcset(image, size, rows = 1, cols = 1) {
@@ -59,7 +59,7 @@ export const Home = () => {
       }&fit=crop&auto=format&dpr=2 2x`,
     };
   }
-
+  
   async function donwloadApp() {
     console.log("ok, butinstall-clicked");
     const promptEvent = window.deferredPrompt;
@@ -158,7 +158,6 @@ export const Home = () => {
         >
           {isLoaded ? (
             <GoogleMap
-             
               mapContainerStyle={{ width: "90%", height: "60%" }}
               center={{
                 lat: location[0],

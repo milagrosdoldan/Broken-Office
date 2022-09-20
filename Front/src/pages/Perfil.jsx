@@ -1,20 +1,16 @@
 import {
   Avatar,
   Box,
-  Heading,
-  Image,
   Text,
-  useDisclosure,
   WrapItem,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartPerfil from "../commons/CartPerfil";
 import CartReports from "../commons/CartReports";
-import NotFound from "./NotFound";
 import { myReport } from "../state/reports";
-
 import { Navigate, useNavigate } from "react-router-dom";
+
 const Perfil = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -68,8 +64,3 @@ const Perfil = () => {
 };
 
 export default Perfil;
-
-/*<Box
-        bgImage="url(https://statics.globant.com/production/public/2021-10/img_talent_community_bg.png)"
-        h="86.5vh"
-      >*/

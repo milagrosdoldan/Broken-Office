@@ -23,6 +23,6 @@ router.post("/logout", logout);
 router.delete("/:_id", validateAuth, validateAdmin, deleteUser);
 router.put("/:_id", updateUser);
 router.put("/picture", validateAuth, updatePicture);
-router.post("/removePicture", validateAuth, removePicture);
+router.post("/removepicture", validateAuth, removePicture);
 
 module.exports = router;

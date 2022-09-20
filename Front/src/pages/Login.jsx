@@ -37,9 +37,6 @@ const Login = () => {
     dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
-  
-
-
   const handleCallbackResponse = (response) => {
     let userObject = jwt_decode(response.credential);
 
@@ -57,8 +54,7 @@ const Login = () => {
   useEffect(() => {
     async function loginGoogle() {
       /* global google */ google.accounts.id.initialize({
-        client_id:
-          "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
+        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
         callback: handleCallbackResponse,
       });
       google.accounts.id.renderButton(document.getElementById(10), {
@@ -103,7 +99,6 @@ const Login = () => {
               _focusVisible={{ borderColor: "third" }}
               type="email"
               placeholder="Email"
-              color="#BFD732"
               size="md"
               {...register("email", { required: true })}
             />

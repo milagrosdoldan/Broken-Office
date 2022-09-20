@@ -6,14 +6,10 @@ import {
   AccordionPanel,
   Box,
   Button,
-  Heading,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
-  Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -24,7 +20,6 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ReportData from "./ReportData";
 
 const CartReports = () => {
   const report = useSelector((state) => state.report);
@@ -70,23 +65,21 @@ const CartReports = () => {
                 >
                   <Table variant="simple">
                     <Thead>
-                      <Tr>
+                      <Tr id="2">
                         <Th>Date:</Th>
                         <Th>Description:</Th>
                         <Th>Info:</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
-                      {report.length ? (
+                      {report?.length ? (
                         report.map((e) => {
                           return (
                             <>
                               <Tr key={e._id}>
-                                <Td alt={e.date.slice(0, 10)} fontSize={15}>
-                                  {e.date.slice(0, 10)}
-                                </Td>
-                                <Td alt={e.description} fontSize={15}>
-                                  {e.description.slice(0, 18)}
+                                <Td fontSize={15}>{e.date?.slice(0, 10)}</Td>
+                                <Td fontSize={15}>
+                                  {e.description?.slice(0, 18)}
                                 </Td>
                                 <Td>
                                   <Link to={`/report/${e._id}`}>
@@ -105,7 +98,7 @@ const CartReports = () => {
                           );
                         })
                       ) : (
-                        <Tr>
+                        <Tr id="1">
                           <Td>SIN DATOS</Td>
                         </Tr>
                       )}

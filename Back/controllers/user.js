@@ -77,7 +77,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             tel: user.tel,
             companyRole: user.companyRole,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin,
           });
           res.cookie("token", token);
           res.send({
@@ -103,7 +103,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
         res.cookie("token", token);
         res.send({
@@ -125,7 +125,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
         res.cookie("token", token);
 
@@ -169,7 +169,7 @@ user.updateUser = async (req, res) => {
     );
     usuario.save();
     const user = await User.find({ _id: req.params._id });
-    console.log(user, "user");
+
     res.status(200).send(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -209,14 +209,16 @@ user.updatePicture = async (req, res) => {
   }
 };
 
-user.removePicture = async (req,res) => {
-  try{
-  const report = await Reports.update({_id: req.user.id}, {picture: undefined})
-res.status(200).send("Imagen borrada!")
-}
-  catch{
-    res.status(500).send('Error')
+user.removePicture = async (req, res) => {
+  try {
+    const user = await User.update(
+      { _id: req.user.id },
+      { picture: "No picture" }
+    );
+    res.status(200).send("Imagen borrada!");
+  } catch {
+    res.status(500).send("Error");
   }
-}
+};
 
 module.exports = user;

@@ -1,11 +1,8 @@
-import { SearchIcon } from "@chakra-ui/icons";
 import {
-  Badge,
   Box,
   IconButton,
   Input,
   Spinner,
-  Stack,
   Tab,
   TabList,
   Tabs,
@@ -19,6 +16,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 import ReportList from "../commons/ReportList";
+import { SearchIcon } from "@chakra-ui/icons";
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);

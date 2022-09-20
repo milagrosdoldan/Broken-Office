@@ -38,6 +38,8 @@ const FormRequest = () => {
   const focusVisible = useColorModeValue("white", "white");
   const [input, setInput] = useState(null);
   const [anotherInput, setAnotherInput] = useState(null);
+  const { colorMode } = useColorMode();
+
   const {
     register,
     handleSubmit,
@@ -53,10 +55,8 @@ const FormRequest = () => {
       data.lastname = user.lastname;
       data.email = user.email;
       data.image = imageSrc;
-
-      console.log(data);
+      data.date = new Date();
       dispatch(sendReport(data));
-
       Swal.fire({
         text: "Your report was success!",
         icon: "success",
@@ -67,7 +67,6 @@ const FormRequest = () => {
       });
     } catch {}
   };
-  const { colorMode, toggleColorMode } = useColorMode();
 
   useEffect(() => {
     async function cleanInputs() {

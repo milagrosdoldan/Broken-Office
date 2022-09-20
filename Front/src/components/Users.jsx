@@ -1,6 +1,7 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, ArrowForwardIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   IconButton,
   Input,
   Spinner,
@@ -20,14 +21,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Users = () => {
   const user = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -35,6 +38,12 @@ const Users = () => {
     formState,
     formState: { isSubmitSuccessful },
   } = useForm();
+  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
+  const nextPage = () => {
+    if (currentPage + 5 <= users.length) setCurrentPage(currentPage + 5);
+  };
+  const prevPage = () =>
+    currentPage > 0 ? setCurrentPage(currentPage - 5) : setCurrentPage(0);
 
   const getAllUsers = () => {
     axios.get(`/api/user/allUsers/${"USER"}`).then((res) => {
@@ -49,6 +58,7 @@ const Users = () => {
         reset({
           search: "",
         });
+        setCurrentPage(0);
       }
     }
     cleanInputs();
@@ -86,7 +96,6 @@ const Users = () => {
 
   const handlerReports = (e) => {
     const value = e.target.value;
-    const obj = { role: value };
     axios.get(`/api/user/allUsers/${value}`).then((res) => {
       setUsers(res.data);
     });
@@ -154,11 +163,14 @@ const Users = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {users?.map((user) => (
+          {filteredUsers()?.map((user) => (
             <Tr key={user.id}>
-              <Td textAlign="start" py="5">
-                {user.name} {user.lastname}
-              </Td>
+              <Link to={`/user/${user.id}`}>
+                <Td textAlign="start" py="5">
+                  {user.name} {user.lastname}
+                </Td>
+              </Link>
+
               <Td textAlign="start" py="5">
                 {user.active ? "Active" : "No Active"}
               </Td>
@@ -177,6 +189,26 @@ const Users = () => {
           ))}
         </Tbody>
       </Table>
+      <Box>
+        <Button
+          alt="previus page"
+          bg="secondary"
+          ml={5}
+          mt={15}
+          onClick={prevPage}
+        >
+          <ArrowBackIcon />
+        </Button>
+        <Button
+          alt="next page"
+          bg="secondary"
+          ml={5}
+          mt={15}
+          onClick={nextPage}
+        >
+          <ArrowForwardIcon />
+        </Button>
+      </Box>
     </TableContainer>
   );
 };

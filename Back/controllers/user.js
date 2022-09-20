@@ -249,6 +249,7 @@ user.userSearch = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 user.allUsers = async (req, res) => {
   try {
     console.log(req.params);

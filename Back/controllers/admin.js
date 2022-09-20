@@ -58,5 +58,13 @@ admin.all = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
-
+admin.oneUser = async (req,res)=>{
+  try {
+    const user = await User.find({_id: req.params.id});
+    console.log("🚀 ~ file: admin.js ~ line 64 ~ admin.oneUser= ~ req.params.id", req.params.id)
+    res.status(200).json(user);
+  } catch (err) {
+    return res.status(404).json({ message: err.message });
+  }
+}
 module.exports = admin;

@@ -1,11 +1,9 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import {
-  Badge,
   Box,
   IconButton,
   Input,
   Spinner,
-  Stack,
   Tab,
   TabList,
   Tabs,
@@ -29,12 +27,12 @@ const Reports = () => {
     handleSubmit,
     reset,
     formState,
-    formState: { errors, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
   } = useForm();
 
   useEffect(() => {
     async function cleanInputs() {
-      if (formState.isSubmitSuccessful) {
+      if (isSubmitSuccessful) {
         reset({
           search: "",
         });

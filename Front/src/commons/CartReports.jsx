@@ -80,7 +80,6 @@ const CartReports = () => {
                       {report.length ? (
                         report.map((e) => {
                           return (
-                            <>
                               <Tr key={e._id}>
                                 <Td alt={e.date.slice(0, 10)} fontSize={15}>
                                   {e.date.slice(0, 10)}
@@ -101,7 +100,6 @@ const CartReports = () => {
                                   </Link>
                                 </Td>
                               </Tr>
-                            </>
                           );
                         })
                       ) : (

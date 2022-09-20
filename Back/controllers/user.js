@@ -77,7 +77,7 @@ user.login = async (req, res) => {
             lastname: user.lastname,
             tel: user.tel,
             companyRole: user.companyRole,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin,
           });
           res.cookie("token", token);
           res.send({
@@ -103,7 +103,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
         res.cookie("token", token);
         res.send({
@@ -125,7 +125,7 @@ user.login = async (req, res) => {
           lastname: user.lastname,
           tel: user.tel,
           companyRole: user.companyRole,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
         });
         res.cookie("token", token);
 
@@ -209,45 +209,56 @@ user.updatePicture = async (req, res) => {
   }
 };
 
-user.removePicture = async (req,res) => {
-  try{
-  const report = await Reports.update({_id: req.user.id}, {picture: undefined})
-res.status(200).send("Imagen borrada!")
-}
-  catch{
-    res.status(500).send('Error')
+user.removePicture = async (req, res) => {
+  try {
+    const report = await Reports.update(
+      { _id: req.user.id },
+      { picture: undefined }
+    );
+    res.status(200).send("Imagen borrada!");
+  } catch {
+    res.status(500).send("Error");
   }
-}
-user.userSearch = async (req,res) => {
-  try{
+};
+user.userSearch = async (req, res) => {
+  try {
     const users = await User.find();
-    let filteredUsers = []
+    let filteredUsers = [];
 
     users.forEach((user) => {
       if (user.name.toLowerCase().includes(req.params.search.toLowerCase()))
-      filteredUsers.push(user)
+        filteredUsers.push(user);
       else if (
         user.lastname.toLowerCase().includes(req.params.search.toLowerCase())
       )
-      filteredUsers.push(user)
+        filteredUsers.push(user);
       else if (
-        user.companyRole
-          .toLowerCase()
-          .includes(req.params.search.toLowerCase())
+        user.companyRole.toLowerCase().includes(req.params.search.toLowerCase())
       )
-      filteredUsers.push(user)
+        filteredUsers.push(user);
       else if (
         user.email.toLowerCase().includes(req.params.search.toLowerCase())
       )
-      filteredUsers.push(user);
+        filteredUsers.push(user);
     });
-    res.status(200).send(filteredUsers)
-
+    res.status(200).send(filteredUsers);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
   }
-  catch (error) {
-    console.log(error)
-    res.status(500).send(error)
+};
+user.allUsers = async (req, res) => {
+  try {
+    console.log(req.params)
+    let users = [];
+    req.params.role === "ADMIN"
+      ? (users = await User.find({ isAdmin: true }))
+      : (users = await User.find({ isAdmin: false }));
+    res.status(200).send(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
   }
-}
+};
 
 module.exports = user;

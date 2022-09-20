@@ -14,11 +14,13 @@ const {
   search,
   removePicture,
   userSearch,
+  allUsers,
 } = require("../controllers/user");
 
 router.post("/register", register);
 router.post("/login", login);
 router.get("/me", validateAuth, me);
+router.get("/allUsers/:role", validateAuth, validateAdmin, allUsers);
 router.get("/search/:search", validateAuth, userSearch);
 router.post("/logout", logout);
 router.delete("/:_id", validateAuth, validateAdmin, deleteUser);

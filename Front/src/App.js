@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
 import { Home } from "./pages/Home";
@@ -18,9 +18,10 @@ import NotFound from "./pages/NotFound";
 import Chat from "./components/Chat";
 import Users from "./components/Users";
 import UserData from "./commons/UserData";
-
+import QrScanner from "./components/QrScanner";
 
 function App() {
+  const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
   useEffect(() => {
     async function persistence() {
@@ -31,6 +32,7 @@ function App() {
       }
       navigator.geolocation.getCurrentPosition(success);
     }
+
     persistence();
   }, []);
 
@@ -38,6 +40,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
+        <Route path="/scanner" element={<QrScanner />}></Route>
         <Route path="/chat" element={<Chat />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Perfil />}></Route>
@@ -46,7 +49,7 @@ function App() {
         <Route path="/report/:id" element={<ReportDataById />}></Route>
         <Route path="/admin/reports" element={<Reports />}></Route>
         <Route path="/admin/myreports" element={<MyReports />}></Route>
-        <Route path="/user/:id" element={<UserData/>}></Route>
+        <Route path="/user/:id" element={<UserData />}></Route>
         <Route path="/admin/reports/:id" element={<SingleReport />}></Route>
         <Route
           path="/admin/reports/resolve/:id"

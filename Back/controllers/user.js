@@ -69,6 +69,7 @@ user.login = async (req, res) => {
 
       User.findOne({ email }).then((user) => {
         if (!user) return res.sendStatus(401);
+        if(!user.active) return res.status(401).send("This account has been deactivated by an Administrator")
 
         user.validatePassword(password).then((isValid) => {
           if (!isValid) return res.sendStatus(401);

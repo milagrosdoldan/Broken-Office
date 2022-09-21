@@ -15,8 +15,12 @@ const ReportList = ({ reports }) => {
   return (
     <TableContainer
       mt="10"
-      m={["1", "15", "20", "100"]}
+      m="0 auto"
       width={["100%", "70%", "60%"]}
+      display="flex"
+      alignItems="center"
+      p="2"
+      fontSize={["18", "18"]}
     >
       <Table size="s">
         <Thead>

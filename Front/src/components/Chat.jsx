@@ -25,7 +25,7 @@ const Chat = ({ report }) => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
   const { id } = useParams();
-
+  const user = useSelector(state=> state.user)
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -36,7 +36,9 @@ const Chat = ({ report }) => {
       let filterMessages = messages.filter(
         (message) => message.reportId === id
       );
-
+      if(filterMessages[filterMessages.length - 1].userId !== user.id) {
+        alert("Nuevo mensaje")
+      }
       setMessages(filterMessages);
     });
     return () => unsubscribe();

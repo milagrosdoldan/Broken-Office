@@ -13,7 +13,6 @@ import {
   InputRightElement,
   useColorModeValue,
   Stack,
-  useToast,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -27,7 +26,6 @@ const Register = () => {
   const handleClick = () => setShow(!show);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const toast = useToast();
   const user = useSelector((state) => state.user);
 
   const {

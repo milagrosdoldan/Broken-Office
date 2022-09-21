@@ -14,7 +14,7 @@ import {
 import React from "react";
 import { useForm } from "react-hook-form";
 import { logIn } from "../state/user";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "@fontsource/open-sans";
 import jwt_decode from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const Login = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -41,7 +40,6 @@ const Login = () => {
 
 
   const responseFacebook = (response) => {
-  
     let nombre = response.name.split(" ")
     const payload = {
       name: nombre[0],

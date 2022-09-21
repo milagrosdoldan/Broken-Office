@@ -8,7 +8,9 @@ import { Provider } from "react-redux";
 import store from "./state/store";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import theme from "./styles/theme";
+import rootReducer from "./reducer"
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 
 root.render(
   <BrowserRouter>

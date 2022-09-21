@@ -17,6 +17,7 @@ import "@fontsource/heebo/700.css";
 import ImageListItem from "@mui/material/ImageListItem";
 import FormRequest from "../components/FormRequest";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const itemData = [
   {
@@ -59,7 +60,7 @@ export const Home = () => {
       }&fit=crop&auto=format&dpr=2 2x`,
     };
   }
-  
+
   async function donwloadApp() {
     console.log("ok, butinstall-clicked");
     const promptEvent = window.deferredPrompt;
@@ -109,7 +110,7 @@ export const Home = () => {
         display="flex"
         flexDirection={{
           base: "column", // 0-48em
-          md: "row",
+          md: "column",
           lg: "row", // 48em-80em,
           xl: "row", // 80em+
         }}
@@ -125,22 +126,37 @@ export const Home = () => {
           mb={{ xl: "150px", lg: "150px" }}
         >
           <Heading
+            m="0 auto"
             fontFamily="heading"
             color={color}
             textAlign="left"
-            fontSize={41}
+            fontSize={50}
           >
-            Your location.
+            Your Location
           </Heading>{" "}
           <Text
-            fontFamily="heading"
+            pl={15}
+            fontFamily="body"
             color={color}
-            textAlign="left"
-            fontSize={20}
-            pl={{ xl: "175px", lg: "92px", md: "43px" }}
-            pr={{ xl: "115px", lg: "100px", md: "43px" }}
+            textAlign={{
+              xl: "center",
+              lg: "center",
+              md: "center",
+              base: "left",
+            }}
+            fontSize={25}
+            m="0 auto"
+            // pl={{ xl: "150px", lg: "70px" }}
+            // pr={{ xl: "70px", lg: "40px", md: "20px" }}
           >
-            In this map, you can see where you are!
+            In this map, you can see where you are, but if you want, you can
+            scan a{" "}
+            <Link
+              to="/scanner"
+              style={{ textDecoration: "underline", color: "#BFD732" }}
+            >
+              location's QR!
+            </Link>
           </Text>
         </Box>
         <Box

@@ -65,7 +65,7 @@ const SingleReport = () => {
         <Box display="flex" flexDirection="row" alignItems="center">
           <Link to="/admin/reports">
             <Button m="3" borderRadius="40px">
-              Atrás
+              Back
             </Button>
           </Link>
           {!report.admin || report.admin === "No admin." ? (
@@ -73,16 +73,18 @@ const SingleReport = () => {
               m="3"
               borderRadius="40px"
               bg="secondary"
+              color="black"
               _hover={{ bg: "fourth" }}
               onClick={acceptReport}
             >
-              Aceptar
+              Acept
             </Button>
           ) : report.state === "pending" ? (
             <Button
               m="3"
               borderRadius="40px"
               bg="secondary"
+              color="black"
               _hover={{ bg: "fourth" }}
               onClick={resolveReport}
             >

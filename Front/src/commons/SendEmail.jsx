@@ -77,11 +77,12 @@ function SendEmail({ report }) {
           <ModalHeader>Send Comment</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl mt={4}>
+            <FormControl>
               <FormLabel>To</FormLabel>
               <Input
+                borderColor="ActiveBorder"
+                mb={4}
                 _focusVisible={{ borderColor: "third" }}
-                _hover={{ color: "black" }}
                 placeholder="TO"
                 defaultValue={report.email}
               />
@@ -89,8 +90,8 @@ function SendEmail({ report }) {
             <FormControl>
               <FormLabel>Subject</FormLabel>
               <Input
+                borderColor="ActiveBorder"
                 _focusVisible={{ borderColor: "third" }}
-                _hover={{ color: "black" }}
                 ref={initialRef}
                 placeholder="Subject"
                 onChange={handlerSubject}
@@ -100,8 +101,8 @@ function SendEmail({ report }) {
             <FormControl mt={4}>
               <FormLabel>Message</FormLabel>
               <Textarea
+                borderColor="ActiveBorder"
                 _focusVisible={{ borderColor: "third" }}
-                _hover={{ color: "black" }}
                 placeholder="Leave your message here"
                 onChange={handlerMessage}
               />

@@ -94,12 +94,14 @@ const Reports = () => {
           onClick={handleSubmit(handlerSearch)}
           aria-label="Search database"
           mt="0px"
+          borderRadius={50}
+          ml={3}
           icon={<SearchIcon />}
         />
       </Box>
 
       <Tabs m="3">
-        <TabList display="flex" justifyContent="center">
+        <TabList m="15px 0 auto" display="flex" justifyContent="center">
           <Tab
             value={"REJECTED"}
             _selected={{ color: "white", bg: "red" }}

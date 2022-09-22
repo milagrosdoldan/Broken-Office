@@ -21,7 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import FacebookLogin from "react-facebook-login";
-
+import "../style/login.css";
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
@@ -38,9 +38,8 @@ const Login = () => {
     dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
   };
 
-
   const responseFacebook = (response) => {
-    let nombre = response.name.split(" ")
+    let nombre = response.name.split(" ");
     const payload = {
       name: nombre[0],
       lastname: nombre[1],
@@ -51,7 +50,6 @@ const Login = () => {
     dispatch(logIn(payload));
     navigate("/");
   };
-
 
   const handleCallbackResponse = (response) => {
     let userObject = jwt_decode(response.credential);
@@ -77,6 +75,8 @@ const Login = () => {
         theme: "outline",
         size: "large",
         color: "black",
+        margin: "15px",
+        width: "100px",
       });
     }
     loginGoogle();
@@ -106,7 +106,7 @@ const Login = () => {
           textAlign="center"
           fontSize="35px"
         >
-          Sig in
+          Sign in
         </Heading>
         <Center>
           <FormControl className="login" isRequired>
@@ -141,7 +141,7 @@ const Login = () => {
               <InputRightElement width="4.5rem" mr={5}>
                 <Button
                   h="1.75rem"
-                  size="sm"
+                  size="md"
                   alignItems="center"
                   onClick={handleClick}
                 >
@@ -159,9 +159,9 @@ const Login = () => {
           color="black"
           fontFamily="body"
           display="flex"
-          m="0 auto"
+          m="0 7px auto"
           alt="Submit request."
-          width={125}
+          width={150}
           onClick={handleSubmit(onSubmit)}
           borderRadius="20px"
           bg="secondary"
@@ -169,17 +169,30 @@ const Login = () => {
         >
           Submit
         </Button>
-        <Box backgroundColor="black" id={10}></Box>
+        <Box backgroundColor="black" mt={15} mb={15} id={10}></Box>
         <Box backgroundColor="black">
           <FacebookLogin
+            h={15}
+            className="hola"
+            borderRadius="5px"
             appId="627379595701369"
             autoLoad={false}
+            buttonStyle={{
+              backgroundColor: "#3b5998",
+              color: "white",
+              padding: "6.5px",
+              textTransform: "capitalize",
+              borderRadius: "4px",
+              borderColor: "#e2e8f0",
+              marginLeft: "2px",
+              minWidth: "223px", //:hover {backgroundColor: "#e2e8f0"}
+            }}
             fields="name,email,picture"
             /* onClick={componentClicked} */
             callback={responseFacebook}
           />
         </Box>
-        <Text alt="This link allows you to register in the app" mt="5px">
+        <Text alt="This link allows you to register in the app" mt="10px">
           Need an account? You can register{" "}
           <Link
             to="/register"

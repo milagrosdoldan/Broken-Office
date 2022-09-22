@@ -35,10 +35,13 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
+app.use(express.json({ limit: "10mb", extended: true }));
+app.use(
+  express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
+);
 app.use(morgan("tiny"));
 app.use(cookieparser());
-app.use(express.urlencoded({ extended: true }));
+
 app.use("/api", routes);
 
 app.use(
@@ -53,4 +56,4 @@ server.listen(process.env.PORT, () => {
   console.log("api working!...");
 });
 
-module.exports = server
+module.exports = server;

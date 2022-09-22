@@ -75,29 +75,31 @@ const CartReports = () => {
                       {report?.length ? (
                         report.map((e) => {
                           return (
-                              <Tr key={e._id}>
-                                <Td fontSize={15}>{e.date?.slice(0, 10)}</Td>
-                                <Td fontSize={15}>
-                                  {e.description?.slice(0, 18)}
-                                </Td>
-                                <Td>
-                                  <Link to={`/report/${e._id}`}>
-                                    <Button
-                                      bg="secondary"
-                                      textAlign="center"
-                                      size="sm"
-                                      mt={2}
-                                    >
-                                      +
-                                    </Button>
-                                  </Link>
-                                </Td>
-                              </Tr>
+                            <Tr key={e._id}>
+                              <Td fontSize={15}>{e.date?.slice(0, 10)}</Td>
+                              <Td fontSize={15}>
+                                {e.description?.slice(0, 18)}
+                              </Td>
+                              <Td>
+                                <Link to={`/report/${e._id}`}>
+                                  <Button
+                                    bg="secondary"
+                                    textAlign="center"
+                                    size="sm"
+                                    mt={2}
+                                    color="black"
+                                    borderRadius="40px"
+                                  >
+                                    +
+                                  </Button>
+                                </Link>
+                              </Td>
+                            </Tr>
                           );
                         })
                       ) : (
-                        <Tr id="1">
-                          <Td>SIN DATOS</Td>
+                        <Tr alignSelf="center" id="1">
+                          <Td>No data</Td>
                         </Tr>
                       )}
                     </Tbody>

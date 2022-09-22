@@ -36,7 +36,7 @@ const CartPerfil = ({ user }) => {
           <Divider ml={2} mt={1} mb={1} />
           <Text fontWeight="bold">Phone</Text>
           <Divider ml={2} mt={1} mb={1} />
-          <Text fontWeight="bold">Puesto</Text>
+          <Text fontWeight="bold">Role</Text>
         </Box>
         <Box display="flex" flexDirection="column">
           <Text ml="1rem">{`${user.email}`}</Text>

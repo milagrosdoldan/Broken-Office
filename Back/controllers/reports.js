@@ -20,8 +20,8 @@ const Rep = {
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
-         categorization: "google_tagging",
-         auto_tagging: 0.8,
+        categorization: "google_tagging",
+        auto_tagging: 0.8,
       });
 
       const newReport = await new Reports({
@@ -29,7 +29,7 @@ const Rep = {
         date: date,
         admin: req.body.admin,
         location: req.body.location,
-        image: results.secure_url||"",
+        image: results.secure_url || "",
         tags: results.tags || [],
         country: req.body.country,
         description: req.body.description,

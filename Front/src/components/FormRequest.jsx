@@ -72,6 +72,7 @@ const FormRequest = () => {
     async function cleanInputs() {
       if (formState.isSubmitSuccessful) {
         reset({
+          title: "",
           compañyRole: "",
           description: "",
           priority: null,

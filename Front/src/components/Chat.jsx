@@ -25,7 +25,7 @@ const Chat = ({ report }) => {
   const [messages, setMessages] = useState([]);
   const scroll = useRef();
   const { id } = useParams();
-  const user = useSelector(state=> state.user)
+  const user = useSelector((state) => state.user);
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -36,8 +36,8 @@ const Chat = ({ report }) => {
       let filterMessages = messages.filter(
         (message) => message.reportId === id
       );
-      if(filterMessages[filterMessages.length - 1].userId !== user.id) {
-        alert("Nuevo mensaje")
+      if (filterMessages[filterMessages.length - 1].userId !== user.id) {
+        alert("Nuevo mensaje");
       }
       setMessages(filterMessages);
     });
@@ -51,8 +51,11 @@ const Chat = ({ report }) => {
         _hover={{ bg: "fourth" }}
         textAlign="center"
         mt={15}
+        color="black"
+        margin="0 auto"
         colorScheme="teal"
         onClick={onOpen}
+        borderRadius="40px"
       >
         Send Messages
       </Button>

@@ -40,7 +40,14 @@ const ReportDataById = () => {
       <>
         <Box display="flex">
           <Link to="/profile">
-            <Button alt="back to profile" bg="secondary" ml={5} mt={15}>
+            <Button
+              color="black"
+              borderRadius="40px"
+              alt="back to profile"
+              bg="secondary"
+              ml={5}
+              mt={15}
+            >
               <ArrowLeftIcon />
             </Button>
           </Link>
@@ -92,7 +99,10 @@ const ReportDataById = () => {
               >
                 Description:
               </Text>
-              <Text ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}>
+              <Text
+                maxWidth="300px"
+                ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
+              >
                 {report.description}
               </Text>
               <TableContainer
@@ -120,10 +130,13 @@ const ReportDataById = () => {
                     </Tr>
                   </Thead>
                 </Table>
+                <Box ml="100px">
+                  <Chat report={report} />
+                </Box>
               </TableContainer>
             </Box>
           </Box>
-          <Chat report={report} />
+
           <Maps location={report.coord} />
         </Box>
       </>

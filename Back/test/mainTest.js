@@ -232,7 +232,7 @@ describe('Functional Test <Sessions>:', function () {
       });
   });
   it('As an admin, you should be able to catch reports', function (done) {
-    var req = request(app).put('/api/report/catchreport/6321e28fa1ef47b16bc997d6');
+    var req = request(app).put('/api/report/catchreport/632c9ed036614fd7bcf5a227');
     req.cookies = Cookies;
     req.set('Accept','application/json')
       .expect('Content-Type', /json/)
@@ -243,7 +243,7 @@ describe('Functional Test <Sessions>:', function () {
       });
   });
   it('As an admin, you should be able to fulfill a report', function (done) {
-    var req = request(app).put('/api/report/solvereport/6321e28fa1ef47b16bc997d6');
+    var req = request(app).put('/api/report/solvereport/632c9ed036614fd7bcf5a227');
     req.cookies = Cookies;
     req.set('Accept','application/json')
       .expect('Content-Type', /json/)
@@ -253,7 +253,7 @@ describe('Functional Test <Sessions>:', function () {
       });
   });
   it('As an admin, you should be able to reject a report', function (done) {
-    var req = request(app).put('/api/report/rejectedreport/6321e28fa1ef47b16bc997d6');
+    var req = request(app).put('/api/report/rejectedreport/632c9ed036614fd7bcf5a227');
     req.cookies = Cookies;
     req.set('Accept','application/json')
       .expect('Content-Type', /json/)
@@ -263,7 +263,7 @@ describe('Functional Test <Sessions>:', function () {
       });
   });
   it('As an admin, you should be able to fulfill a report', function (done) {
-    var req = request(app).put('/api/report/solvereport/6321e28fa1ef47b16bc997d6');
+    var req = request(app).put('/api/report/solvereport/632c9ed036614fd7bcf5a227');
     req.cookies = Cookies;
     req.set('Accept','application/json')
       .expect('Content-Type', /json/)
@@ -339,13 +339,13 @@ describe('Functional Test <Sessions>:', function () {
       });
   });
   it('Everyone should be able to access reports pages', function (done) {
-    var req = request(app).get('/api/report/getreportbyid/6321e28fa1ef47b16bc997d6');
+    var req = request(app).get('/api/report/getreportbyid/632c9ed036614fd7bcf5a227');
     req.cookies = Cookies;
     req.set('Accept','application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function (err, res) {
-        res.body[0]._id.should.equal("6321e28fa1ef47b16bc997d6")
+        res.body[0]._id.should.equal("632c9ed036614fd7bcf5a227")
         done();
       });
   });

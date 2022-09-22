@@ -155,7 +155,8 @@ export const Home = () => {
               to="/scanner"
               style={{
                 textDecoration: "underline",
-                color: useColorModeValue("black", "#BFD732"),
+
+                color: useColorModeValue("#92c64e", "#BFD732"),
               }}
             >
               location's QR!

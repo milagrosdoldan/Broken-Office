@@ -56,19 +56,13 @@ const UserData = () => {
   };
   return (
     <>
-      <Box
-        m="5"
-        display="flex"
-        flexDir={"row"}
-        alignItems="center"
-        justifyContent={"space-around"}
-      >
+      <Box m="5" display="flex" flexDir={"row"} alignItems="center">
         <Link to="/admin/users">
           <Button alt="back to profile" bg="secondary">
             <ArrowLeftIcon />
           </Button>
         </Link>
-        <Heading>
+        <Heading m="0 auto" textAlign="center">
           {user.active ? "Desactive Account" : "Active Account"}
         </Heading>
       </Box>
@@ -123,7 +117,7 @@ const UserData = () => {
             <Divider ml={2} mt={1} mb={1} />
             <Text fontWeight="bold">Phone</Text>
             <Divider ml={2} mt={1} mb={1} />
-            <Text fontWeight="bold">Puesto</Text>
+            <Text fontWeight="bold">Role</Text>
           </Box>
           <Box display="flex" flexDirection="column">
             <Text ml="1rem">{`${user.email}`}</Text>
@@ -136,7 +130,7 @@ const UserData = () => {
           </Box>
         </Box>
         <Button onClick={handlerActive} my="5">
-          {user.active ? "Desactivar cuenta" : "Activar cuenta"}
+          {user.active ? "Deactivate account" : "Activate account"}
         </Button>
       </Box>
     </>

@@ -160,9 +160,9 @@ const EditAbout = () => {
                   colorScheme="blue"
                   type="submit"
                   mr={3}
-                  color=""
                   borderRadius="40px"
                   bg="secondary"
+                  color="black"
                   _hover={useColorModeValue("black", "white")}
                   onClick={updateUser}
                 >

@@ -51,7 +51,9 @@ const ResolveReport = () => {
   };
   return (
     <>
-      <Heading textAlign="center">Resolve Report</Heading>
+      <Heading mt={5} textAlign="center">
+        Resolve Report
+      </Heading>
       <ReportData report={report} />
       <Box display="flex" alignItems="center" justifyContent="center">
         <Button
@@ -60,7 +62,7 @@ const ResolveReport = () => {
           borderRadius="40px"
           onClick={rejectedReport}
         >
-          Rechazar
+          Reject
         </Button>
         <Button
           m="3"
@@ -69,7 +71,7 @@ const ResolveReport = () => {
           _hover={{ bg: "fourth" }}
           onClick={resolveReport}
         >
-          Resolver
+          Resolve
         </Button>
         <SendEmail report={report} />
       </Box>

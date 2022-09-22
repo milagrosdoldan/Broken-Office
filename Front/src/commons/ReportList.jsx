@@ -42,11 +42,13 @@ const ReportList = ({ reports }) => {
                 <Td textAlign="center">
                   <Link to={`/admin/reports/${report._id}`}>
                     <Button
-                      borderRadius="40px"
+                      borderRadius="20px"
                       bg="secondary"
+                      h={10}
+                      color="black"
                       _hover={{ bg: "fourth" }}
                     >
-                      Ver
+                      +
                     </Button>
                   </Link>
                 </Td>

@@ -81,13 +81,16 @@ const Navbar = () => {
             _hover={{ bg: "fourth" }}
             as={Button}
             color="black"
+            borderRadius="40px"
           >
             {user.name}
           </MenuButton>
         ) : (
           <MenuButton
+            borderRadius="40px"
             rightIcon={<ChevronDownIcon />}
             mr={5}
+            color="black"
             bg="secondary"
             alt="menu button"
             _hover={{ bg: "fourth" }}
@@ -107,7 +110,9 @@ const Navbar = () => {
             {user.isAdmin ? (
               <>
                 {" "}
-                <Link to="/admin/users"><MenuItem aria-label="admin reports">Users</MenuItem></Link>
+                <Link to="/admin/users">
+                  <MenuItem aria-label="admin reports">Users</MenuItem>
+                </Link>
                 <Link to="/admin/reports">
                   <MenuItem aria-label="admin reports">Reports</MenuItem>
                 </Link>

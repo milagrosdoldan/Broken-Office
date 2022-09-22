@@ -2,6 +2,7 @@ import { ArrowBackIcon, ArrowForwardIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Divider,
   IconButton,
   Input,
   Spinner,
@@ -119,7 +120,7 @@ const Users = () => {
     >
       <Box my="5" display="flex" flexDir={"row"} alignItems="center">
         <Input
-          placeholder="Search reports..."
+          placeholder="Search users..."
           _focusVisible={{ borderColor: "third" }}
           {...register("search")}
         />
@@ -127,11 +128,13 @@ const Users = () => {
           onClick={handleSubmit(handlerSearch)}
           aria-label="Search database"
           mt="0px"
+          borderRadius={50}
+          ml={3}
           icon={<SearchIcon />}
         />
       </Box>
       <Tabs m="3">
-        <TabList display="flex" justifyContent="center">
+        <TabList m="0 auto" display="flex" justifyContent="center">
           <Tab
             value={"USER"}
             _selected={{ color: "white", bg: "gray" }}
@@ -165,11 +168,12 @@ const Users = () => {
         <Tbody>
           {filteredUsers()?.map((user) => (
             <Tr key={user.id}>
-              <Link to={`/user/${user.id}`}>
-                <Td textAlign="start" py="5">
+              <Td textAlign="start" py="5">
+                <Link to={`/user/${user.id}`}>
+                  {" "}
                   {user.name} {user.lastname}
-                </Td>
-              </Link>
+                </Link>
+              </Td>
 
               <Td textAlign="start" py="5">
                 {user.active ? "Active" : "No Active"}

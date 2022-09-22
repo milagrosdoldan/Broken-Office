@@ -27,6 +27,7 @@ import Swal from "sweetalert2";
 
 const Users = () => {
   const user = useSelector((state) => state.user);
+  console.log("🚀 ~ file: Users.jsx ~ line 30 ~ Users ~ user", user);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,13 +47,6 @@ const Users = () => {
   const prevPage = () =>
     currentPage > 0 ? setCurrentPage(currentPage - 5) : setCurrentPage(0);
 
-  const getAllUsers = () => {
-    axios.get(`/api/user/allUsers/${"USER"}`).then((res) => {
-      setUsers(res.data);
-      setIsLoading(false);
-    });
-  };
-
   useEffect(() => {
     async function cleanInputs() {
       if (isSubmitSuccessful) {
@@ -65,6 +59,13 @@ const Users = () => {
     cleanInputs();
   }, [formState, reset]);
 
+  const getAllUsers = () => {
+    axios.get(`/api/user/allUsers/${"USER"}`).then((res) => {
+      setUsers(res.data);
+      setIsLoading(false);
+    });
+  };
+  
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -103,7 +104,7 @@ const Users = () => {
   };
 
   if (isLoading) {
-    user.isAdmin ? getAllUsers() : navigate("/404");
+    user?.isAdmin ? getAllUsers() : navigate("/404");
     return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
   }
 

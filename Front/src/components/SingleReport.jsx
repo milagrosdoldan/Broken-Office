@@ -94,7 +94,7 @@ const SingleReport = () => {
           ) : (
             <Button
               borderRadius="40px"
-              colorScheme={report.state === "solved" ? "green" : "red"}
+              colorScheme={report.state === "fullfilled" ? "green" : "red"}
             >
               {report.state}
             </Button>

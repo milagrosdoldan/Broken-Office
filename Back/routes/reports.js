@@ -30,6 +30,469 @@ const {
 //Ruta para buscar reportes sin administrador.
 router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
 
+/**
+ * @swagger
+ * /api/report/reportswithoutadmin:
+ *  get:
+ *    summary: get all reports without admin
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return all reports without admin
+ *       content:
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401:
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/search/{search}:
+ *  get:
+ *    summary: return a search
+ *    tags: [Reports]
+ *    parameters:
+ *      - in: path
+ *        name: search
+ *        schema:
+ *          type: string
+ *        required: false
+ *        description: return report by search
+ *    responses:
+ *      200:
+ *        description: user by the search
+ *        content:
+ *          application/json:
+ *            schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *      400:
+ *       description: report not found
+ */
+
+/**
+ * @swagger
+ * /api/report/allreports:
+ *  get:
+ *    summary: get all reports
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return all reports
+ *       content:
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401:
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/catchedreports:
+ *  get:
+ *    summary: get catched reports of admin logged
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return catched reports of admin logged
+ *       content:
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401:
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/myreportsfullfilled:
+ *  get:
+ *    summary: get fullfilled reports of user logged
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return fullfilled reports of user logged
+ *       content:
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401:
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/myreportsrejected:
+ *  get:
+ *    summary: get rejected reports of user logged
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return rejected reports of user logged
+ *       content:
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401:
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/reportsbyuserid/{id}:
+ *  get:
+ *    summary: get reports by user id
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: user id
+ *    responses:
+ *      200:
+ *       description: reports by user id
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ */
+
+/**
+ * @swagger
+ * /api/report/priorityreports/{id}:
+ *  get:
+ *    summary: get priority reports 1 to 3 levels
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the report priority level
+ *    responses:
+ *      200:
+ *       description: return report by priority level
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ */
+
+/**
+ * @swagger
+ * /api/report/dailyreports:
+ *  get:
+ *    summary: get daily reports
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: daily reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/myreports:
+ *  get:
+ *    summary: get all pending reports
+ *    tag: [Reports]
+ *    responses:
+ *      200:
+ *       description: return all you reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/getreportbyid/{id}:
+ *  get:
+ *    summary: get report by id
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the report id
+ *    responses:
+ *      200:
+ *       description: return report by id
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ */
+
+/**
+ * @swagger
+ * /api/report/getpendingreports:
+ *  get:
+ *    summary: get all pending reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all pending reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ * 
+ */
+
+/**
+ * @swagger
+ * /api/report/getrejectedreports:
+ *  get:
+ *    summary: get all rejected reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all rejected reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/getsolvedreports:
+ *  get:
+ *    summary: get all fullfilled reports
+ *    tag: [Reports]
+ *    responses:
+ *      201:
+ *       description: return all fullfilled reports
+ *       content: 
+ *          application/json:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Reports'
+ *      401: 
+ *       description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/addreport:
+ *  post:
+ *    summary: created report
+ *    tag: [Reports]
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *    responses:
+ *      200:
+ *        description: new report created!
+ *      401: 
+ *        description: Unauthorized
+ */
+
+/**
+ * @swagger
+ * /api/report/catchreport/{id}:
+ *  put:
+ *    summary: updated fullname
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *    responses:
+ *      201:
+ *        description: Report 
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/report/modifyreport/{id}:
+ *  put:
+ *    summary: updated state fullfilled
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *    responses:
+ *      200:
+ *        description: Report solved!
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/report/solvereport/{id}:
+ *  put:
+ *    summary: updated state fullfilled
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            state: 'fullfilled'
+ *    responses:
+ *      201:
+ *        description: Report solved!
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/report/rejectedreport/{id}:
+ *  put:
+ *    summary: updated state rejected
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            state: 'rejected'
+ *    responses:
+ *      201:
+ *        description: Report rejected!
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/report/removereport/{id}:
+ *  delete:
+ *    summary: report deleted
+ *    tag: [Reports]
+ *    parameters:
+ *      - in: path
+ *        _id: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content: 
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Reports'
+ *    responses:
+ *      200:
+ *        description: report deleted 
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/report/deleteall:
+ *  delete:
+ *    summary: delete all reports 
+ *    tag: [Reports] 
+ *    responses:
+ *      201:
+ *        description: Deleted all!
+ *      401:
+ *        description: Unauthorized
+ *      500:
+ *        description: Internal server error
+ */
+
+//Ruta para buscar reportes sin administrador.
+router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
+
 //Ruta para buscar por SEARCH.
 router.get("/search/:search", validateAuth, getReportBySearch);
 

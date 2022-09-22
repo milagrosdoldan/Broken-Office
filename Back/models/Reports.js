@@ -13,9 +13,6 @@ const ReportSchema = new mongoose.Schema({
   email: {
     type: String,
   },
-  name: {
-    type: String,
-  },
   title: {
     type: String,
   },

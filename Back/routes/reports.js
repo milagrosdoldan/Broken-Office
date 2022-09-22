@@ -32,6 +32,77 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
 
 /**
  * @swagger
+ * components:
+ *  schemas:
+ *    Reports:
+ *      type: object
+ *      properties:
+ *        name:
+ *         type: string
+ *         description: user's name
+ *        lastname:
+ *         type: string
+ *         description: user's lastname
+ *        userId:
+ *         type: string
+ *         description: user's password
+ *        email:
+ *         type: string
+ *         description: user's email
+ *        title:
+ *         type: string
+ *         description: report title
+ *        admin:
+ *         type: string
+ *         default: No admin.
+ *         description: user is admin or not
+ *        location:
+ *         type: string
+ *         description: user location
+ *        companyRole:
+ *         type: string
+ *         description: user company role
+ *        state:
+ *         type: string
+ *         default: pending
+ *         description: report state pending / fullfilled / rejected
+ *        image:
+ *         type: string
+ *         description: report image
+ *        date:
+ *         type: string
+ *         description: report date
+ *        description:
+ *         type: string
+ *         description: report desc
+ *        priority:
+ *         type: number
+ *         description: report priority 1 to 3
+ *        country:
+ *         type: string
+ *         description: user country.
+ *        coord:
+ *         type: array
+ *         description: user's coord
+ *        tags:
+ *         type: array
+ *         description: reports image tags
+ *        messages:
+ *         type: array
+ *         description: report chat
+ *      example:
+ *        name: Bautista
+ *        lastname: Gomez
+ *        email: bautistagomez@gmail.com
+ *        title: Accidente con la pc
+ *        description: Tuve un accidente con la PC que utilizo para laburar.
+ *        priority: 3
+ *        image: image.png
+ *        userId: 1
+ */
+
+/**
+ * @swagger
  * /api/report/reportswithoutadmin:
  *  get:
  *    summary: get all reports without admin
@@ -64,7 +135,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        description: return report by search
  *    responses:
  *      200:
- *        description: user by the search
+ *        description: report by the search
  *        content:
  *          application/json:
  *            schema:

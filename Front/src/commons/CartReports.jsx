@@ -67,7 +67,7 @@ const CartReports = () => {
                     <Thead>
                       <Tr id="2">
                         <Th>Date:</Th>
-                        <Th>Description:</Th>
+                        <Th>Title:</Th>
                         <Th>Info:</Th>
                       </Tr>
                     </Thead>
@@ -77,9 +77,7 @@ const CartReports = () => {
                           return (
                             <Tr key={e._id}>
                               <Td fontSize={15}>{e.date?.slice(0, 10)}</Td>
-                              <Td fontSize={15}>
-                                {e.description?.slice(0, 18)}
-                              </Td>
+                              <Td fontSize={15}>{e.title}</Td>
                               <Td>
                                 <Link to={`/report/${e._id}`}>
                                   <Button

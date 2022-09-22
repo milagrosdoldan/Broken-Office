@@ -21,7 +21,6 @@ import Footer from "../components/Footer";
 import Maps from "./Maps";
 
 const ReportData = ({ report }) => {
- 
   return (
     <>
       <Box
@@ -47,14 +46,14 @@ const ReportData = ({ report }) => {
             fallbackSrc="https://via.placeholder.com/150"
             minWidth={["60%", "50%", "30%", "20%"]}
             maxWidth="30%"
-            maxHeight="550px"
+            maxHeight="40%"
             borderRadius="10"
             mr={{ xl: "45px", lg: "45px", md: "0", base: "0" }}
             mb={{ base: "15px" }}
-            ml="120px"
+            ml={{ xl: "120px", lg: "120px", md: "0", base: "0" }}
           />
 
-          <Box ml={-10}>
+          <Box ml={{ xl: -10, lg: -10, md: 0, base: 0 }}>
             <Text fontWeight="bold" fontSize={25}>
               {report.title}
             </Text>
@@ -106,7 +105,7 @@ const ReportData = ({ report }) => {
         )}
       </HStack>
 
-      <Box ml={30}>
+      <Box mb={5} ml={{ xl: 30, lg: 30, md: 30, base: "-50px" }}>
         <Maps location={report.coord} />
       </Box>
       <Box />

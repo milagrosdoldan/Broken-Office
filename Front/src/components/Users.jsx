@@ -150,6 +150,7 @@ const Users = () => {
               _selected={{ color: "white", bg: "secondary" }}
               onClick={handlerReports}
             >
+              
               ADMINS
             </Tab>
           </TabList>
@@ -171,8 +172,11 @@ const Users = () => {
           <Tbody>
             {filteredUsers()?.map((user) => (
               <Tr key={user.id}>
-                <Td textAlign="start" py="5">
-                  <Link to={`/user/${user.id}`}>
+                <Td _hover={{ color: "fourth" }} textAlign="start" py="5">
+                  <Link
+                    style={{ textDecoration: "underline" }}
+                    to={`/user/${user.id}`}
+                  >
                     {" "}
                     {user.name} {user.lastname}
                   </Link>

@@ -85,6 +85,7 @@ const Register = () => {
               <Input
                 _focusVisible={{ borderColor: "third" }}
                 ml={5}
+                alt="lastname"
                 width={40}
                 placeholder="Lastname"
                 size="md"
@@ -142,13 +143,15 @@ const Register = () => {
             fontFamily="body"
             display="flex"
             mt={4}
+            id="Register"
+            alt="Register"
             color="black"
             onClick={handleSubmit(onSubmit)}
             borderRadius="40px"
             bg="secondary"
             _hover={{ bg: "fourth" }}
           >
-            Register
+            Submit
           </Button>
         </Stack>
       </Flex>

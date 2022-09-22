@@ -153,7 +153,10 @@ export const Home = () => {
             scan a{" "}
             <Link
               to="/scanner"
-              style={{ textDecoration: "underline", color: "#BFD732" }}
+              style={{
+                textDecoration: "underline",
+                color: useColorModeValue("black", "#BFD732"),
+              }}
             >
               location's QR!
             </Link>

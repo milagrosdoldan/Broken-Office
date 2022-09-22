@@ -1,16 +1,30 @@
-import React from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import {render, screen} from "../test-utils"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { render, fireEvent, screen } from "../test-utils";
+import { onSubmit } from "./Register";
+import Register from "./Register";
 
-import Register from "./Register"
+describe("Register", () => {
+  let componente;
+  test("Render Register", () => {
+    componente = render(
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  });
 
-describe("Register", ()=>{
-    test("Render Register", ()=>{
-        const componente = render( <BrowserRouter>
-            <Routes>   
-                <Route path="*" element= {<Register />}/>
-            </Routes>
-        </BrowserRouter>)
-        console.log(componente)
-    })
-})
+  test("onClick event on SUBMIT button", () => {
+    const component = render(
+      <BrowserRouter>
+        <Register />
+      </BrowserRouter>
+    );
+
+    const boton = component.getByText("Submit");
+    fireEvent.click(boton);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+});

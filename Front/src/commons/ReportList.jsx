@@ -25,28 +25,31 @@ const ReportList = ({ reports }) => {
       <Table size="s">
         <Thead>
           <Tr>
-            <Th textAlign="center">ID</Th>
-            <Th textAlign="center">DESCRIPTION</Th>
-            <Th textAlign="center"> NAME</Th>
+            <Th textAlign="left">ID</Th>
+            <Th textAlign="left">TITLE</Th>
+            <Th textAlign="left"> NAME</Th>
+            <Th textAlign="left"> INFO</Th>
           </Tr>
         </Thead>
         <Tbody>
           {reports?.length > 0 ? (
             reports.map((report) => (
               <Tr key={report._id}>
-                <Td textAlign="center">{report._id.slice(0, 5)}</Td>
-                <Td textAlign="center"> {report.description.slice(0, 13)}</Td>
-                <Td textAlign="center">
+                <Td textAlign="left">{report._id.slice(0, 5)}</Td>
+                <Td textAlign="left"> {report.title}</Td>
+                <Td textAlign="left">
                   {report.name} {report.lastname}
                 </Td>
                 <Td textAlign="center">
                   <Link to={`/admin/reports/${report._id}`}>
                     <Button
-                      borderRadius="20px"
                       bg="secondary"
-                      h={10}
+                      textAlign="center"
+                      size="sm"
+                      mt={2}
+                      mb={2}
                       color="black"
-                      _hover={{ bg: "fourth" }}
+                      borderRadius="40px"
                     >
                       +
                     </Button>

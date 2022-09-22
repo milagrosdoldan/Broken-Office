@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 import ReportList from "../commons/ReportList";
 import { SearchIcon } from "@chakra-ui/icons";
+import Footer from "../components/Footer";
 const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
@@ -83,62 +84,70 @@ const Reports = () => {
   }
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center">
-      <Box mt="5" display="flex" flexDir={"row"} alignItems="center">
-        <Input
-          placeholder="Search reports..."
-          _focusVisible={{ borderColor: "third" }}
-          {...register("search")}
-        />
-        <IconButton
-          onClick={handleSubmit(handlerSearch)}
-          aria-label="Search database"
-          mt="0px"
-          borderRadius={50}
-          ml={3}
-          icon={<SearchIcon />}
-        />
-      </Box>
+    <>
+      <Box
+        h={{ xl: "65vh", lg: "60vh", md: "70vh", base: "68vh" }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Box mt="5" display="flex" flexDir={"row"} alignItems="center">
+          <Input
+            placeholder="Search reports..."
+            _focusVisible={{ borderColor: "third" }}
+            {...register("search")}
+          />
+          <IconButton
+            onClick={handleSubmit(handlerSearch)}
+            aria-label="Search database"
+            mt="0px"
+            borderRadius={50}
+            ml={3}
+            icon={<SearchIcon />}
+          />
+        </Box>
 
-      <Tabs m="3">
-        <TabList m="15px 0 auto" display="flex" justifyContent="center">
-          <Tab
-            value={"REJECTED"}
-            _selected={{ color: "white", bg: "red" }}
-            onClick={handlerReports}
-          >
-            Rejected
-          </Tab>
-          <Tab
-            value={"PENDING"}
-            _selected={{ color: "white", bg: "gray" }}
-            onClick={handlerReports}
-          >
-            In Progress
-          </Tab>
-          <Tab
-            value={"FULLFIELD"}
-            _selected={{ color: "white", bg: "secondary" }}
-            onClick={handlerReports}
-          >
-            Fullfield
-          </Tab>
-        </TabList>
-      </Tabs>
-      <ReportList reports={reports} />
-      <div>
-        <ScrollToTop
-          smooth
-          color="black"
-          bg="#bfd732 "
-          style={{
-            backgroundColor: "#bfd732",
-            width: "10",
-            borderRadius: "15px",
-          }}
-        />
-      </div>
-    </Box>
+        <Tabs m="3">
+          <TabList m="15px 0 auto" display="flex" justifyContent="center">
+            <Tab
+              value={"REJECTED"}
+              _selected={{ color: "white", bg: "red" }}
+              onClick={handlerReports}
+            >
+              Rejected
+            </Tab>
+            <Tab
+              value={"PENDING"}
+              _selected={{ color: "white", bg: "gray" }}
+              onClick={handlerReports}
+            >
+              In Progress
+            </Tab>
+            <Tab
+              value={"FULLFIELD"}
+              _selected={{ color: "white", bg: "secondary" }}
+              onClick={handlerReports}
+            >
+              Fullfield
+            </Tab>
+          </TabList>
+        </Tabs>
+        <ReportList reports={reports} />
+        <div>
+          <ScrollToTop
+            smooth
+            color="black"
+            bg="#bfd732 "
+            style={{
+              backgroundColor: "#bfd732",
+              width: "10",
+              borderRadius: "15px",
+            }}
+          />
+        </div>
+      </Box>
+      <Footer />
+    </>
   );
 };
 

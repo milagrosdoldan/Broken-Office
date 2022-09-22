@@ -18,6 +18,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Chat from "../components/Chat";
+import Footer from "../components/Footer";
 import Maps from "./Maps";
 
 const ReportDataById = () => {
@@ -81,18 +82,18 @@ const ReportDataById = () => {
               minWidth={["60%", "40%", "30%", "20%"]}
               maxWidth="20%"
               borderRadius="10"
-              mr={{ xl: "55px", lg: "45px", md: "0", base: "0" }}
+              mr={{ xl: "45px", lg: "45px", md: "0", base: "0" }}
+              mb={{ base: "15px" }}
             />
             <Box>
               <Text
                 ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
                 fontWeight="bold"
+                fontSize={25}
               >
-                Title:
-              </Text>
-              <Text ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}>
                 {report.title}
               </Text>
+
               <Text
                 ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
                 fontWeight="bold"
@@ -130,15 +131,17 @@ const ReportDataById = () => {
                     </Tr>
                   </Thead>
                 </Table>
-                <Box ml="100px">
+                <Box mt={17} ml="100px">
                   <Chat report={report} />
                 </Box>
               </TableContainer>
             </Box>
           </Box>
-
-          <Maps location={report.coord} />
+          <Box ml={30}>
+            <Maps location={report.coord} />
+          </Box>
         </Box>
+        <Footer />
       </>
     );
   }

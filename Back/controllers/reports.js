@@ -3,11 +3,12 @@
 const cloudinary = require("cloudinary").v2;
 const Reports = require("../models/Reports");
 const transporter = require("../config/transporter");
+require("dotenv").config();
 
 cloudinary.config({
-  cloud_name: "dgmprcco9",
-  api_key: "658267799784839",
-  api_secret: "16dlQI3LiVBGyNLOsIfm--iReo4",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 const Rep = {
   //El usuario crea un parámetro. Toma los datos del body.
@@ -19,8 +20,8 @@ const Rep = {
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
-        // categorization: "google_tagging",
-        // auto_tagging: 0.8,
+         categorization: "google_tagging",
+         auto_tagging: 0.8,
       });
 
       const newReport = await new Reports({
@@ -41,18 +42,18 @@ const Rep = {
         title: req.body.title,
       });
 
-      // await transporter.sendMail({
-      //   from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
-      //   to: req.user.email,
-      //   subject: "Report sent!",
-      //   html: `
-      //   <h1>Hello ${req.body.name}!</h1><br/>
-      //   <p>Your report has been sent</p><br/>
-      //   <img src=${req.body.secure_url}/><br/>
-      //   <p>${req.body.description}</p><br/>
-      //   <p>An administrator will contact you soon</p>
-      //   `,
-      // });
+      await transporter.sendMail({
+        from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
+        to: req.user.email,
+        subject: "Report sent!",
+        html: `
+        <h1>Hello ${req.body.name}!</h1><br/>
+        <p>Your report has been sent</p><br/>
+        <img src=${req.body.secure_url}/><br/>
+        <p>${req.body.description}</p><br/>
+        <p>An administrator will contact you soon</p>
+        `,
+      });
 
       newReport.save();
 

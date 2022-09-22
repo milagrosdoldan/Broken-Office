@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Footer from "../components/Footer";
 
 const UserData = () => {
   const params = useParams();
@@ -58,7 +59,14 @@ const UserData = () => {
     <>
       <Box m="5" display="flex" flexDir={"row"} alignItems="center">
         <Link to="/admin/users">
-          <Button alt="back to profile" bg="secondary">
+          <Button
+            alt="back to admin"
+            color="black"
+            borderRadius="40px"
+            bg="secondary"
+            ml={5}
+            mt={15}
+          >
             <ArrowLeftIcon />
           </Button>
         </Link>
@@ -108,7 +116,7 @@ const UserData = () => {
           bg={useColorModeValue("white", "black")}
           p="1.5rem"
           borderRadius="10"
-          boxShadow="inner"
+          shadow="xl"
         >
           <Box display="flex" flexDirection="column">
             <Text fontWeight="bold">Email</Text>
@@ -133,6 +141,7 @@ const UserData = () => {
           {user.active ? "Deactivate account" : "Activate account"}
         </Button>
       </Box>
+      <Footer />
     </>
   );
 };

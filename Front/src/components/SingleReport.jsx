@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Spinner } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -6,22 +6,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import NotFound from "../pages/NotFound";
 import ReportData from "../commons/ReportData";
-
+import Footer from "./Footer";
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 const SingleReport = () => {
   const [report, setReport] = useState({});
-  console.log(
-    "🚀 ~ file: SingleReport.jsx ~ line 12 ~ SingleReport ~ report",
-    report
-  );
+  const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getReportbyId() {
-      axios
-        .get(`/api/report/getreportbyid/${params.id}`)
-        .then((res) => setReport(res.data[0]));
+      axios.get(`/api/report/getreportbyid/${params.id}`).then((res) => {
+        setReport(res.data[0]);
+        setIsLoading(false);
+      });
     }
     getReportbyId();
   }, []);
@@ -51,9 +50,11 @@ const SingleReport = () => {
     navigate(`/admin/reports/resolve/${params.id}`);
   };
 
-  if (user.isAdmin) {
-    return (
+  if (isLoading) return <Spinner />;
+  return (
+    <>
       <Box
+        mt={50}
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -100,10 +101,9 @@ const SingleReport = () => {
           )}
         </Box>
       </Box>
-    );
-  } else {
-    return <NotFound />;
-  }
+      <Footer />
+    </>
+  );
 };
 
 export default SingleReport;

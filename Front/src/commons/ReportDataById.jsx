@@ -137,7 +137,7 @@ const ReportDataById = () => {
               </TableContainer>
             </Box>
           </Box>
-          <Box ml={30}>
+          <Box ml={{ xl: 30, lg: 30, md: 30, base: "-50px" }}>
             <Maps location={report.coord} />
           </Box>
         </Box>

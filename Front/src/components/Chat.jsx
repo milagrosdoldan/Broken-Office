@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const Chat = ({ report }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
@@ -37,7 +37,13 @@ const Chat = ({ report }) => {
         (message) => message.reportId === id
       );
       if (filterMessages[filterMessages.length - 1].userId !== user.id) {
-        alert("Nuevo mensaje");
+        Swal.fire({
+          text: "New message!",
+          width: 400,
+          showConfirmButton: false,
+          timer: 1000,
+          color: "secondary",
+        });
       }
       setMessages(filterMessages);
     });
@@ -52,7 +58,7 @@ const Chat = ({ report }) => {
         textAlign="center"
         mt={15}
         color="black"
-        margin="0 auto"
+        alignSelf="center"
         colorScheme="teal"
         onClick={onOpen}
         borderRadius="40px"

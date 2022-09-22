@@ -15,6 +15,7 @@
     "@react-google-maps/api": "^2.12.2",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "cloudinary": "^1.31.0",
@@ -83,25 +84,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-<<<<<<< HEAD
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0"
-=======
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/builder-webpack5": "^6.5.12",
-    "@storybook/manager-webpack5": "^6.5.12",
-    "@storybook/node-logger": "^6.5.12",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.5.12",
-    "@storybook/testing-library": "^0.0.13",
-    "babel-plugin-named-exports-order": "^0.0.2",
-    "prop-types": "^15.8.1",
-    "webpack": "^5.74.0"
->>>>>>> 96e681d33e767b7f0d4c1ef93eee0264a0508f99
   }
 }

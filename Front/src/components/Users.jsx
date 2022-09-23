@@ -61,7 +61,7 @@ const Users = () => {
   }, [formState, reset]);
 
   const getAllUsers = () => {
-    axios.get(`/api/user/allUsers/${"USER"}`).then((res) => {
+    axios.get(`http://localhost:3001/api/user/allUsers/${"USER"}`, { withCredentials: true }).then((res) => {
       setUsers(res.data);
       setIsLoading(false);
     });
@@ -82,9 +82,9 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (isAdmin) {
-          axios.put(`/api/admin/demote/${id}`);
+          axios.put(`http://localhost:3001/api/admin/demote/${id}`, { withCredentials: true });
         } else {
-          axios.put(`/api/admin/promote/${id}`);
+          axios.put(`http://localhost:3001/api/admin/promote/${id}`, { withCredentials: true });
         }
         getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");
@@ -93,13 +93,13 @@ const Users = () => {
   };
 
   const handlerSearch = async (data) => {
-    const reportes = await axios.get(`/api/user/search/${data.search}`);
+    const reportes = await axios.get(`http://localhost:3001/api/user/search/${data.search}`, { withCredentials: true });
     setUsers(reportes.data);
   };
 
   const handlerReports = (e) => {
     const value = e.target.value;
-    axios.get(`/api/user/allUsers/${value}`).then((res) => {
+    axios.get(`http://localhost:3001/api/user/allUsers/${value}`, { withCredentials: true }).then((res) => {
       setUsers(res.data);
     });
   };

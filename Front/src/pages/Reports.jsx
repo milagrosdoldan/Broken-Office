@@ -45,7 +45,7 @@ const Reports = () => {
 
   async function allReports() {
     axios
-      .get("/api/report/getpendingreports")
+      .get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true })
       .then((res) => {
         setReports(res.data);
         setIsLoading(false);
@@ -57,24 +57,24 @@ const Reports = () => {
     const value = e.target.value;
 
     if (value === "PENDING") {
-      axios.get("/api/report/getpendingreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }
     if (value === "FULLFIELD") {
-      axios.get("/api/report/getsolvedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getsolvedreports", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }
     if (value === "REJECTED") {
-      axios.get("/api/report/getrejectedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/getrejectedreports", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }
   };
 
   const handlerSearch = async (data) => {
-    const reportes = await axios.get(`/api/report/search/${data.search}`);
+    const reportes = await axios.get(`http://localhost:3001/api/report/search/${data.search}`, { withCredentials: true });
     setReports(reportes.data);
   };
 

@@ -43,7 +43,7 @@ const EditAbout = () => {
       companyRole,
       picture: imageSrc,
     };
-    axios.put(`/api/user/${user.id}`, newData);
+    axios.put(`http://localhost:3001/api/user/${user.id}`, newData, { withCredentials: true });
     dispatch(sendMe());
     onClose();
   };

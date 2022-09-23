@@ -23,7 +23,7 @@ const UserData = () => {
 
   const getUser = () => {
     axios
-      .get(`/api/admin/user/${params.id}`)
+      .get(`http://localhost:3001/api/admin/user/${params.id}`, { withCredentials: true })
       .then((res) => setUser(res.data[0]));
   };
 
@@ -46,9 +46,9 @@ const UserData = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (user.active) {
-          axios.put(`/api/admin/deactivate/${user.id}`);
+          axios.put(`http://localhost:3001/api/admin/deactivate/${user.id}`, { withCredentials: true });
         } else {
-          axios.put(`/api/admin/activate/${user.id}`);
+          axios.put(`http://localhost:3001/api/admin/activate/${user.id}`, { withCredentials: true });
         }
         getUser();
         Swal.fire("Updated!", "User has been updated.", "success");

@@ -28,7 +28,7 @@ const ReportDataById = () => {
   useEffect(() => {
     async function oneProduct() {
       axios
-        .get(`/api/report/getreportbyid/${id}`)
+        .get(`http://localhost:3001/api/report/getreportbyid/${id}`, { withCredentials: true })
         .then((result) => setReport(result.data[0]));
     }
     oneProduct();

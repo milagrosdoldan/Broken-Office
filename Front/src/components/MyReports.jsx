@@ -12,18 +12,18 @@ const MyReports = () => {
     const value = e.target.value;
 
     if (value === "PENDING") {
-      axios.get("/api/report/catchedreports").then((res) => {
+      axios.get("http://localhost:3001/api/report/catchedreports", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }
     if (value === "FULLFIELD") {
       console.log("fulfil");
-      axios.get("/api/report/myreportsfullfilled").then((res) => {
+      axios.get("http://localhost:3001/api/report/myreportsfullfilled", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }
     if (value === "REJECTED") {
-      axios.get("/api/report/myreportsrejected").then((res) => {
+      axios.get("http://localhost:3001/api/report/myreportsrejected", { withCredentials: true }).then((res) => {
         setReports(res.data);
       });
     }

@@ -29,21 +29,40 @@ const swaggerSpec = {
 };
 
 //middelware
+
 app.use(
   cors({
-    origin: "*",
-    credentials: true,
+    origin: "http://localhost:3000",
+    credentials:true,
+    methods:["GET", "POST", "PUT", "DELETE"],
+    optionsSuccessStatus:200,
+    allowedHeaders: [
+      "Access-Control-Allow-Credentials",
+      "Access-Control-Allow-Headers",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Methods",
+      "Origin",
+      "WithCredentials",
+      "X-Requested-Wwith",
+      "Content-Type",
+      "Accept",
+      "Authorization",
+      "X-HTTP-Method-Override",
+      "Set-Cookie",
+      "Cookie",
+      "Request",
+    ], 
   })
-);
-app.use(express.json({ limit: "10mb", extended: true }));
-app.use(
-  express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
-);
-app.use(morgan("tiny"));
-app.use(cookieparser());
-
-app.use("/api", routes);
-
+  );
+  app.use(express.json({ limit: "10mb", extended: true }));
+  app.use(
+    express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
+    );
+    app.use(cookieparser());
+    app.use(morgan("tiny"));
+    
+    app.use("/api", routes);
+    
 app.use(
   "/api-doc",
   swaggerUI.serve,

@@ -31,11 +31,11 @@ function SendEmail({ report }) {
 
   const sendEmail = () => {
     axios
-      .post(`/api/report/share/${params.id}`, {
+      .post(`http://localhost:3001/api/report/share/${params.id}`, {
         email: report.email,
         subject,
         message,
-      })
+      }, { withCredentials: true })
       .then(() => {
         Swal.fire({
           icon: "success",

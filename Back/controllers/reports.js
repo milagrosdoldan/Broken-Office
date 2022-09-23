@@ -49,7 +49,6 @@ const Rep = {
         html: `
         <h1>Hello ${req.body.name}!</h1><br/>
         <p>Your report has been sent</p><br/>
-        <img src=${req.body.secure_url}/><br/>
         <p>${req.body.description}</p><br/>
         <p>An administrator will contact you soon</p>
         `,
@@ -155,7 +154,7 @@ const Rep = {
   reportFullfilled: async function reportFullfilled(req, res) {
     const report = await Reports.update(
       { _id: req.params.id },
-      { state: "fullfilled" }
+      { state: "fulfilled" }
     )
       .then((reporte) => {
         res.status(201).send("Report solved!");
@@ -203,7 +202,7 @@ const Rep = {
 
   //Función para mostrar TODOS los informes pendientes.
   getAllFullfilledReports: async function getAllFullfilledReports(req, res) {
-    const report = await Reports.find({ state: "fullfilled" })
+    const report = await Reports.find({ state: "fulfilled" })
       .then((reporte) => {
         res.status(201).send(reporte);
       })
@@ -244,7 +243,7 @@ const Rep = {
   myReportsFullfilled: async function myReportsFullfilled(req, res) {
     const report = await Reports.find({
       admin: req.user.name + " " + req.user.lastname,
-      state: "fullfilled",
+      state: "fulfilled",
     })
       .then((reporte) => {
         res.status(201).send(reporte);

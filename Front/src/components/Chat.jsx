@@ -15,10 +15,14 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  AvatarGroup,
+  Avatar,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import Swal from "sweetalert2";
+import { ChatIcon } from "@chakra-ui/icons";
 const Chat = ({ report }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
@@ -26,6 +30,7 @@ const Chat = ({ report }) => {
   const scroll = useRef();
   const { id } = useParams();
   const user = useSelector((state) => state.user);
+
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -56,14 +61,15 @@ const Chat = ({ report }) => {
         bg="secondary"
         _hover={{ bg: "fourth" }}
         textAlign="center"
-        mt={15}
         color="black"
         alignSelf="center"
         colorScheme="teal"
         onClick={onOpen}
         borderRadius="40px"
+        m="0 auto"
       >
-        Send Messages
+        <ChatIcon mr={1} />
+        Messages
       </Button>
       <Drawer
         isOpen={isOpen}

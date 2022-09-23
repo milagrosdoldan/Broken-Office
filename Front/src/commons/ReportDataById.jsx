@@ -60,7 +60,7 @@ const ReportDataById = () => {
           alignItems="center"
         >
           <Heading my="5" textAlign="center">
-            Your report:
+            Report
           </Heading>
 
           <Box
@@ -82,35 +82,29 @@ const ReportDataById = () => {
               minWidth={["60%", "40%", "30%", "20%"]}
               maxWidth="20%"
               borderRadius="10"
-              mr={{ xl: "45px", lg: "45px", md: "0", base: "0" }}
+              mr={{ xl: "40px", lg: "45px", md: "0", base: "0" }}
               mb={{ base: "15px" }}
+              ml={{ xl: "20px" }}
             />
             <Box>
-              <Text
-                ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
-                fontWeight="bold"
-                fontSize={25}
-              >
-                {report.title}
-              </Text>
-
-              <Text
-                ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
-                fontWeight="bold"
-              >
-                Description:
-              </Text>
-              <Text
-                maxWidth="300px"
-                ml={{ xl: "68px", lg: "58px", md: 3.5, base: 3.5 }}
-              >
-                {report.description}
-              </Text>
               <TableContainer
-                ml={{ xl: "55px", lg: "45px", md: "0", base: "0" }}
+                whiteSpace="pre-wrap"
+                display="flex"
+                flexDirection="column"
+                m="15px auto"
               >
                 <Table size="sm">
                   <Thead>
+                    <Tr>
+                      <Th>TITLE</Th>
+                      <Td> {report.title}</Td>
+                    </Tr>
+                    <Tr>
+                      <Th>DESCRIPTION</Th>
+                      <Td textAlign="left" maxWidth="300px">
+                        {report.description}
+                      </Td>
+                    </Tr>
                     <Tr>
                       <Th>PRIORITY</Th>
                       <Td>{report.priority}</Td>
@@ -131,13 +125,13 @@ const ReportDataById = () => {
                     </Tr>
                   </Thead>
                 </Table>
-                <Box mt={17} ml="100px">
+                <Box mt={7} mb={5} ml="auto" mr="auto">
                   <Chat report={report} />
                 </Box>
               </TableContainer>
             </Box>
           </Box>
-          <Box ml={{ xl: 30, lg: 30, md: 30, base: "-50px" }}>
+          <Box m="20px auto">
             <Maps location={report.coord} />
           </Box>
         </Box>

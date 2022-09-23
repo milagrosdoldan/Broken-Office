@@ -6,9 +6,17 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { sendMe } from "../state/user";
 import EditAbout from "./EditAbout";
 
 const CartPerfil = ({ user }) => {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(sendMe());
+  },[])
   return (
     <Box mt={5} display="flex" flexDir="column" alignItems="center">
       <Heading mt={5} fontSize="25">

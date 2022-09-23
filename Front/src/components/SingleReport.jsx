@@ -53,8 +53,21 @@ const SingleReport = () => {
   if (isLoading) return <Spinner />;
   return (
     <>
+      <Box display="flex">
+        <Link to="/admin/reports">
+          <Button
+            color="black"
+            borderRadius="40px"
+            alt="back to profile"
+            bg="secondary"
+            ml={5}
+            mt={15}
+          >
+            <ArrowLeftIcon />
+          </Button>
+        </Link>
+      </Box>
       <Box
-        mt={50}
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -64,11 +77,6 @@ const SingleReport = () => {
         <ReportData report={report} />
 
         <Box display="flex" flexDirection="row" alignItems="center">
-          <Link to="/admin/reports">
-            <Button m="3" borderRadius="40px">
-              Back
-            </Button>
-          </Link>
           {!report.admin || report.admin === "No admin." ? (
             <Button
               m="3"
@@ -94,7 +102,10 @@ const SingleReport = () => {
           ) : (
             <Button
               borderRadius="40px"
-              colorScheme={report.state === "fullfilled" ? "green" : "red"}
+              fontSize={15}
+              textTransform="uppercase"
+              color="black"
+              bg={report.state === "fulfilled" ? "secondary" : "red"}
             >
               {report.state}
             </Button>

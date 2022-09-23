@@ -62,6 +62,7 @@ function SendEmail({ report }) {
         _focusVisible={{ borderColor: "third" }}
         _hover={{ color: "secondary" }}
         onClick={onOpen}
+        m="3"
       >
         Send Email
       </Button>
@@ -119,6 +120,7 @@ function SendEmail({ report }) {
                 sendEmail();
                 onClose();
               }}
+              color="black"
             >
               Send
             </Button>

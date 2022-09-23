@@ -18,8 +18,9 @@ const Maps = ({ location }) => {
       alignItems="center"
       w={["300px", "500px", "800px"]}
       h="300px"
-      ml="55px"
-      mt={15}
+      // ml="55px"
+      // mt={15}
+      m="0 auto"
       maxWidth="90%"
     >
       {isLoaded ? (

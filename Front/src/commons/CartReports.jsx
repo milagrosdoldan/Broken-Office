@@ -60,6 +60,9 @@ const CartReports = () => {
               </AccordionButton>
               <AccordionPanel>
                 <TableContainer
+                  ml={2}
+                  whiteSpace="-moz-initial"
+                  overflowX="clip"
                   alignSelf="center"
                   width={{ xl: 600, lg: 600, md: "70vh", base: "60vh" }}
                 >

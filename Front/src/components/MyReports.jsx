@@ -16,7 +16,7 @@ const MyReports = () => {
         setReports(res.data);
       });
     }
-    if (value === "FULLFIELD") {
+    if (value === "FULFILLED") {
       console.log("fulfil");
       axios.get("/api/report/myreportsfullfilled").then((res) => {
         setReports(res.data);
@@ -31,7 +31,7 @@ const MyReports = () => {
 
   return (
     <>
-      <Box h={{ xl: "65vh", lg: "55vh", md: "70vh", base: "68vh" }}>
+      <Box h={{ xl: "65vh", lg: "60vh", md: "70vh", base: "67.5vh" }}>
         <Heading textAlign={"center"} m="5">
           My reports
         </Heading>
@@ -52,11 +52,11 @@ const MyReports = () => {
               In Progress
             </Tab>
             <Tab
-              value={"FULLFIELD"}
+              value={"FULFILLED"}
               _selected={{ color: "white", bg: "secondary" }}
               onClick={handlerReports}
             >
-              Fullfield
+              Fulfilled
             </Tab>
           </TabList>
         </Tabs>

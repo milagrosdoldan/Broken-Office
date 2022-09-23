@@ -40,7 +40,7 @@ const ReportList = ({ reports }) => {
                 <Td textAlign="left">
                   {report.name} {report.lastname}
                 </Td>
-                <Td textAlign="center">
+                <Td textAlign="left">
                   <Link to={`/admin/reports/${report._id}`}>
                     <Button
                       bg="secondary"

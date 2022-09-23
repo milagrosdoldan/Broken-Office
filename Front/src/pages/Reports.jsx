@@ -61,7 +61,7 @@ const Reports = () => {
         setReports(res.data);
       });
     }
-    if (value === "FULLFIELD") {
+    if (value === "FULFILLED") {
       axios.get("/api/report/getsolvedreports").then((res) => {
         setReports(res.data);
       });
@@ -124,11 +124,11 @@ const Reports = () => {
               In Progress
             </Tab>
             <Tab
-              value={"FULLFIELD"}
+              value={"FULFILLED"}
               _selected={{ color: "white", bg: "secondary" }}
               onClick={handlerReports}
             >
-              Fullfield
+              Fulfilled
             </Tab>
           </TabList>
         </Tabs>

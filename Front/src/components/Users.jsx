@@ -66,7 +66,7 @@ const Users = () => {
       setIsLoading(false);
     });
   };
-  
+
   useEffect(() => {
     getAllUsers();
   }, []);
@@ -104,125 +104,123 @@ const Users = () => {
     });
   };
 
-  if (isLoading) {
-    user?.isAdmin ? getAllUsers() : navigate("/404");
-    return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
-  }
+  // if (isLoading) {
+  //   user?.isAdmin ? getAllUsers() : navigate("/404");
+  //   return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+  // }
 
   return (
     <>
-      <TableContainer
-        mt="10"
-        width={["100%", "70%", "60%"]}
-        display="flex"
-        flexDir={"column"}
-        alignItems="center"
-        m="0 auto"
-        p="2"
-        fontSize={["18", "18"]}
-      >
-        <Box my="5" display="flex" flexDir={"row"} alignItems="center">
-          <Input
-            placeholder="Search users..."
-            _focusVisible={{ borderColor: "third" }}
-            {...register("search")}
-          />
-          <IconButton
-            onClick={handleSubmit(handlerSearch)}
-            aria-label="Search database"
-            mt="0px"
-            borderRadius={50}
-            ml={3}
-            icon={<SearchIcon />}
-          />
-        </Box>
-        <Tabs m="3">
-          <TabList m="0 auto" display="flex" justifyContent="center">
-            <Tab
-              value={"USER"}
-              _selected={{ color: "white", bg: "gray" }}
-              onClick={handlerReports}
-            >
-              USERS
-            </Tab>
-            <Tab
-              value={"ADMIN"}
-              _selected={{ color: "white", bg: "secondary" }}
-              onClick={handlerReports}
-            >
-              
-              ADMINS
-            </Tab>
-          </TabList>
-        </Tabs>
-        <Table size="s">
-          <Thead>
-            <Tr>
-              <Th textAlign="start" py="5">
-                NAME
-              </Th>
-              <Th textAlign="start" py="5" pr="5">
-                ACTIVE
-              </Th>
-              <Th textAlign="start" py="5">
-                ROLE
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {filteredUsers()?.map((user) => (
-              <Tr key={user.id}>
-                <Td _hover={{ color: "fourth" }} textAlign="start" py="5">
-                  <Link
-                    style={{ textDecoration: "underline" }}
-                    to={`/user/${user.id}`}
-                  >
-                    {" "}
-                    {user.name} {user.lastname}
-                  </Link>
-                </Td>
-
-                <Td textAlign="start" py="5">
-                  {user.active ? "Active" : "No Active"}
-                </Td>
-                <Td textAlign="start" py="5">
-                  {user.isAdmin ? "Admin" : "User"}
-                </Td>
-                <Td textAlign="end" py="5">
-                  <Switch
-                    onChange={() => handlerAdmin(user.id, user.isAdmin)}
-                    colorScheme="whatsapp"
-                    size="lg"
-                    isChecked={user.isAdmin}
-                  />
-                </Td>
+      <Box h={{ xl: "95vh", lg: "100vh", md: "95vh", base: "90vh" }}>
+        <TableContainer
+          mt="10"
+          width={["100%", "70%", "60%"]}
+          display="flex"
+          flexDir={"column"}
+          alignItems="center"
+          m="0 auto"
+          p="2"
+          fontSize={["18", "18"]}
+        >
+          <Box my="5" display="flex" flexDir={"row"} alignItems="center">
+            <Input
+              placeholder="Search users..."
+              _focusVisible={{ borderColor: "third" }}
+              {...register("search")}
+            />
+            <IconButton
+              onClick={handleSubmit(handlerSearch)}
+              aria-label="Search database"
+              mt="0px"
+              borderRadius={50}
+              ml={3}
+              icon={<SearchIcon />}
+            />
+          </Box>
+          <Tabs m="3">
+            <TabList m="0 auto" display="flex" justifyContent="center">
+              <Tab
+                value={"USER"}
+                _selected={{ color: "white", bg: "gray" }}
+                onClick={handlerReports}
+              >
+                USERS
+              </Tab>
+              <Tab
+                value={"ADMIN"}
+                _selected={{ color: "white", bg: "secondary" }}
+                onClick={handlerReports}
+              >
+                ADMINS
+              </Tab>
+            </TabList>
+          </Tabs>
+          <Table size="s">
+            <Thead>
+              <Tr>
+                <Th textAlign="start" py="5">
+                  NAME
+                </Th>
+                <Th textAlign="start" py="5" pr="5">
+                  ACTIVE
+                </Th>
+                <Th textAlign="end" py="5" pr="5">
+                  ADMIN
+                </Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-        <Box>
-          <Button
-            alt="previus page"
-            bg="secondary"
-            ml={5}
-            mt={15}
-            color="black"
-            onClick={prevPage}
-          >
-            <ArrowBackIcon />
-          </Button>
-          <Button
-            alt="next page"
-            bg="secondary"
-            ml={5}
-            color="black"
-            mt={15}
-            onClick={nextPage}
-          >
-            <ArrowForwardIcon />
-          </Button>
-        </Box>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {filteredUsers()?.map((user) => (
+                <Tr key={user.id}>
+                  <Td _hover={{ color: "fourth" }} textAlign="start" py="5">
+                    <Link
+                      style={{ textDecoration: "underline" }}
+                      to={`/user/${user.id}`}
+                    >
+                      {" "}
+                      {user.name} {user.lastname}
+                    </Link>
+                  </Td>
+
+                  <Td textAlign="start" py="5">
+                    {user.active ? "Active" : "No Active"}
+                  </Td>
+                  <Td textAlign="end" py="5">
+                    <Switch
+                      onChange={() => handlerAdmin(user.id, user.isAdmin)}
+                      colorScheme="whatsapp"
+                      size="lg"
+                      isChecked={user.isAdmin}
+                    />
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+          <Box>
+            <Button
+              alt="previus page"
+              bg="secondary"
+              ml={5}
+              mt={15}
+              color="black"
+              onClick={prevPage}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <Button
+              alt="next page"
+              bg="secondary"
+              ml={5}
+              color="black"
+              mt={15}
+              onClick={nextPage}
+            >
+              <ArrowForwardIcon />
+            </Button>
+          </Box>
+        </TableContainer>
+      </Box>
       <Footer />
     </>
   );

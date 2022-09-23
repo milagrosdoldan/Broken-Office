@@ -1,11 +1,14 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const url = useLocation().pathname;
+
   return (
     <Box
       flexDirection="column"
-      mt={70}
+      mt={url === "/login" ? 0 : 70}
       bg="#000000"
       height="15vh"
       width="full"
@@ -13,7 +16,7 @@ const Footer = () => {
       position="absolute"
     >
       <Image
-        ml={4}
+        ml={2.5}
         w="150px"
         h="100%"
         src="https://i.ibb.co/SxKhWCJ/Captura-desde-2022-09-14-16-08-00.png"

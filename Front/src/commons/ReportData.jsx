@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -38,30 +39,43 @@ const ReportData = ({ report }) => {
           flexDirection={["column", "row", "row"]}
           alignItems="center"
           w="100%"
-          justifyContent="space-around"
+          justifyContent={{
+            xl: "center",
+            lg: "center",
+            md: "space-evenly",
+            base: "space-evenly",
+          }}
         >
           <Image
+            src={report.image}
             alt="photo of the report"
-            src={report.image || "gibbresh.png"}
             fallbackSrc="https://via.placeholder.com/150"
-            minWidth={["60%", "50%", "30%", "20%"]}
+            minWidth={["60%", "40%", "30%", "20%"]}
             maxWidth="30%"
-            maxHeight="40%"
             borderRadius="10"
-            mr={{ xl: "45px", lg: "45px", md: "0", base: "0" }}
+            mr={{ xl: "40px", lg: "45px", md: "0", base: "0" }}
             mb={{ base: "15px" }}
-            ml={{ xl: "120px", lg: "120px", md: "0", base: "0" }}
+            ml={{ xl: "20px" }}
           />
-
-          <Box ml={{ xl: -10, lg: -10, md: 0, base: 0 }}>
-            <Text fontWeight="bold" fontSize={25}>
-              {report.title}
-            </Text>
-            <Text fontWeight="bold">Description</Text>
-            <Text maxWidth="300px">{report.description}</Text>
-            <TableContainer>
+          <Box>
+            <TableContainer
+              whiteSpace="pre-wrap"
+              display="flex"
+              flexDirection="column"
+              m="15px auto"
+            >
               <Table size="sm">
                 <Thead>
+                  <Tr>
+                    <Th>TITLE</Th>
+                    <Td> {report.title}</Td>
+                  </Tr>
+                  <Tr>
+                    <Th>DESCRIPTION</Th>
+                    <Td textAlign="left" maxWidth="300px">
+                      {report.description}
+                    </Td>
+                  </Tr>
                   <Tr>
                     <Th>ID</Th>
                     <Td>{report._id}</Td>
@@ -86,29 +100,35 @@ const ReportData = ({ report }) => {
                   </Tr>
                 </Thead>
               </Table>
-              <Box mt={17} ml="100px">
+
+              <HStack justifyContent="center" pt={5} spacing={2} m="0 auto">
+                {report?.tags?.map((size, i) =>
+                  i >= 3 ? (
+                    <></>
+                  ) : (
+                    <Tag
+                      minW={20}
+                      key={i}
+                      p={1}
+                      variant="solid"
+                      textAlign="center"
+                    >
+                      {size}
+                    </Tag>
+                  )
+                )}
+              </HStack>
+              <Box mt={7} mb={5} ml="auto" mr="auto">
                 <Chat report={report} />
               </Box>
             </TableContainer>
           </Box>
         </Box>
-      </Box>
-      <HStack spacing={4} m="5">
-        {report?.tags?.map((size, i) =>
-          i >= 3 ? (
-            <></>
-          ) : (
-            <Tag minW={20} key={i} variant="solid" colorScheme="green">
-              {size}
-            </Tag>
-          )
-        )}
-      </HStack>
 
-      <Box mb={5} ml={{ xl: 30, lg: 30, md: 30, base: "-50px" }}>
-        <Maps location={report.coord} />
+        <Box m="20px auto">
+          <Maps location={report.coord} />
+        </Box>
       </Box>
-      <Box />
     </>
   );
 };

@@ -19,6 +19,7 @@ import {
   useColorModeValue,
   Image,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -176,7 +177,7 @@ const FormRequest = () => {
             </FormControl>
             <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Description:</FormLabel>
-              <Input
+              <Textarea
                 _hover="ActiveBorder"
                 borderColor="ActiveBorder"
                 alt="The description about the problem you have"
@@ -221,18 +222,20 @@ const FormRequest = () => {
             </FormControl>
             <FormControl textAlign="center" isRequired>
               <FormLabel textAlign="center">Add file</FormLabel>
-              <Input
-                borderColor="ActiveBorder"
-                textAlign="center"
-                m="0 auto"
-                key={input || ""}
-                width={["200px", "200px", "330px", "250px", "400px"]}
-                alt="Add the photos."
-                onChange={handleOnChange}
-                id="image"
-                type="file"
-                placeholder="Add a photo"
-              />
+              
+                <Input
+                  borderColor="ActiveBorder"
+                  textAlign="center"
+                  m="0 auto"
+                  key={input || ""}
+                  width={["200px", "200px", "330px", "250px", "400px"]}
+                  alt="Add the photos."
+                  onChange={handleOnChange}
+                  id="image"
+                  type="file" 
+                  placeholder="Add a photo"
+                />
+              
             </FormControl>
             {imageSrc && (
               <Image

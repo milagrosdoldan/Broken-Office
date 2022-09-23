@@ -1,8 +1,10 @@
+import { ArrowLeftIcon } from "@chakra-ui/icons";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import Footer from "../components/Footer";
 import ReportData from "./ReportData";
 import SendEmail from "./SendEmail";
 
@@ -51,33 +53,45 @@ const ResolveReport = () => {
   };
   return (
     <>
-      <Heading mt={5} textAlign="center">
-        Resolve Report
-      </Heading>
-      <ReportData report={report} />
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <Button
-          m="3"
-          colorScheme="red"
-          borderRadius="40px"
-          onClick={rejectedReport}
-        >
-          Reject
-        </Button>
-        <Button
-          m="3"
-          borderRadius="40px"
-          bg="secondary"
-          _hover={{ bg: "fourth" }}
-          onClick={resolveReport}
-        >
-          Resolve
-        </Button>
-        <SendEmail report={report} />
+      <Box display="flex">
+        <Link to="/admin/reports">
+          <Button
+            color="black"
+            borderRadius="40px"
+            alt="back to profile"
+            bg="secondary"
+            ml={5}
+            mt={15}
+          >
+            <ArrowLeftIcon />
+          </Button>
+        </Link>
       </Box>
-      <Link to="/admin/reports">
-        <Button>Back</Button>
-      </Link>
+      <Box>
+        <ReportData report={report} />
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <Button
+            m="3"
+            colorScheme="red"
+            borderRadius="40px"
+            onClick={rejectedReport}
+          >
+            Reject
+          </Button>
+          <Button
+            m="3"
+            borderRadius="40px"
+            bg="secondary"
+            _hover={{ bg: "fourth" }}
+            onClick={resolveReport}
+            color="black"
+          >
+            Resolve
+          </Button>
+          <SendEmail report={report} />
+        </Box>
+      </Box>
+      <Footer />
     </>
   );
 };

@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import FacebookLogin from "react-facebook-login";
 import "../style/login.css";
+import Footer from "../components/Footer";
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
@@ -73,138 +74,143 @@ const Login = () => {
       });
       google.accounts.id.renderButton(document.getElementById(10), {
         theme: "outline",
-        size: "large",
-        color: "black",
+        size: "medium",
+
         margin: "15px",
-        width: "100px",
+        width: "15px",
       });
     }
     loginGoogle();
   }, []);
 
   return (
-    <Box
-      className="loginView"
-      h={{ xl: 546, lg: 546, md: 536, base: 795 }}
-      bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
-    >
+    <>
       <Box
-        className="loginCart"
-        display="flex"
-        flexDirection="column"
-        justify="center"
-        justifyContent="space-between"
-        alignItems="center"
-        borderRadius="10"
-        backgroundColor={useColorModeValue("white", "#1a202c")}
-        p={30}
-        h={550}
-        margin={100}
+        className="loginView"
+        h={{ xl: 600, lg: 520, md: 900, base: 675 }}
+        bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
       >
-        <Heading
-          color={useColorModeValue("third", "white")}
-          textAlign="center"
-          fontSize="35px"
+        <Box
+          className="loginCart"
+          display="flex"
+          flexDirection="column"
+          justify="center"
+          justifyContent="space-between"
+          alignItems="center"
+          borderRadius="10"
+          backgroundColor={useColorModeValue("white", "#1a202c")}
+          p={30}
+          w={{ xl: 400, lg: 400, md: 400, base: 340 }}
+          h={{ xl: 470, lg: 440 }}
+          margin={100}
         >
-          Sign in
-        </Heading>
-        <Center>
-          <FormControl className="login" isRequired>
-            <FormLabel textAlign={"center"}>Email</FormLabel>
-            <Input
-              _focusVisible={{ borderColor: "third" }}
-              type="email"
-              placeholder="Email"
-              size="md"
-              {...register("email", { required: true })}
-            />
-
-            <Box mb="15px" ml="25px">
-              {errors.email?.type === "required" && "Email is required"}
-            </Box>
-          </FormControl>
-        </Center>
-        <Center>
-          <FormControl className="login" isRequired>
-            <FormLabel textAlign={"center"}>Password</FormLabel>
-            <InputGroup size="md">
+          <Heading
+            color={useColorModeValue("third", "white")}
+            textAlign="center"
+            fontSize="35px"
+          >
+            Sign in
+          </Heading>
+          <Center>
+            <FormControl className="login" isRequired>
+              <FormLabel textAlign={"center"}>Email</FormLabel>
               <Input
                 _focusVisible={{ borderColor: "third" }}
-                fontFamily="body"
-                pr="4.5rem"
+                type="email"
+                placeholder="Email"
                 size="md"
-                type={show ? "text" : "password"}
-                placeholder="Password"
-                {...register("password", { required: true, minLength: "10" })}
+                {...register("email", { required: true })}
               />
 
-              <InputRightElement width="4.5rem" mr={5}>
-                <Button
-                  h="1.75rem"
+              <Box mb="15px" ml="25px">
+                {errors.email?.type === "required" && "Email is required"}
+              </Box>
+            </FormControl>
+          </Center>
+          <Center>
+            <FormControl className="login" isRequired>
+              <FormLabel textAlign={"center"}>Password</FormLabel>
+              <InputGroup size="md">
+                <Input
+                  _focusVisible={{ borderColor: "third" }}
+                  fontFamily="body"
+                  pr="4.5rem"
                   size="md"
-                  alignItems="center"
-                  onClick={handleClick}
-                >
-                  {show ? "Hide" : "Show"}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-            <Box mb="15px" ml="25px">
-              {errors.password?.type === "required" && "Password is required"}
-              {errors.password?.type === "minLength" && "Password is required"}
-            </Box>
-          </FormControl>
-        </Center>
-        <Button
-          color="black"
-          fontFamily="body"
-          display="flex"
-          m="0 7px auto"
-          alt="Submit request."
-          width={150}
-          onClick={handleSubmit(onSubmit)}
-          borderRadius="20px"
-          bg="secondary"
-          _hover={{ bg: "fourth" }}
-        >
-          Submit
-        </Button>
-        <Box backgroundColor="black" mt={15} mb={15} id={10}></Box>
-        <Box backgroundColor="black">
-          <FacebookLogin
-            h={15}
-            className="hola"
-            borderRadius="5px"
-            appId="627379595701369"
-            autoLoad={false}
-            buttonStyle={{
-              backgroundColor: "#3b5998",
-              color: "white",
-              padding: "6.5px",
-              textTransform: "capitalize",
-              borderRadius: "4px",
-              borderColor: "#e2e8f0",
-              marginLeft: "2px",
-              minWidth: "223px", //:hover {backgroundColor: "#e2e8f0"}
-            }}
-            fields="name,email,picture"
-            /* onClick={componentClicked} */
-            callback={responseFacebook}
-          />
-        </Box>
-        <Text alt="This link allows you to register in the app" mt="10px">
-          Need an account? You can register{" "}
-          <Link
-            to="/register"
-            style={{ color: "#2759be", textDecoration: "underline" }}
+                  type={show ? "text" : "password"}
+                  placeholder="Password"
+                  {...register("password", { required: true, minLength: "10" })}
+                />
+
+                <InputRightElement width="4.5rem" mr={5}>
+                  <Button
+                    h="1.75rem"
+                    size="md"
+                    alignItems="center"
+                    onClick={handleClick}
+                  >
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              <Box mb="15px" ml="25px">
+                {errors.password?.type === "required" && "Password is required"}
+                {errors.password?.type === "minLength" &&
+                  "Password is required"}
+              </Box>
+            </FormControl>
+          </Center>
+          <Button
+            color="black"
+            fontFamily="body"
+            display="flex"
+            m="5px 5px auto"
+            alt="Submit request."
+            width={150}
+            onClick={handleSubmit(onSubmit)}
+            borderRadius="20px"
+            bg="secondary"
+            _hover={{ bg: "fourth" }}
           >
-            {" "}
-            here!
-            <ExternalLinkIcon ml="5px" mb="4px" />
-          </Link>
-        </Text>
+            Submit
+          </Button>
+          <Box backgroundColor="black" mt={15} mb={15} id={10}></Box>
+          <Box backgroundColor="black">
+            <FacebookLogin
+              h={15}
+              className="hola"
+              borderRadius="5px"
+              appId="627379595701369"
+              autoLoad={false}
+              buttonStyle={{
+                backgroundColor: "#3b5998",
+                color: "white",
+                padding: "6.5px",
+                textTransform: "capitalize",
+                borderRadius: "4px",
+                height: "42px",
+                margin: "0 auto",
+                minWidth: "234px", //:hover {backgroundColor: "#e2e8f0"}
+              }}
+              fields="name,email,picture"
+              /* onClick={componentClicked} */
+              callback={responseFacebook}
+            />
+          </Box>
+          <Text alt="This link allows you to register in the app" mt="10px">
+            Need an account? You can register{" "}
+            <Link
+              to="/register"
+              style={{ color: "#2759be", textDecoration: "underline" }}
+            >
+              {" "}
+              here!
+              <ExternalLinkIcon ml="5px" mb="4px" />
+            </Link>
+          </Text>
+        </Box>
       </Box>
-    </Box>
+      <Footer />
+    </>
   );
 };
 

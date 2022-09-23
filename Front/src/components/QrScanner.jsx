@@ -24,7 +24,13 @@ function QRscanner() {
     <>
       <Box display="flex">
         <Link to="/">
-          <Button alt="back to profile" bg="secondary" ml={5} mt={15}>
+          <Button
+            color="black"
+            alt="back to profile"
+            bg="secondary"
+            ml={5}
+            mt={15}
+          >
             <ArrowLeftIcon />
           </Button>
         </Link>

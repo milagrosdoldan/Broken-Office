@@ -16,14 +16,14 @@ const ResolveReport = () => {
   useEffect(() => {
     async function getReportbyId() {
       axios
-        .get(`/api/report/getreportbyid/${params.id}`)
+        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
         .then((res) => setReport(res.data[0]));
     }
     getReportbyId();
   }, []);
 
   const rejectedReport = (e) => {
-    axios.put(`/api/report/rejectedreport/${params.id}`).then(() => {
+    axios.put(`http://localhost:3001/api/report/rejectedreport/${params.id}`).then(() => {
       Swal.fire({
         icon: "error",
         text: "Reporte rechazado",
@@ -37,7 +37,7 @@ const ResolveReport = () => {
   };
   const resolveReport = async () => {
     try {
-      await axios.put(`/api/report/solvereport/${params.id}`);
+      await axios.put(`http://localhost:3001/api/report/solvereport/${params.id}`);
       Swal.fire({
         icon: "success",
         text: "Reporte resuelto",

@@ -17,7 +17,7 @@ const SendMessage = ({ scroll, report }) => {
   const sendMessage = async (e) => {
     e.preventDefault();
     if (input === "") {
-      alert("Please enter a valid message");
+      alert("Please enter a valid message")
       return;
     }
     const { id } = user;

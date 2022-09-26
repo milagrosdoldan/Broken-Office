@@ -29,7 +29,7 @@ import { Link } from "react-router-dom";
 import { sendReport } from "../state/reports";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import Swal from "sweetalert2";
-import "../style/login.css";
+import "../styles/login.css";
 const FormRequest = () => {
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();

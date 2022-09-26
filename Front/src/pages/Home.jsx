@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import "../style/login.css";
+import "../styles/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Spinner,

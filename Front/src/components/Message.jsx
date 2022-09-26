@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../firebase";
-import "../style/login.css";
+import "../styles/login.css";
 const style = {
   message: `flex items-center shadow-xl m-4 py-2 px-3 rounded-tl-full rounded-tr-full`,
   name: `absolute mt-[-4rem] text-gray-600 text-xs`,

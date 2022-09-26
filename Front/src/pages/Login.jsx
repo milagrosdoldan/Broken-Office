@@ -21,7 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import FacebookLogin from "react-facebook-login";
-import "../style/login.css";
+import "../styles/login.css";
 import Footer from "../components/Footer";
 const Login = () => {
   const dispatch = useDispatch();

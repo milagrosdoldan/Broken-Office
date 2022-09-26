@@ -104,6 +104,7 @@ const FormRequest = () => {
       rounded="md"
       pb="35px"
       pt="35px"
+      className="report"
       margin="0 auto"
       width={["full", "full", "full", "80vh", "80vh", "90vh"]}
       height="full"
@@ -222,20 +223,19 @@ const FormRequest = () => {
             </FormControl>
             <FormControl textAlign="center" isRequired>
               <FormLabel textAlign="center">Add file</FormLabel>
-              
-                <Input
-                  borderColor="ActiveBorder"
-                  textAlign="center"
-                  m="0 auto"
-                  key={input || ""}
-                  width={["200px", "200px", "330px", "250px", "400px"]}
-                  alt="Add the photos."
-                  onChange={handleOnChange}
-                  id="image"
-                  type="file" 
-                  placeholder="Add a photo"
-                />
-              
+
+              <Input
+                borderColor="ActiveBorder"
+                textAlign="center"
+                m="0 auto"
+                key={input || ""}
+                width={["200px", "200px", "330px", "250px", "400px"]}
+                alt="Add the photos."
+                onChange={handleOnChange}
+                id="image"
+                type="file"
+                placeholder="Add a photo"
+              />
             </FormControl>
             {imageSrc && (
               <Image

@@ -4,7 +4,7 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { setUbication } from "../state/location";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 

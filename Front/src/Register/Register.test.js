@@ -1,7 +1,8 @@
+import { userEvent } from "@storybook/testing-library";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { render, fireEvent, screen } from "../test-utils";
-import { onSubmit } from "./Register";
+
 import Register from "./Register";
 
 describe("Register", () => {
@@ -23,8 +24,8 @@ describe("Register", () => {
       </BrowserRouter>
     );
 
-    const boton = component.getByText("Submit");
-    fireEvent.click(boton);
-    expect(onSubmit).toHaveBeenCalledTimes(1);
+    const submitButton = screen.getByText("Submit");
+    
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 });

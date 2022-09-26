@@ -201,6 +201,7 @@ const FormRequest = () => {
                 borderColor="ActiveBorder"
                 alt="Select the priority of your problem."
                 m="0 auto"
+                data-testid="priority"
                 textAlign="center"
                 _focusVisible={focusVisible}
                 width={["200px", "200px", "330px", "250px", "400px"]}
@@ -234,6 +235,7 @@ const FormRequest = () => {
                 onChange={handleOnChange}
                 id="image"
                 type="file"
+                data-testid="image"
                 placeholder="Add a photo"
               />
             </FormControl>

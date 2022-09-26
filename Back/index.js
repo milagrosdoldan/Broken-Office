@@ -10,6 +10,7 @@ const cookieparser = require("cookie-parser");
 const path = require("path");
 //enviroment
 require("dotenv").config();
+
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerSpec = {
@@ -32,10 +33,10 @@ const swaggerSpec = {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials:true,
-    methods:["GET", "POST", "PUT", "DELETE"],
-    optionsSuccessStatus:200,
+    origin: "http://localhost:6006",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    optionsSuccessStatus: 200,
     allowedHeaders: [
       "Access-Control-Allow-Credentials",
       "Access-Control-Allow-Headers",
@@ -51,18 +52,18 @@ app.use(
       "Set-Cookie",
       "Cookie",
       "Request",
-    ], 
+    ],
   })
-  );
-  app.use(express.json({ limit: "10mb", extended: true }));
-  app.use(
-    express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
-    );
-    app.use(cookieparser());
-    app.use(morgan("tiny"));
-    
-    app.use("/api", routes);
-    
+);
+app.use(express.json({ limit: "10mb", extended: true }));
+app.use(
+  express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 })
+);
+app.use(cookieparser());
+app.use(morgan("tiny"));
+
+app.use("/api", routes);
+
 app.use(
   "/api-doc",
   swaggerUI.serve,

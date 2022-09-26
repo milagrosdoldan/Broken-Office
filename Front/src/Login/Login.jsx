@@ -23,6 +23,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import FacebookLogin from "react-facebook-login";
 import "../styles/login.css";
 import Footer from "../components/Footer";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
@@ -69,7 +70,8 @@ const Login = () => {
   useEffect(() => {
     async function loginGoogle() {
       /* global google */ google.accounts.id.initialize({
-        client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        client_id:
+          "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
         callback: handleCallbackResponse,
       });
       google.accounts.id.renderButton(document.getElementById(10), {

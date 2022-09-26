@@ -44,7 +44,7 @@ const Register = () => {
     <>
       <HStack
         w="full"
-        h="85.7vh"
+        h={{ xl: "85.7vh", lg: "85.7vh", md: "150vh" }}
         flexDirection={{ xl: "row", lg: "row", md: "column", base: "column" }}
       >
         <Flex w="full" h="full">

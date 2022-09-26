@@ -7,6 +7,7 @@ const config = {
 const theme = extendTheme({ config });
 
 export default theme;
+
 export const myNewTheme = extendTheme({
   colors: {
     primary: "#FFFFFF", //blanco

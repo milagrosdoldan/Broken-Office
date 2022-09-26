@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import NotFound from "../pages/NotFound";
+import NotFound from "../NotFound/NotFound";
 import ReportData from "../commons/ReportData";
 import Footer from "./Footer";
 import { ArrowLeftIcon } from "@chakra-ui/icons";

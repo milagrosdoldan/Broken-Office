@@ -19,6 +19,7 @@ import ReportList from "../commons/ReportList";
 import { SearchIcon } from "@chakra-ui/icons";
 import Footer from "../components/Footer";
 const Reports = () => {
+  const navigate = useNavigate();
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +42,6 @@ const Reports = () => {
     }
     cleanInputs();
   }, [formState, reset]);
-  const navigate = useNavigate();
 
   async function allReports() {
     axios

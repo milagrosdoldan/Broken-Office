@@ -19,10 +19,19 @@ import Chat from "./components/Chat";
 import Users from "./components/Users";
 import UserData from "./commons/UserData";
 import QrScanner from "./components/QrScanner";
+import JoyRide from "react-joyride";
+import { TOUR_STEPS } from "./hooks/info";
+import { Box, useColorModeValue } from "@chakra-ui/react";
+import { useState } from "react";
 
 function App() {
-  const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
+  let localStorageKey = 1;
+  const [run, setRun] = useState(false);
+  const user = useSelector((state) => state.user);
+  const color = useColorModeValue("black", "white");
+  const backgroundColor = useColorModeValue("white", "black");
+
   useEffect(() => {
     async function persistence() {
       dispatch(sendMe());
@@ -32,12 +41,59 @@ function App() {
       }
       navigator.geolocation.getCurrentPosition(success);
     }
-
     persistence();
   }, []);
 
+  function tutorial() {
+    if (user.email) {
+      if (!localStorageKey) {
+        setRun(true);
+        return;
+      }
+      const tourViewed = window.localStorage.getItem(localStorageKey);
+
+      if (tourViewed) {
+        return;
+      }
+      window.localStorage.setItem(localStorageKey, 1);
+      setRun(true);
+    }
+  }
+
+  tutorial();
+
   return (
     <>
+      <Box>
+        <JoyRide
+          steps={TOUR_STEPS}
+          continuous={true}
+          showSkipButton={true}
+          showProgress={true}
+          run={run}
+          isFixed={true}
+          offset={2}
+          styles={{
+            options: {
+              arrowColor: "#BFD732",
+              backgroundColor: backgroundColor,
+              overlayColor: "rgba(79, 26, 0, 0.4)",
+              primaryColor: "#000",
+              textColor: color,
+              width: 500,
+              zIndex: 1000,
+            },
+            buttonNext: {
+              backgroundColor: "#BFD732 ",
+            },
+            buttonBack: {
+              color: color,
+            },
+          }}
+          locale={{ last: "Finish tour", skip: "End tour" }}
+        />
+      </Box>
+
       <Navbar />
       <Routes>
         <Route path="/scanner" element={<QrScanner />}></Route>

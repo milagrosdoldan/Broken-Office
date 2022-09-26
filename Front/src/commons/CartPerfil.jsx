@@ -12,11 +12,11 @@ import { sendMe } from "../state/user";
 import EditAbout from "./EditAbout";
 
 const CartPerfil = ({ user }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(sendMe());
-  },[])
+  }, []);
   return (
     <Box mt={5} display="flex" flexDir="column" alignItems="center">
       <Heading mt={5} fontSize="25">

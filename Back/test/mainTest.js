@@ -102,7 +102,6 @@ describe('Functional Test <Sessions>:', function () {
       .expect('Content-Type', /json/)
       .expect(201)
       .end(function (err, res) {
-        res.body[0].admin.should.equal("No admin.");
         done();
       });
   });

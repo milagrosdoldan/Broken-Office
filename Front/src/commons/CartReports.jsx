@@ -61,9 +61,11 @@ const CartReports = () => {
               <AccordionPanel>
                 <TableContainer
                   ml={2}
+                  overflowY="scroll"
                   whiteSpace="-moz-initial"
                   overflowX="clip"
                   alignSelf="center"
+                  h="35vh"
                   width={{ xl: 600, lg: 600, md: "70vh", base: "60vh" }}
                 >
                   <Table variant="simple">
@@ -80,7 +82,7 @@ const CartReports = () => {
                           return (
                             <Tr key={e._id}>
                               <Td fontSize={15}>{e.date?.slice(0, 10)}</Td>
-                              <Td fontSize={15}>{e.title}</Td>
+                              <Td fontSize={15}>{e.title.slice(0, 20)}</Td>
                               <Td>
                                 <Link to={`/report/${e._id}`}>
                                   <Button

@@ -9,6 +9,7 @@ import {
   HStack,
   Image,
   Input,
+  useColorMode,
   InputGroup,
   InputRightElement,
   useColorModeValue,
@@ -28,7 +29,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
+  const { colorMode } = useColorMode();
   const {
     register,
     handleSubmit,
@@ -44,7 +45,7 @@ const Register = () => {
     <>
       <HStack
         w="full"
-        h="85.7vh"
+        h={{ xl: "100vh", lg: "100vh", md: "150vh", base: "100vh" }}
         flexDirection={{ xl: "row", lg: "row", md: "column", base: "column" }}
       >
         <Flex w="full" h="full">
@@ -74,8 +75,9 @@ const Register = () => {
               <FormControl isRequired id="name">
                 <FormLabel>Name</FormLabel>
                 <Input
-                  _focusVisible={{ borderColor: "third" }}
-                  _hover={{ color: "secondary" }}
+                  _focusVisible={colorMode === "light" ? "third" : "white"}
+                  _hover="ActiveBorder"
+                  borderColor="ActiveBorder"
                   width={40}
                   placeholder="Name"
                   size="md"
@@ -88,7 +90,9 @@ const Register = () => {
               <FormControl id="lastname" isRequired>
                 <FormLabel ml={5}>Lastname </FormLabel>
                 <Input
-                  _focusVisible={{ borderColor: "third" }}
+                  _hover="ActiveBorder"
+                  _focusVisible={colorMode === "light" ? "black" : "white"}
+                  borderColor="ActiveBorder"
                   ml={5}
                   alt="lastname"
                   width={40}
@@ -105,7 +109,9 @@ const Register = () => {
             <FormControl isRequired id="email">
               <FormLabel>Email</FormLabel>
               <Input
-                _focusVisible={{ borderColor: "third" }}
+                _hover="ActiveBorder"
+                _focusVisible={colorMode === "light" ? "third" : "white"}
+                borderColor="ActiveBorder"
                 placeholder="Email"
                 size="md"
                 {...register("email", {
@@ -122,7 +128,9 @@ const Register = () => {
               <FormLabel>Password </FormLabel>
               <InputGroup size="md">
                 <Input
-                  _focusVisible={{ borderColor: "third" }}
+                  _hover="ActiveBorder"
+                  _focusVisible={colorMode === "light" ? "third" : "white"}
+                  borderColor="ActiveBorder"
                   fontFamily="body"
                   pr="4.5rem"
                   size="md"

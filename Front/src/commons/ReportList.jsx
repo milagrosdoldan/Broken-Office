@@ -22,7 +22,7 @@ const ReportList = ({ reports }) => {
       p="2"
       fontSize={["18", "18"]}
     >
-      <Table size="s">
+      <Table mt={55} size="s">
         <Thead>
           <Tr>
             <Th textAlign="left">ID</Th>

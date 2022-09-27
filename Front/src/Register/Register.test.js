@@ -16,16 +16,13 @@ describe("Register", () => {
       </BrowserRouter>
     );
   });
-
-  test("onClick event on SUBMIT button", () => {
-    const component = render(
+  test("Includes Register Title", () => {
+    componente = render(
       <BrowserRouter>
         <Register />
       </BrowserRouter>
     );
-
-    const submitButton = screen.getByText("Submit");
-    
-    expect(spy).toHaveBeenCalledTimes(1);
+    const titulo = componente.getByText("Register");
+    console.log(titulo);
   });
 });

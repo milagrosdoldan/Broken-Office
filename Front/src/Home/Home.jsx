@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import JoyRide from "react-joyride";
 import { itemData } from "../hooks/info";
 import { setUbication } from "../state/location";
+import { sendMe } from "../state/user";
 
 export const Home = () => {
   const user = useSelector((state) => state.user);

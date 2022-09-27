@@ -19,13 +19,22 @@ import ScrollToTop from "react-scroll-to-top";
 import ReportList from "../commons/ReportList";
 import { SearchIcon } from "@chakra-ui/icons";
 import Footer from "../components/Footer";
+import useReports from "../hooks/useReports";
+
 const Reports = () => {
-  const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
-  const [isLoading, setIsLoading] = useState(true);
   const { colorMode } = useColorMode();
   const navigate = useNavigate();
-
+  const {
+    allReports,
+    reports,
+    setReports,
+    isLoading,
+    setIsLoading,
+    handlerSearch,
+    handlerReports,
+  } = useReports();
+  
   const {
     register,
     handleSubmit,
@@ -33,10 +42,6 @@ const Reports = () => {
     formState,
     formState: { isSubmitSuccessful },
   } = useForm();
-
-  useEffect(() => {
-    allReports();
-  }, []);
 
   useEffect(() => {
     async function cleanInputs() {
@@ -48,66 +53,6 @@ const Reports = () => {
     }
     cleanInputs();
   }, [formState, reset]);
-
-  async function allReports() {
-    axios
-      .get("http://localhost:3001/api/report/getpendingreports", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setReports(res.data);
-        setIsLoading(false);
-        console.log(reports);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  const handlerReports = (e) => {
-    const value = e.target.value;
-
-    if (value === "PENDING") {
-      axios
-        .get("http://localhost:3001/api/report/getpendingreports", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setReports(res.data);
-           if (isLoading) {
-             if (user) {
-               user.isAdmin ? allReports() : navigate("/404");
-             }
-            return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
-          }
-        });
-    }
-
-    if (value === "FULFILLED") {
-      axios
-        .get("http://localhost:3001/api/report/getsolvedreports", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setReports(res.data);
-        });
-    }
-    if (value === "REJECTED") {
-      axios
-        .get("http://localhost:3001/api/report/getrejectedreports", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setReports(res.data);
-        });
-    }
-  };
-
-  const handlerSearch = async (data) => {
-    const reportes = await axios.get(
-      `http://localhost:3001/api/report/search/${data.search}`,
-      { withCredentials: true }
-    );
-    setReports(reportes.data);
-  };
 
   if (isLoading) {
     if (user.length) {
@@ -184,7 +129,5 @@ const Reports = () => {
     </>
   );
 };
-console.log("🚀 ~ file: Reports.jsx ~ line 173 ~ Reports ~ Input", Input);
-console.log("🚀 ~ file: Reports.jsx ~ line 173 ~ Reports ~ Input", Input);
 
 export default Reports;

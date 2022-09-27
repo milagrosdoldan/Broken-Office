@@ -25,9 +25,9 @@ const ResolveReport = () => {
   }, []);
 
   const rejectedReport = (e) => {
-    axios.put(`http://localhost:3001/api/report/rejectedreport/${params.id}`, {
-      withCredentials: true,
-    }).then(() => {
+    axios
+    .put(`http://localhost:3001/api/report/rejectedreport/${params.id}`)
+    .then(() => {
       Swal.fire({
         icon: "error",
         text: "Reporte rechazado",
@@ -35,9 +35,12 @@ const ResolveReport = () => {
         showConfirmButton: false,
         timer: 1500,
         color: "secondary",
-        navigate("/admin/reports");
       });
-  };
+      navigate("/admin/reports");
+    });
+    navigate("/admin/reports");
+};
+
   const resolveReport = async () => {
     try {
       await axios.put(`http://localhost:3001/api/report/solvereport/${params.id}`, {

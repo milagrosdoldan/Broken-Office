@@ -8,7 +8,6 @@ const Footer = () => {
   return (
     <Box
       flexDirection="column"
-      mt={url === "/login" ? 0 : 70}
       bg="#000000"
       height="15vh"
       width="full"

@@ -16,28 +16,35 @@ const ResolveReport = () => {
   useEffect(() => {
     async function getReportbyId() {
       axios
-        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`)
+        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`, {
+          withCredentials: true,
+        })
         .then((res) => setReport(res.data[0]));
     }
     getReportbyId();
   }, []);
 
   const rejectedReport = (e) => {
-    axios.put(`http://localhost:3001/api/report/rejectedreport/${params.id}`).then(() => {
-      Swal.fire({
-        icon: "error",
-        text: "Reporte rechazado",
-        width: 400,
-        showConfirmButton: false,
-        timer: 1500,
-        color: "secondary",
+    axios
+      .put(`http://localhost:3001/api/report/rejectedreport/${params.id}`)
+      .then(() => {
+        Swal.fire({
+          icon: "error",
+          text: "Reporte rechazado",
+          width: 400,
+          showConfirmButton: false,
+          timer: 1500,
+          color: "secondary",
+        });
+        navigate("/admin/reports");
       });
-      navigate("/admin/reports");
-    });
   };
   const resolveReport = async () => {
     try {
-      await axios.put(`http://localhost:3001/api/report/solvereport/${params.id}`);
+      await axios.put(
+        `http://localhost:3001/api/report/solvereport/${params.id}`,
+        { withCredentials: true }
+      );
       Swal.fire({
         icon: "success",
         text: "Reporte resuelto",
@@ -67,8 +74,16 @@ const ResolveReport = () => {
           </Button>
         </Link>
       </Box>
-      <Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        w={["92%", "90%", "80%", "70%"]}
+        mx={["4%", "7%", "10%", "15%"]}
+      >
         <ReportData report={report} />
+      </Box>
+      <Box mb={30}>
         <Box display="flex" alignItems="center" justifyContent="center">
           <Button
             m="3"

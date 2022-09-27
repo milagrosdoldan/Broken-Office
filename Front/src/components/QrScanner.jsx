@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUbication } from "../state/location";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -37,11 +37,11 @@ function QRscanner() {
       </Box>
       <Box
         mt="-55px"
-        h={{ xl: "85vh", lg: "77vh", md: "91vh", base: "80vh" }}
+        h={{ xl: "85vh", lg: "90vh", md: "91vh", base: "80vh" }}
         backgroundImage="https://i.ibb.co/hWcn2Tz/Captura-desde-2022-09-21-14-45-38.png"
       >
         <Box
-          h={{ xl: "65vh", lg: "58vh", md: "69vh", base: "68vh" }}
+          h={{ xl: "75vh", lg: "90vh", md: "80vh", base: "77vh" }}
           flexDirection="column"
           display="flex"
           alignItems="center"
@@ -73,6 +73,7 @@ function QRscanner() {
             <p>{data}</p>
           </Box>
         </Box>
+
         <Footer />
       </Box>
     </>

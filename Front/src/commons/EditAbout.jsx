@@ -35,7 +35,7 @@ const EditAbout = () => {
   const [imageSrc, setImageSrc] = useState();
   const dispatch = useDispatch();
 
-  const updateUser = (event) => {
+  const updateUser = async (event) => {
     event.preventDefault();
 
     const newData = {
@@ -43,9 +43,14 @@ const EditAbout = () => {
       companyRole,
       picture: imageSrc,
     };
-    axios.put(`http://localhost:3001/api/user/${user.id}`, newData, { withCredentials: true });
-    dispatch(sendMe());
-    onClose();
+    axios
+      .put(`http://localhost:3001/api/user/${user.id}`, newData, {
+        withCredentials: true,
+      })
+      .then(() => {
+        onClose();
+        dispatch(sendMe());
+      });
   };
 
   const handlerEmail = (e) => {

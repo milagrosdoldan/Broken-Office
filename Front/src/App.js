@@ -19,6 +19,7 @@ import Chat from "./components/Chat";
 import Users from "./components/Users";
 import UserData from "./commons/UserData";
 import QrScanner from "./components/QrScanner";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useSelector((state) => state.location);

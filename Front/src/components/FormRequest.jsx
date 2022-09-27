@@ -36,11 +36,11 @@ const FormRequest = () => {
   const user = useSelector((state) => state.user);
   const [imageSrc, setImageSrc] = useState();
   const color = useColorModeValue("black", "white");
-  const focusVisible = useColorModeValue("white", "white");
+  const [segundoInput, setSegundoInput] = useState();
   const [input, setInput] = useState(null);
   const [anotherInput, setAnotherInput] = useState(null);
   const { colorMode } = useColorMode();
-
+  const [value, setValue] = useState();
   const {
     register,
     handleSubmit,
@@ -147,14 +147,18 @@ const FormRequest = () => {
             <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Title:</FormLabel>
               <Input
+                maxLength={30}
                 alt="The title of your report."
-                _focusVisible={focusVisible}
+                _focusVisible={colorMode === "light" ? "third" : "white"}
+                _hover="ActiveBorder"
                 borderColor="ActiveBorder"
                 textAlign="initial"
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 placeholder="Title"
                 {...register("title", { required: true })}
+                onChange={(e) => setValue(e.target.value)}
               ></Input>
+              <Box>{value ? value.length : 0}/30</Box>
               <Box>
                 {errors.title?.type === "required" && "Title is required."}
               </Box>
@@ -162,6 +166,7 @@ const FormRequest = () => {
             <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Company role:</FormLabel>
               <Input
+                _hover="ActiveBorder"
                 borderColor="ActiveBorder"
                 alt="Your company role in the company."
                 _focusVisible={colorMode === "light" ? "third" : "white"}
@@ -178,15 +183,18 @@ const FormRequest = () => {
             <FormControl isRequired textAlign="center">
               <FormLabel textAlign="center">Description:</FormLabel>
               <Textarea
+                maxLength={160}
                 _hover="ActiveBorder"
                 borderColor="ActiveBorder"
                 alt="The description about the problem you have"
-                _focusVisible={focusVisible}
+                _focusVisible={colorMode === "light" ? "third" : "white"}
                 textAlign="initial"
                 placeholder="Description"
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 {...register("description", { required: true })}
+                onChange={(e) => setSegundoInput(e.target.value)}
               />
+              <Box>{segundoInput ? segundoInput.length : 0}/160</Box>
               <Box>
                 {errors.description?.type === "required" &&
                   "Description is required."}
@@ -197,11 +205,12 @@ const FormRequest = () => {
 
               <Select
                 key={anotherInput || ""}
+                _hover="ActiveBorder"
                 borderColor="ActiveBorder"
                 alt="Select the priority of your problem."
                 m="0 auto"
                 textAlign="center"
-                _focusVisible={focusVisible}
+                _focusVisible={colorMode === "light" ? "third" : "white"}
                 width={["200px", "200px", "330px", "250px", "400px"]}
                 placeholder="Select level:"
               >
@@ -222,20 +231,19 @@ const FormRequest = () => {
             </FormControl>
             <FormControl textAlign="center" isRequired>
               <FormLabel textAlign="center">Add file</FormLabel>
-              
-                <Input
-                  borderColor="ActiveBorder"
-                  textAlign="center"
-                  m="0 auto"
-                  key={input || ""}
-                  width={["200px", "200px", "330px", "250px", "400px"]}
-                  alt="Add the photos."
-                  onChange={handleOnChange}
-                  id="image"
-                  type="file" 
-                  placeholder="Add a photo"
-                />
-              
+
+              <Input
+                borderColor="ActiveBorder"
+                textAlign="center"
+                m="0 auto"
+                key={input || ""}
+                width={["200px", "200px", "330px", "250px", "400px"]}
+                alt="Add the photos."
+                onChange={handleOnChange}
+                id="image"
+                type="file"
+                placeholder="Add a photo"
+              />
             </FormControl>
             {imageSrc && (
               <Image

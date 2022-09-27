@@ -237,7 +237,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *       description: reports by user id
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: object
@@ -260,7 +260,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *       description: return report by priority level
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: object
@@ -276,13 +276,13 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *       description: daily reports
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: object
  *            items:
  *              $ref: '#/components/schemas/Reports'
- *      401: 
+ *      401:
  *       description: Unauthorized
  */
 
@@ -295,13 +295,13 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *       description: return all you reports
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: object
  *            items:
  *              $ref: '#/components/schemas/Reports'
- *      401: 
+ *      401:
  *       description: Unauthorized
  */
 
@@ -321,7 +321,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *       description: return report by id
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: object
@@ -337,15 +337,15 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      201:
  *       description: return all pending reports
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: array
  *            items:
  *              $ref: '#/components/schemas/Reports'
- *      401: 
+ *      401:
  *       description: Unauthorized
- * 
+ *
  */
 
 /**
@@ -357,13 +357,13 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      201:
  *       description: return all rejected reports
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: array
  *            items:
  *              $ref: '#/components/schemas/Reports'
- *      401: 
+ *      401:
  *       description: Unauthorized
  */
 
@@ -376,13 +376,13 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      201:
  *       description: return all fullfilled reports
- *       content: 
+ *       content:
  *          application/json:
  *          schema:
  *            type: array
  *            items:
  *              $ref: '#/components/schemas/Reports'
- *      401: 
+ *      401:
  *       description: Unauthorized
  */
 
@@ -394,7 +394,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    tag: [Reports]
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
@@ -402,7 +402,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *    responses:
  *      200:
  *        description: new report created!
- *      401: 
+ *      401:
  *        description: Unauthorized
  */
 
@@ -420,14 +420,14 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        required: true
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/Reports'
  *    responses:
  *      201:
- *        description: Report 
+ *        description: Report
  *      401:
  *        description: Unauthorized
  *      500:
@@ -448,7 +448,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        required: true
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
@@ -476,7 +476,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        required: true
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
@@ -504,7 +504,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        required: true
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
@@ -532,14 +532,14 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  *        required: true
  *    requestBody:
  *      required: true
- *      content: 
+ *      content:
  *        application/json:
  *          schema:
  *            type: object
  *            $ref: '#/components/schemas/Reports'
  *    responses:
  *      200:
- *        description: report deleted 
+ *        description: report deleted
  *      401:
  *        description: Unauthorized
  *      500:
@@ -550,8 +550,8 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * @swagger
  * /api/report/deleteall:
  *  delete:
- *    summary: delete all reports 
- *    tag: [Reports] 
+ *    summary: delete all reports
+ *    tag: [Reports]
  *    responses:
  *      201:
  *        description: Deleted all!

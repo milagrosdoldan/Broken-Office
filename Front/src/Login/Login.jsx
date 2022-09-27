@@ -37,7 +37,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     data.loginWithGoogle = false;
-    dispatch(logIn(data)).then(() => document.cookie && navigate("/"));
+    dispatch(logIn(data)).then(() => document.cookie && navigate(""));
   };
 
   const responseFacebook = (response) => {
@@ -53,43 +53,44 @@ const Login = () => {
     navigate("/");
   };
 
-  const handleCallbackResponse = (response) => {
-    let userObject = jwt_decode(response.credential);
+  // const handleCallbackResponse = (response) => {
+  //   let userObject = jwt_decode(response.credential);
 
-    const payload = {
-      name: userObject.given_name,
-      lastname: userObject.family_name,
-      email: userObject.email,
-      loginWithGoogle: true,
-      picture: userObject.picture,
-    };
-    dispatch(logIn(payload));
-    navigate("/");
-  };
+  //   const payload = {
+  //     name: userObject.given_name,
+  //     lastname: userObject.family_name,
+  //     email: userObject.email,
+  //     loginWithGoogle: true,
+  //     picture: userObject.picture,
+  //   };
+  //   dispatch(logIn(payload));
+  //   navigate("/");
+  // };
 
-  useEffect(() => {
-    async function loginGoogle() {
-      /* global google */ google.accounts.id.initialize({
-        client_id:
-          "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
-        callback: handleCallbackResponse,
-      });
-      google.accounts.id.renderButton(document.getElementById(10), {
-        theme: "outline",
-        size: "medium",
+  // useEffect(() => {
+  //   async function loginGoogle() {
+  //     /* global google */ google.accounts.id.initialize({
+  //       client_id:
+  //         "341804667959-sf2nh33is88glm6s2212b6die141qnih.apps.googleusercontent.com",
+  //       callback: handleCallbackResponse,
+  //     });
+  //     google.accounts.id.renderButton(document.getElementById(10), {
+  //       theme: "outline",
+  //       size: "medium",
 
-        margin: "15px",
-        width: "15px",
-      });
-    }
-    loginGoogle();
-  }, []);
+  //       margin: "15px",
+  //       width: "15px",
+  //     });
+  //   }
+  //   loginGoogle();
+  // }, []);
 
   return (
     <>
       <Box
         className="loginView"
-        h={{ xl: 600, lg: 520, md: 900, base: 675 }}
+        mb={-30}
+        h={{ xl: 600, lg: 580, md: 900, base: 675 }}
         bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
       >
         <Box
@@ -175,7 +176,7 @@ const Login = () => {
           >
             Submit
           </Button>
-          <Box backgroundColor="black" mt={15} mb={15} id={10}></Box>
+          {/* <Box backgroundColor="black" mt={15} mb={15} id={10}></Box> */}
           <Box backgroundColor="black">
             <FacebookLogin
               h={15}

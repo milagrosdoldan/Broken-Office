@@ -23,7 +23,9 @@ export const signUp = createAsyncThunk("SIGN_UP", async (user) => {
 
 export const logIn = createAsyncThunk("LOG_IN", async (user) => {
   try {
-    const res = await axios.post("http://localhost:3001/api/user/login", user);
+    const res = await axios.post("http://localhost:3001/api/user/login", user, {
+      withCredentials: true,
+    });
     return res.data;
   } catch {
     Swal.fire({
@@ -37,7 +39,9 @@ export const logIn = createAsyncThunk("LOG_IN", async (user) => {
 });
 
 export const sendMe = createAsyncThunk("SEND_ME", async () => {
-  const res = await axios.get("http://localhost:3001/api/user/me", );
+  const res = await axios.get("http://localhost:3001/api/user/me", {
+    withCredentials: true,
+  });
   return res.data;
 });
 

@@ -9,7 +9,7 @@ import { myNewTheme } from "../styles/theme";
 import { screen, userEvent } from "@storybook/testing-library";
 
 export default {
-  title: "Perfil",
+  title: "Profile",
   component: Perfil,
 };
 const Template = (args) => (

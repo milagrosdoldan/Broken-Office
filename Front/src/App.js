@@ -32,18 +32,7 @@ function App() {
   const color = useColorModeValue("black", "white");
   const backgroundColor = useColorModeValue("white", "black");
 
-  useEffect(() => {
-    async function persistence() {
-      dispatch(sendMe());
-
-      function success(pos) {
-        dispatch(setUbication([pos.coords.latitude, pos.coords.longitude]));
-      }
-      navigator.geolocation.getCurrentPosition(success);
-    }
-    persistence();
-  }, []);
-
+ 
   function tutorial() {
     if (user.email) {
       if (!localStorageKey) {

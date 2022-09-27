@@ -7,7 +7,7 @@ import store from "../state/store";
 import theme from "../styles/theme";
 import { myNewTheme } from "../styles/theme";
 import { screen, userEvent } from "@storybook/testing-library";
-
+import { linkTo } from "@storybook/addon-links";
 export default {
   title: "Login",
   component: Login,

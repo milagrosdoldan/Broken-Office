@@ -20,8 +20,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import JoyRide from "react-joyride";
 import { itemData } from "../hooks/info";
+import { setUbication } from "../state/location";
 
 export const Home = () => {
+  const user = useSelector((state) => state.user);
   const location = useSelector((state) => state.location);
   const dispatch = useDispatch();
   const [setIsReadyForInstall, setSetIsReadyForInstall] = useState(false);
@@ -30,6 +32,20 @@ export const Home = () => {
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_API_KEY,
   });
+
+  useEffect(() => {
+    async function persistence() {
+      if (!user) {
+        dispatch(sendMe());
+      }
+
+      function success(pos) {
+        dispatch(setUbication([pos.coords.latitude, pos.coords.longitude]));
+      }
+      navigator.geolocation.getCurrentPosition(success);
+    }
+    persistence();
+  }, []);
 
   function srcset(image, size, rows = 1, cols = 1) {
     return {

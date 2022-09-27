@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import locationReducer from "./location";
-import newLocationReducer from "./newLocation";
+import myReportReducer from "./myReport";
+
 import reportReducer from "./reports";
 import userReducer from "./user";
 
@@ -11,7 +12,7 @@ const store = configureStore({
     user: userReducer,
     location: locationReducer,
     report: reportReducer,
-    newUbication: newLocationReducer,
+    idReport: myReportReducer,
   },
 });
 

@@ -26,7 +26,13 @@ const ResolveReport = () => {
 
   const rejectedReport = (e) => {
     axios
-      .put(`http://localhost:3001/api/report/rejectedreport/${params.id}`)
+      .put(
+        `http://localhost:3001/api/report/rejectedreport/${params.id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
       .then(() => {
         Swal.fire({
           icon: "error",
@@ -43,6 +49,7 @@ const ResolveReport = () => {
     try {
       await axios.put(
         `http://localhost:3001/api/report/solvereport/${params.id}`,
+        {},
         { withCredentials: true }
       );
       Swal.fire({

@@ -48,13 +48,21 @@ const UserData = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (user.active) {
-          axios.put(`http://localhost:3001/api/admin/deactivate/${user.id}`, {
-            withCredentials: true,
-          });
+          axios.put(
+            `http://localhost:3001/api/admin/deactivate/${user.id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
         } else {
-          axios.put(`http://localhost:3001/api/admin/activate/${user.id}`, {
-            withCredentials: true,
-          });
+          axios.put(
+            `http://localhost:3001/api/admin/activate/${user.id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
         }
         getUser();
         Swal.fire("Updated!", "User has been updated.", "success");

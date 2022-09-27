@@ -89,9 +89,17 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (isAdmin) {
-          axios.put(`http://localhost:3001/api/admin/demote/${id}`);
+          axios.put(
+            `http://localhost:3001/api/admin/demote/${id}`,
+            {},
+            { withCredentials: true }
+          );
         } else {
-          axios.put(`http://localhost:3001/api/admin/promote/${id}`);
+          axios.put(
+            `http://localhost:3001/api/admin/promote/${id}`,
+            {},
+            { withCredentials: true }
+          );
         }
         getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");

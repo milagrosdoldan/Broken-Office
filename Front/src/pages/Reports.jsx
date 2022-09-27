@@ -45,7 +45,9 @@ const Reports = () => {
 
   async function allReports() {
     axios
-      .get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true })
+      .get("http://localhost:3001/api/report/getpendingreports", {
+        withCredentials: true,
+      })
       .then((res) => {
         setReports(res.data);
         setIsLoading(false);
@@ -57,26 +59,40 @@ const Reports = () => {
     const value = e.target.value;
 
     if (value === "PENDING") {
-      axios.get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true }).then((res) => {
-        setReports(res.data);
-      });
+      axios
+        .get("http://localhost:3001/api/report/getpendingreports", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReports(res.data);
+        });
     }
 
     if (value === "FULFILLED") {
-      axios.get("http://localhost:3001/api/report/getsolvedreports", { withCredentials: true }).then((res) => {
-
-        setReports(res.data);
-      });
+      axios
+        .get("http://localhost:3001/api/report/getsolvedreports", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReports(res.data);
+        });
     }
     if (value === "REJECTED") {
-      axios.get("http://localhost:3001/api/report/getrejectedreports", { withCredentials: true }).then((res) => {
-        setReports(res.data);
-      });
+      axios
+        .get("http://localhost:3001/api/report/getrejectedreports", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReports(res.data);
+        });
     }
   };
 
   const handlerSearch = async (data) => {
-    const reportes = await axios.get(`http://localhost:3001/api/report/search/${data.search}`, { withCredentials: true });
+    const reportes = await axios.get(
+      `http://localhost:3001/api/report/search/${data.search}`,
+      { withCredentials: true }
+    );
     setReports(reportes.data);
   };
 
@@ -112,18 +128,18 @@ const Reports = () => {
         <Tabs m="3">
           <TabList m="15px 0 auto" display="flex" justifyContent="center">
             <Tab
-              value={"REJECTED"}
-              _selected={{ color: "white", bg: "red" }}
-              onClick={handlerReports}
-            >
-              Rejected
-            </Tab>
-            <Tab
               value={"PENDING"}
               _selected={{ color: "white", bg: "gray" }}
               onClick={handlerReports}
             >
               In Progress
+            </Tab>
+            <Tab
+              value={"REJECTED"}
+              _selected={{ color: "white", bg: "red" }}
+              onClick={handlerReports}
+            >
+              Rejected
             </Tab>
             <Tab
               value={"FULFILLED"}

@@ -25,14 +25,23 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Footer from "./Footer";
+import usePaginationUsers from "../hooks/usePaginationUsers";
 
 const Users = () => {
   const user = useSelector((state) => state.user);
-  console.log("🚀 ~ file: Users.jsx ~ line 30 ~ Users ~ user", user);
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
   const navigate = useNavigate();
+  const {
+    nextPage,
+    prevPage,
+    currentPage,
+    setCurrentPage,
+    handlerSearch,
+    isLoading,
+    setIsLoading,
+    getAllUsers,
+    handlerUser,
+    users,
+  } = usePaginationUsers();
 
   const {
     register,
@@ -41,12 +50,6 @@ const Users = () => {
     formState,
     formState: { isSubmitSuccessful },
   } = useForm();
-  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
-  const nextPage = () => {
-    if (currentPage + 5 <= users.length) setCurrentPage(currentPage + 5);
-  };
-  const prevPage = () =>
-    currentPage > 0 ? setCurrentPage(currentPage - 5) : setCurrentPage(0);
 
   useEffect(() => {
     async function cleanInputs() {
@@ -60,18 +63,8 @@ const Users = () => {
     cleanInputs();
   }, [formState, reset]);
 
-  const getAllUsers = () => {
-    axios.get(`http://localhost:3001/api/user/allUsers/${"USER"}`, { withCredentials: true }).then((res) => {
-      setUsers(res.data);
-      setIsLoading(false);
-    });
-  };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
   const handlerAdmin = (id, isAdmin) => {
+    setCurrentPage(0);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -82,27 +75,20 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (isAdmin) {
-          axios.put(`http://localhost:3001/api/admin/demote/${id}`, { withCredentials: true });
+          axios.put(`http://localhost:3001/api/admin/demote/${id}`, {
+            withCredentials: true,
+          });
         } else {
-          axios.put(`http://localhost:3001/api/admin/promote/${id}`, { withCredentials: true });
+          axios.put(`http://localhost:3001/api/admin/promote/${id}`, {
+            withCredentials: true,
+          });
         }
         getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");
       }
     });
   };
-
-  const handlerSearch = async (data) => {
-    const reportes = await axios.get(`http://localhost:3001/api/user/search/${data.search}`, { withCredentials: true });
-    setUsers(reportes.data);
-  };
-
-  const handlerReports = (e) => {
-    const value = e.target.value;
-    axios.get(`http://localhost:3001/api/user/allUsers/${value}`, { withCredentials: true }).then((res) => {
-      setUsers(res.data);
-    });
-  };
+  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
 
   // if (isLoading) {
   //   user?.isAdmin ? getAllUsers() : navigate("/404");
@@ -142,14 +128,14 @@ const Users = () => {
               <Tab
                 value={"USER"}
                 _selected={{ color: "white", bg: "gray" }}
-                onClick={handlerReports}
+                onClick={handlerUser}
               >
                 USERS
               </Tab>
               <Tab
                 value={"ADMIN"}
                 _selected={{ color: "white", bg: "secondary" }}
-                onClick={handlerReports}
+                onClick={handlerUser}
               >
                 ADMINS
               </Tab>

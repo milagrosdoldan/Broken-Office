@@ -72,12 +72,12 @@ const Reports = () => {
         })
         .then((res) => {
           setReports(res.data);
-          // if (isLoading) {
-          //   if (user) {
-          //     user.isAdmin ? allReports() : navigate("/404");
-          //   }
-          //   return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
-          // }
+           if (isLoading) {
+             if (user) {
+               user.isAdmin ? allReports() : navigate("/404");
+             }
+            return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+          }
         });
     }
 

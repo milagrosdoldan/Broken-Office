@@ -34,7 +34,7 @@ function App() {
   const backgroundColor = useColorModeValue("white", "black");
 
   useEffect(() => {
-    async function persistence() {
+    async function persistence(dispatch) {
       dispatch(sendMe());
 
       function success(pos) {

@@ -43,14 +43,9 @@ const MyReports = () => {
         });
     }
     if (value === "FULFILLED") {
-      console.log("fulfil");
-      axios
-        .get("http://localhost:3001/api/report/myreportsfullfilled", {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setReports(res.data);
-        });
+      axios.get("http://localhost:3001/api/report/myreportsfullfilled", { withCredentials: true }).then((res) => {
+        setReports(res.data);
+      });
     }
     if (value === "REJECTED") {
       axios

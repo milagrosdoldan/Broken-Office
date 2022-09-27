@@ -18,29 +18,8 @@ import ImageListItem from "@mui/material/ImageListItem";
 import FormRequest from "../components/FormRequest";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const itemData = [
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/print-18.jpg",
-    title:
-      "Photo of a man working and behind him there is a frame which is painted 'Where globant is innovation design and engineering meet scale.'",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/cards.jpg",
-    title: "Building a new way of being digital",
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/aqua.jpg",
-    rows: 2,
-    title: "Photo of a frame saying globant.",
-  },
-  {
-    img: "https://brand.globant.com/wp-content/uploads/2021/10/showcase-22.jpg",
-    title: "Three people sitting in a sofa working",
-  },
-];
+import JoyRide from "react-joyride";
+import { itemData } from "../hooks/info";
 
 export const Home = () => {
   const location = useSelector((state) => state.location);
@@ -126,6 +105,7 @@ export const Home = () => {
           mb={{ xl: "150px", lg: "150px" }}
         >
           <Heading
+            className="tour-search"
             m="0 auto"
             fontFamily="heading"
             color={color}
@@ -152,6 +132,7 @@ export const Home = () => {
             In this map, you can see where you are, but if you want, you can
             scan a{" "}
             <Link
+              className="link-qr"
               to="/scanner"
               style={{
                 textDecoration: "underline",
@@ -178,6 +159,7 @@ export const Home = () => {
         >
           {isLoaded ? (
             <GoogleMap
+              mapContainerClassName="maps"
               mapContainerStyle={{ width: "90%", height: "60%" }}
               center={{
                 lat: location[0],
@@ -215,6 +197,7 @@ export const Home = () => {
           ))}
         </ImageList>
       </Grid>
+
       <FormRequest />
       <Box mt={50}>
         <Footer />

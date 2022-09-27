@@ -104,6 +104,7 @@ const FormRequest = () => {
       rounded="md"
       pb="35px"
       pt="35px"
+      className="report"
       margin="0 auto"
       width={["full", "full", "full", "80vh", "80vh", "90vh"]}
       height="full"

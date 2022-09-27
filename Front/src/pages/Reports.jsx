@@ -6,6 +6,7 @@ import {
   Tab,
   TabList,
   Tabs,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
@@ -22,6 +23,8 @@ const Reports = () => {
   const [reports, setReports] = useState([]);
   const user = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(true);
+  const { colorMode } = useColorMode();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -30,6 +33,10 @@ const Reports = () => {
     formState,
     formState: { isSubmitSuccessful },
   } = useForm();
+
+  useEffect(() => {
+    allReports();
+  }, []);
 
   useEffect(() => {
     async function cleanInputs() {
@@ -41,7 +48,6 @@ const Reports = () => {
     }
     cleanInputs();
   }, [formState, reset]);
-  const navigate = useNavigate();
 
   async function allReports() {
     axios
@@ -51,6 +57,7 @@ const Reports = () => {
       .then((res) => {
         setReports(res.data);
         setIsLoading(false);
+        console.log(reports);
       })
       .catch((err) => console.log(err));
   }
@@ -65,6 +72,12 @@ const Reports = () => {
         })
         .then((res) => {
           setReports(res.data);
+           if (isLoading) {
+             if (user) {
+               user.isAdmin ? allReports() : navigate("/404");
+             }
+            return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+          }
         });
     }
 
@@ -97,20 +110,23 @@ const Reports = () => {
   };
 
   if (isLoading) {
-    user?.isAdmin ? allReports() : navigate("/404");
+    if (user.length) {
+      user.isAdmin ? allReports() : navigate("/404");
+    }
     return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
   }
 
   return (
     <>
       <Box
-        h={{ xl: "65vh", lg: "60vh", md: "70vh", base: "68vh" }}
+        h={{ xl: "110vh", lg: "110vh", md: "75vh", base: "110vh" }}
         display="flex"
         flexDirection="column"
         alignItems="center"
       >
         <Box mt="5" display="flex" flexDir={"row"} alignItems="center">
           <Input
+            borderColor={colorMode === "light" ? "third" : "white"}
             placeholder="Search reports..."
             _focusVisible={{ borderColor: "third" }}
             {...register("search")}
@@ -168,5 +184,7 @@ const Reports = () => {
     </>
   );
 };
+console.log("🚀 ~ file: Reports.jsx ~ line 173 ~ Reports ~ Input", Input);
+console.log("🚀 ~ file: Reports.jsx ~ line 173 ~ Reports ~ Input", Input);
 
 export default Reports;

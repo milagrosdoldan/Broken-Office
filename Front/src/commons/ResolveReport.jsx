@@ -35,9 +35,8 @@ const ResolveReport = () => {
         showConfirmButton: false,
         timer: 1500,
         color: "secondary",
+        navigate("/admin/reports");
       });
-      navigate("/admin/reports");
-    });
   };
   const resolveReport = async () => {
     try {
@@ -73,8 +72,16 @@ const ResolveReport = () => {
           </Button>
         </Link>
       </Box>
-      <Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        w={["92%", "90%", "80%", "70%"]}
+        mx={["4%", "7%", "10%", "15%"]}
+      >
         <ReportData report={report} />
+      </Box>
+      <Box mb={30}>
         <Box display="flex" alignItems="center" justifyContent="center">
           <Button
             m="3"

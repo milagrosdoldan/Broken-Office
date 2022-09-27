@@ -17,19 +17,27 @@ const SingleReport = () => {
 
   useEffect(() => {
     async function getReportbyId() {
-      axios.get(`http://localhost:3001/api/report/getreportbyid/${params.id}`, { withCredentials: true }).then((res) => {
-        setReport(res.data[0]);
-        setIsLoading(false);
-      });
+      axios
+        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReport(res.data[0]);
+          setIsLoading(false);
+        });
     }
     getReportbyId();
   }, []);
 
   const acceptReport = async (e) => {
     try {
-      axios.put(`http://localhost:3001/api/report/catchreport/${params.id}`, {
-        admin: `${user.name} ${user.lastname}`,
-      }, { withCredentials: true });
+      axios.put(
+        `http://localhost:3001/api/report/catchreport/${params.id}`,
+        {
+          admin: `${user.name} ${user.lastname}`,
+        },
+        { withCredentials: true }
+      );
       Swal.fire({
         icon: "success",
         text: "Reporte aceptado",
@@ -40,7 +48,9 @@ const SingleReport = () => {
       });
 
       axios
-        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`, { withCredentials: true })
+        .get(`http://localhost:3001/api/report/getreportbyid/${params.id}`, {
+          withCredentials: true,
+        })
         .then((res) => setReport(res.data[0]));
     } catch {
       console.log("ERROR REPORT");
@@ -76,7 +86,7 @@ const SingleReport = () => {
       >
         <ReportData report={report} />
 
-        <Box display="flex" flexDirection="row" alignItems="center">
+        <Box mb={15} display="flex" flexDirection="row" alignItems="center">
           {!report.admin || report.admin === "No admin." ? (
             <Button
               m="3"

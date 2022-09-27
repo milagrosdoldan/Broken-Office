@@ -199,8 +199,9 @@ export const Home = () => {
       </Grid>
 
       <FormRequest />
-
-      <Footer />
+      <Box mt={50}>
+        <Footer />
+      </Box>
     </>
   );
 };

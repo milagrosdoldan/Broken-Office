@@ -1,5 +1,6 @@
 import { ArrowBackIcon, ArrowForwardIcon, SearchIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
   Box,
   Button,
   Divider,
@@ -17,6 +18,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -43,6 +45,11 @@ const Users = () => {
     users,
   } = usePaginationUsers();
 
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const navigate = useNavigate();
+  const { colorMode } = useColorMode();
   const {
     register,
     handleSubmit,
@@ -88,16 +95,28 @@ const Users = () => {
       }
     });
   };
-  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
 
-  // if (isLoading) {
-  //   user?.isAdmin ? getAllUsers() : navigate("/404");
-  //   return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
-  // }
+  const handlerSearch = async (data) => {
+    const reportes = await axios.get(
+      `http://localhost:3001/api/user/search/${data.search}`,
+      { withCredentials: true }
+    );
+    setUsers(reportes.data);
+  };
+  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
+  if (isLoading) {
+    if (user.length) {
+      user.isAdmin ? getAllUsers() : navigate("/404");
+    }
+    return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+  }
 
   return (
     <>
-      <Box h={{ xl: "95vh", lg: "100vh", md: "95vh", base: "90vh" }}>
+      <Box
+        m="0 auto"
+        h={{ xl: "110vh", lg: "110vh", md: "110vh", base: "100vh" }}
+      >
         <TableContainer
           mt="10"
           width={["100%", "70%", "60%"]}
@@ -110,6 +129,8 @@ const Users = () => {
         >
           <Box my="5" display="flex" flexDir={"row"} alignItems="center">
             <Input
+              borderColor={colorMode === "light" ? "third" : "white"}
+              m="0 auto"
               placeholder="Search users..."
               _focusVisible={{ borderColor: "third" }}
               {...register("search")}
@@ -159,11 +180,11 @@ const Users = () => {
               {filteredUsers()?.map((user) => (
                 <Tr key={user.id}>
                   <Td _hover={{ color: "fourth" }} textAlign="start" py="5">
+                    <Avatar size="sm" src={user.picture} mr={4} />
                     <Link
                       style={{ textDecoration: "underline" }}
                       to={`/user/${user.id}`}
                     >
-                      {" "}
                       {user.name} {user.lastname}
                     </Link>
                   </Td>

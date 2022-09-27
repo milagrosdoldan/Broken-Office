@@ -32,6 +32,7 @@ import usePaginationUsers from "../hooks/usePaginationUsers";
 const Users = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  
   const {
     nextPage,
     prevPage,
@@ -45,10 +46,6 @@ const Users = () => {
     users,
   } = usePaginationUsers();
 
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
-  const navigate = useNavigate();
   const { colorMode } = useColorMode();
   const {
     register,
@@ -96,13 +93,7 @@ const Users = () => {
     });
   };
 
-  const handlerSearch = async (data) => {
-    const reportes = await axios.get(
-      `http://localhost:3001/api/user/search/${data.search}`,
-      { withCredentials: true }
-    );
-    setUsers(reportes.data);
-  };
+
   const filteredUsers = () => users.slice(currentPage, currentPage + 5);
   if (isLoading) {
     if (user.length) {

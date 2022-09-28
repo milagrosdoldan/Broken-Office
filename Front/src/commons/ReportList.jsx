@@ -1,4 +1,6 @@
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Table,
   TableContainer,
@@ -9,9 +11,19 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import usePaginationReports from "../hooks/usePaginationReports";
 
 const ReportList = ({ reports }) => {
+  const { currentPage, nextPage, prevPage } =
+    usePaginationReports(reports);
+
+  const filteredReports = () => {
+    if(reports.length <= 5) return reports.slice(0, 5)
+    return reports.slice(currentPage, currentPage + 5);
+  };
+
   return (
     <TableContainer
       mt="10"
@@ -21,8 +33,9 @@ const ReportList = ({ reports }) => {
       alignItems="center"
       p="2"
       fontSize={["18", "18"]}
+      flexDir={"column"}
     >
-      <Table size="s">
+      <Table mt={55} size="s">
         <Thead>
           <Tr>
             <Th textAlign="left">ID</Th>
@@ -33,11 +46,16 @@ const ReportList = ({ reports }) => {
         </Thead>
         <Tbody>
           {reports?.length > 0 ? (
-            reports.map((report) => (
+            filteredReports()?.map((report) => (
               <Tr key={report._id}>
-                <Td textAlign="left">{report._id.slice(0, 5)}</Td>
-                <Td textAlign="left"> {report.title}</Td>
-                <Td textAlign="left">
+                <Td textAlign="left" py="4">
+                  {report._id.slice(0, 5)}
+                </Td>
+                <Td textAlign="left" py="4">
+                  {" "}
+                  {report.title}
+                </Td>
+                <Td textAlign="left" py="4">
                   {report.name} {report.lastname}
                 </Td>
                 <Td textAlign="left">
@@ -64,6 +82,28 @@ const ReportList = ({ reports }) => {
           )}
         </Tbody>
       </Table>
+      <Box>
+        <Button
+          alt="previus page"
+          bg="secondary"
+          ml={5}
+          mt={15}
+          color="black"
+          onClick={prevPage}
+        >
+          <ArrowBackIcon />
+        </Button>
+        <Button
+          alt="next page"
+          bg="secondary"
+          ml={5}
+          color="black"
+          mt={15}
+          onClick={nextPage}
+        >
+          <ArrowForwardIcon />
+        </Button>
+      </Box>
     </TableContainer>
   );
 };

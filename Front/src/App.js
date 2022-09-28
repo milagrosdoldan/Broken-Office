@@ -24,6 +24,7 @@ import { TOUR_STEPS } from "./hooks/info";
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 
+
 function App() {
   const dispatch = useDispatch();
   let localStorageKey = 1;
@@ -33,7 +34,7 @@ function App() {
   const backgroundColor = useColorModeValue("white", "black");
 
   useEffect(() => {
-    async function persistence() {
+    async function persistence(dispatch) {
       dispatch(sendMe());
 
       function success(pos) {

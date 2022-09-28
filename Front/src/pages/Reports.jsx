@@ -6,6 +6,7 @@ import {
   Tab,
   TabList,
   Tabs,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
@@ -18,11 +19,22 @@ import ScrollToTop from "react-scroll-to-top";
 import ReportList from "../commons/ReportList";
 import { SearchIcon } from "@chakra-ui/icons";
 import Footer from "../components/Footer";
-const Reports = () => {
-  const [reports, setReports] = useState([]);
-  const user = useSelector((state) => state.user);
-  const [isLoading, setIsLoading] = useState(true);
+import useReports from "../hooks/useReports";
 
+const Reports = () => {
+  const user = useSelector((state) => state.user);
+  const { colorMode } = useColorMode();
+  const navigate = useNavigate();
+  const {
+    allReports,
+    reports,
+    setReports,
+    isLoading,
+    setIsLoading,
+    handlerSearch,
+    handlerReports,
+  } = useReports();
+  
   const {
     register,
     handleSubmit,
@@ -41,60 +53,25 @@ const Reports = () => {
     }
     cleanInputs();
   }, [formState, reset]);
-  const navigate = useNavigate();
-
-  async function allReports() {
-    axios
-      .get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true })
-      .then((res) => {
-        setReports(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  const handlerReports = (e) => {
-    const value = e.target.value;
-
-    if (value === "PENDING") {
-      axios.get("http://localhost:3001/api/report/getpendingreports", { withCredentials: true }).then((res) => {
-        setReports(res.data);
-      });
-    }
-
-    if (value === "FULFILLED") {
-      axios.get("http://localhost:3001/api/report/getsolvedreports", { withCredentials: true }).then((res) => {
-
-        setReports(res.data);
-      });
-    }
-    if (value === "REJECTED") {
-      axios.get("http://localhost:3001/api/report/getrejectedreports", { withCredentials: true }).then((res) => {
-        setReports(res.data);
-      });
-    }
-  };
-
-  const handlerSearch = async (data) => {
-    const reportes = await axios.get(`http://localhost:3001/api/report/search/${data.search}`, { withCredentials: true });
-    setReports(reportes.data);
-  };
 
   if (isLoading) {
-    user?.isAdmin ? allReports() : navigate("/404");
+    if (user.length) {
+      user.isAdmin ? allReports() : navigate("/404");
+    }
     return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
   }
 
   return (
     <>
       <Box
-        h={{ xl: "65vh", lg: "60vh", md: "70vh", base: "68vh" }}
+        h={{ xl: "110vh", lg: "110vh", md: "75vh", base: "110vh" }}
         display="flex"
         flexDirection="column"
         alignItems="center"
       >
         <Box mt="5" display="flex" flexDir={"row"} alignItems="center">
           <Input
+            borderColor={colorMode === "light" ? "third" : "white"}
             placeholder="Search reports..."
             _focusVisible={{ borderColor: "third" }}
             {...register("search")}
@@ -112,18 +89,18 @@ const Reports = () => {
         <Tabs m="3">
           <TabList m="15px 0 auto" display="flex" justifyContent="center">
             <Tab
-              value={"REJECTED"}
-              _selected={{ color: "white", bg: "red" }}
-              onClick={handlerReports}
-            >
-              Rejected
-            </Tab>
-            <Tab
               value={"PENDING"}
               _selected={{ color: "white", bg: "gray" }}
               onClick={handlerReports}
             >
               In Progress
+            </Tab>
+            <Tab
+              value={"REJECTED"}
+              _selected={{ color: "white", bg: "red" }}
+              onClick={handlerReports}
+            >
+              Rejected
             </Tab>
             <Tab
               value={"FULFILLED"}

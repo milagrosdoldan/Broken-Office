@@ -1,5 +1,6 @@
 import { ArrowBackIcon, ArrowForwardIcon, SearchIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
   Box,
   Button,
   Divider,
@@ -17,6 +18,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -25,15 +27,26 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Footer from "./Footer";
+import usePaginationUsers from "../hooks/usePaginationUsers";
 
 const Users = () => {
   const user = useSelector((state) => state.user);
-  console.log("🚀 ~ file: Users.jsx ~ line 30 ~ Users ~ user", user);
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
   const navigate = useNavigate();
+  
+  const {
+    nextPage,
+    prevPage,
+    currentPage,
+    setCurrentPage,
+    handlerSearch,
+    isLoading,
+    setIsLoading,
+    getAllUsers,
+    handlerUser,
+    users,
+  } = usePaginationUsers();
 
+  const { colorMode } = useColorMode();
   const {
     register,
     handleSubmit,
@@ -41,12 +54,6 @@ const Users = () => {
     formState,
     formState: { isSubmitSuccessful },
   } = useForm();
-  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
-  const nextPage = () => {
-    if (currentPage + 5 <= users.length) setCurrentPage(currentPage + 5);
-  };
-  const prevPage = () =>
-    currentPage > 0 ? setCurrentPage(currentPage - 5) : setCurrentPage(0);
 
   useEffect(() => {
     async function cleanInputs() {
@@ -60,18 +67,8 @@ const Users = () => {
     cleanInputs();
   }, [formState, reset]);
 
-  const getAllUsers = () => {
-    axios.get(`http://localhost:3001/api/user/allUsers/${"USER"}`, { withCredentials: true }).then((res) => {
-      setUsers(res.data);
-      setIsLoading(false);
-    });
-  };
-
-  useEffect(() => {
-    getAllUsers();
-  }, []);
-
   const handlerAdmin = (id, isAdmin) => {
+    setCurrentPage(0);
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -82,9 +79,13 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (isAdmin) {
-          axios.put(`http://localhost:3001/api/admin/demote/${id}`, { withCredentials: true });
+          axios.put(`http://localhost:3001/api/admin/demote/${id}`, {
+            withCredentials: true,
+          });
         } else {
-          axios.put(`http://localhost:3001/api/admin/promote/${id}`, { withCredentials: true });
+          axios.put(`http://localhost:3001/api/admin/promote/${id}`, {
+            withCredentials: true,
+          });
         }
         getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");
@@ -92,26 +93,22 @@ const Users = () => {
     });
   };
 
-  const handlerSearch = async (data) => {
-    const reportes = await axios.get(`http://localhost:3001/api/user/search/${data.search}`, { withCredentials: true });
-    setUsers(reportes.data);
-  };
 
-  const handlerReports = (e) => {
-    const value = e.target.value;
-    axios.get(`http://localhost:3001/api/user/allUsers/${value}`, { withCredentials: true }).then((res) => {
-      setUsers(res.data);
-    });
-  };
-
-  // if (isLoading) {
-  //   user?.isAdmin ? getAllUsers() : navigate("/404");
-  //   return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
-  // }
+  const filteredUsers = () => users.slice(currentPage, currentPage + 5);
+  
+  if (isLoading) {
+    if (user.length) {
+      user.isAdmin ? getAllUsers() : navigate("/404");
+    }
+    return <Spinner size="xl" color="secondary" ml="50%" my="10%" />;
+  }
 
   return (
     <>
-      <Box h={{ xl: "95vh", lg: "100vh", md: "95vh", base: "90vh" }}>
+      <Box
+        m="0 auto"
+        h={{ xl: "110vh", lg: "110vh", md: "110vh", base: "100vh" }}
+      >
         <TableContainer
           mt="10"
           width={["100%", "70%", "60%"]}
@@ -124,6 +121,8 @@ const Users = () => {
         >
           <Box my="5" display="flex" flexDir={"row"} alignItems="center">
             <Input
+              borderColor={colorMode === "light" ? "third" : "white"}
+              m="0 auto"
               placeholder="Search users..."
               _focusVisible={{ borderColor: "third" }}
               {...register("search")}
@@ -142,14 +141,14 @@ const Users = () => {
               <Tab
                 value={"USER"}
                 _selected={{ color: "white", bg: "gray" }}
-                onClick={handlerReports}
+                onClick={handlerUser}
               >
                 USERS
               </Tab>
               <Tab
                 value={"ADMIN"}
                 _selected={{ color: "white", bg: "secondary" }}
-                onClick={handlerReports}
+                onClick={handlerUser}
               >
                 ADMINS
               </Tab>
@@ -173,11 +172,11 @@ const Users = () => {
               {filteredUsers()?.map((user) => (
                 <Tr key={user.id}>
                   <Td _hover={{ color: "fourth" }} textAlign="start" py="5">
+                    <Avatar size="sm" src={user.picture} mr={4} />
                     <Link
                       style={{ textDecoration: "underline" }}
                       to={`/user/${user.id}`}
                     >
-                      {" "}
                       {user.name} {user.lastname}
                     </Link>
                   </Td>

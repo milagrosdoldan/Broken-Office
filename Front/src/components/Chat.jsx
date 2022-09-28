@@ -20,9 +20,40 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
 import Swal from "sweetalert2";
 import { ChatIcon } from "@chakra-ui/icons";
+import axios from "axios";
+
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+      .replace(/\-/g, '+')
+      .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+const publicKey = 'BAz6iDmfJti4Po5VRdswl8-pbOpCcNjyGUVPBGRlxl2v9yK7WM7M4qQoke4v6qTFon4RRS6SaHcBrfgCBf5dED4' 
+
+const suscribe = async (name, message) => {
+let sw = await navigator.serviceWorker.register("../service-worker.js");
+let push = await sw.pushManager.subscribe({
+  userVisibleOnly: true,
+  applicationServerKey: urlBase64ToUint8Array(publicKey)      
+});
+  axios.post("http://localhost:3001/api/user/notification", {endpoint:push, name:name, message:message}, {withCredentials:true} )
+}  
+
+
+
+
 const Chat = ({ report }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
@@ -30,8 +61,10 @@ const Chat = ({ report }) => {
   const scroll = useRef();
   const { id } = useParams();
   const user = useSelector((state) => state.user);
+  
+  useEffect( () => {
 
-  useEffect(() => {
+
     const q = query(collection(db, "messages"), orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let messages = [];
@@ -41,20 +74,16 @@ const Chat = ({ report }) => {
       let filterMessages = messages.filter(
         (message) => message.reportId === id
       );
-      if (filterMessages[filterMessages.length - 1].userId !== user.id) {
-        Swal.fire({
-          text: "New message!",
-          width: 400,
-          showConfirmButton: false,
-          timer: 1000,
-          color: "secondary",
-        });
+      if (filterMessages[filterMessages.length - 1]?.userId !== user.id) {
+        suscribe(filterMessages[filterMessages.length - 1].name, filterMessages[filterMessages.length - 1].text)
       }
+        
       setMessages(filterMessages);
-    });
-    return () => unsubscribe();
-  }, []);
-
+        
+      });
+      return () => unsubscribe();
+    }, []);
+    
   return (
     <>
       <Button

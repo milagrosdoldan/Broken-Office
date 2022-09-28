@@ -7,6 +7,7 @@ const isLocalhost = Boolean(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
 );
+
 export function register(config) {
   if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -39,20 +40,7 @@ export function register(config) {
   }
 }
 
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/');
 
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-
-  for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
-}
 
 function registerValidSW(swUrl, config) {
   navigator.serviceWorker
@@ -125,6 +113,7 @@ function checkValidServiceWorker(swUrl, config) {
       );
     });
 }
+
 export function unregister() {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.ready
@@ -136,3 +125,4 @@ export function unregister() {
       });
   }
 }
+

@@ -161,16 +161,29 @@ const Rep = {
 
   //Función para cerrar un informe como rechazado.
   rejectedReport: async function rejectedReport(req, res) {
-    const report = await Reports.update(
-      { _id: req.params.id },
-      { state: "rejected" }
-    )
-      .then((reporte) => {
-        res.status(201).send("Report rejected!");
-      })
-      .catch((error) => {
-        res.status(500).send(reporte);
+    try {
+      const report = await Reports.update(
+        { _id: req.params.id },
+        { state: "rejected" }
+      );
+
+      const updatedReport = await Reports.find({ _id: req.params.id })
+
+      await transporter.sendMail({
+        from: req.user.email,
+        to: req.body.email,
+        subject: req.body.subject,
+        html: `
+    <h1>Hello, it's ${req.user.name}!</h1><br/>
+    <p>I have just rejected your report</p>
+    <p>${req.body.message}</p><br/>
+    <p>for the following reason: ${updatedReport[0].description}</p>
+    `,
       });
+      res.status(201).send("Report rejected!");
+    } catch (err) {
+      res.status(500).send(reporte);
+    }
   },
 
   //Función para mostrar TODOS los informes pendientes.

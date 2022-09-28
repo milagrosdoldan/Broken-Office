@@ -34,7 +34,7 @@ const Reports = () => {
     handlerSearch,
     handlerReports,
   } = useReports();
-  
+
   const {
     register,
     handleSubmit,
@@ -86,8 +86,8 @@ const Reports = () => {
           />
         </Box>
 
-        <Tabs m="3">
-          <TabList m="15px 0 auto" display="flex" justifyContent="center">
+        <Tabs  m="3">
+          <TabList  m="15px 0 auto" display="flex" justifyContent="center">
             <Tab
               value={"PENDING"}
               _selected={{ color: "white", bg: "gray" }}

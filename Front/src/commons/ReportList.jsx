@@ -16,11 +16,10 @@ import { Link } from "react-router-dom";
 import usePaginationReports from "../hooks/usePaginationReports";
 
 const ReportList = ({ reports }) => {
-  const { currentPage, nextPage, prevPage } =
-    usePaginationReports(reports);
+  const { currentPage, nextPage, prevPage } = usePaginationReports(reports);
 
   const filteredReports = () => {
-    if(reports.length <= 5) return reports.slice(0, 5)
+    if (reports.length <= 5) return reports.slice(0, 5);
     return reports.slice(currentPage, currentPage + 5);
   };
 

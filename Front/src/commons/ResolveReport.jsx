@@ -69,6 +69,8 @@ const ResolveReport = () => {
       console.error("no se pudo resolver");
     }
   };
+
+  
   return (
     <>
       <Box display="flex">
@@ -116,3 +118,4 @@ const ResolveReport = () => {
 };
 
 export default ResolveReport;
+

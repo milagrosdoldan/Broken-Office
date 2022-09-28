@@ -7,6 +7,7 @@ import { StaleWhileRevalidate } from "workbox-strategies";
 
 clientsClaim();
 
+
 // Puedes desactivar el precaching reemplazand esta línea
 precacheAndRoute(self.__WB_MANIFEST);
 // por esta otra:
@@ -45,8 +46,34 @@ registerRoute(
     ],
   })
 );
+
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
+
+ 
+self.addEventListener('push',  (e) => {
+  const {name, message} = e.data.json();
+  const options = {
+    body: message,
+    icon: 'https://takingcare.globant.com/ES/assets/images/globant-lightbg-color-2.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '2'
+    }, 
+    actions:[
+      {action: 'close', title: 'Close',
+      icon : 'images/xmark.png'}
+      ]};
+
+      e.waitUntil(
+      self.registration.showNotification(`New message from ${name}`, options)
+      )
+  } 
+); 
+
+
+

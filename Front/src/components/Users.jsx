@@ -143,7 +143,8 @@ const Users = () => {
               icon={<SearchIcon />}
             />
           </Box>
-          <Tabs m="3">
+
+          <Tabs>
             <TabList m="0 auto" display="flex" justifyContent="center">
               <Tab
                 value={"USER"}
@@ -161,6 +162,7 @@ const Users = () => {
               </Tab>
             </TabList>
           </Tabs>
+
           <Table size="s">
             <Thead>
               <Tr>
@@ -203,7 +205,8 @@ const Users = () => {
               ))}
             </Tbody>
           </Table>
-          <Box>
+
+          <Box m="0 auto">
             <Button
               alt="previus page"
               bg="secondary"

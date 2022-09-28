@@ -167,22 +167,22 @@ const Rep = {
         { state: "rejected" }
       );
 
-      const updatedReport = await Reports.find({ _id: req.params.id })
+      const updatedReport = await Reports.find({ _id: req.params.id });
 
       await transporter.sendMail({
         from: req.user.email,
-        to: req.body.email,
-        subject: req.body.subject,
+        to: req.body.data.to,
+        subject: req.body.data.subject,
         html: `
-    <h1>Hello, it's ${req.user.name}!</h1><br/>
-    <p>I have just rejected your report</p>
-    <p>${req.body.message}</p><br/>
-    <p>for the following reason: ${updatedReport[0].description}</p>
-    `,
+      <h1>Hello, it's ${req.user.name}!</h1><br/>
+      <p>I have just rejected your report</p>
+      <p>${req.body.data.message}</p><br/>
+      <p>for the following reason: ${updatedReport[0].description}</p>
+      `,
       });
       res.status(201).send("Report rejected!");
     } catch (err) {
-      res.status(500).send(reporte);
+      res.status(500).send(err);
     }
   },
 

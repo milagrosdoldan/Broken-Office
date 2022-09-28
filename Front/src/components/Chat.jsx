@@ -41,7 +41,7 @@ const Chat = ({ report }) => {
       let filterMessages = messages.filter(
         (message) => message.reportId === id
       );
-      if (filterMessages[filterMessages.length - 1].userId !== user.id) {
+      if (filterMessages[filterMessages.length - 1]?.userId !== user.id) {
         Swal.fire({
           text: "New message!",
           width: 400,

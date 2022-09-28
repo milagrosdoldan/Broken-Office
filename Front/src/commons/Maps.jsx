@@ -40,7 +40,7 @@ const Maps = ({ location }) => {
       )}
     </Box>
   );
-  console.log("🚀 ~ file: Maps.jsx ~ line 32 ~ Maps ~ isLoaded", isLoaded);
+ 
 };
 
 export default Maps;

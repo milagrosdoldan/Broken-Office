@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Footer from "../components/Footer";
+import RejectedEmail from "./RejectedEmail";
 import ReportData from "./ReportData";
 import SendEmail from "./SendEmail";
 
@@ -25,24 +26,25 @@ const ResolveReport = () => {
   }, []);
 
   const rejectedReport = (e) => {
-    axios
-      .put(
-        `http://localhost:3001/api/report/rejectedreport/${params.id}`,
-        {},
-        { withCredentials: true }
-      )
-      .then(() => {
-        Swal.fire({
-          icon: "error",
-          text: "Reporte rechazado",
-          width: 400,
-          showConfirmButton: false,
-          timer: 1500,
-          color: "secondary",
-        });
-        navigate("/admin/reports");
-      });
-    navigate("/admin/reports");
+    <SendEmail report={e} />;
+    // axios
+    //   .put(
+    //     `http://localhost:3001/api/report/rejectedreport/${params.id}`,
+    //     {},
+    //     { withCredentials: true }
+    //   )
+    //   .then(() => {
+    //     Swal.fire({
+    //       icon: "error",
+    //       text: "Reporte rechazado",
+    //       width: 400,
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //       color: "secondary",
+    //     });
+    //     navigate("/admin/reports");
+    //   });
+    // navigate("/admin/reports");
   };
 
   const resolveReport = async () => {
@@ -94,14 +96,7 @@ const ResolveReport = () => {
       </Box>
       <Box mb={30}>
         <Box display="flex" alignItems="center" justifyContent="center">
-          <Button
-            m="3"
-            colorScheme="red"
-            borderRadius="40px"
-            onClick={rejectedReport}
-          >
-            Reject
-          </Button>
+          <RejectedEmail report={report} />
           <Button
             m="3"
             borderRadius="40px"

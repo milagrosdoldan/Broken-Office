@@ -26,6 +26,7 @@ export const Home = () => {
   const dispatch = useDispatch();
   const [setIsReadyForInstall, setSetIsReadyForInstall] = useState(false);
   const color = useColorModeValue("black", "white");
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_API_KEY,
@@ -115,7 +116,6 @@ export const Home = () => {
             Your Location
           </Heading>{" "}
           <Text
-            pl={15}
             fontFamily="body"
             color={color}
             textAlign={{

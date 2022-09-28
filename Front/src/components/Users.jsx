@@ -95,6 +95,7 @@ const Users = () => {
 
 
   const filteredUsers = () => users.slice(currentPage, currentPage + 5);
+  
   if (isLoading) {
     if (user.length) {
       user.isAdmin ? getAllUsers() : navigate("/404");

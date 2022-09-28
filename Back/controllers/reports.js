@@ -20,8 +20,8 @@ const Rep = {
       const { image } = req.body;
 
       const results = await cloudinary.uploader.upload(image, {
-        categorization: "google_tagging",
-        auto_tagging: 0.8,
+        // categorization: "google_tagging",
+        // auto_tagging: 0.8,
       });
 
       const newReport = await new Reports({
@@ -46,12 +46,7 @@ const Rep = {
         from: '"Broken Office 📱" <BrokenOfficeP5@gmail.com>',
         to: req.user.email,
         subject: "Report sent!",
-        html: `
-        <h1>Hello ${req.body.name}!</h1><br/>
-        <p>Your report has been sent</p><br/>
-        <p>${req.body.description}</p><br/>
-        <p>An administrator will contact you soon</p>
-        `,
+        html: { path: "../Front/public/email.html" },
       });
 
       newReport.save();

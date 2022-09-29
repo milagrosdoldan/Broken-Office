@@ -21,7 +21,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import FacebookLogin from "react-facebook-login";
-import "../style/login.css";
+import "../styles/login.css";
 import Footer from "../components/Footer";
 const Login = () => {
   const dispatch = useDispatch();
@@ -87,7 +87,7 @@ const Login = () => {
     <>
       <Box
         className="loginView"
-        h={{ xl: 600, lg: 520, md: 900, base: 675 }}
+        h={{ xl: 660, lg: 580, md: 900, base: 675 }}
         bgImage="url('https://brand.globant.com/wp-content/uploads/2021/10/bg.png')"
       >
         <Box

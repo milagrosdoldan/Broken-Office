@@ -76,7 +76,7 @@ const Rep = {
         res.status(200).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -87,7 +87,7 @@ const Rep = {
         res.status(200).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -98,7 +98,7 @@ const Rep = {
         res.status(200).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -109,7 +109,7 @@ const Rep = {
         res.status(200).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -120,7 +120,7 @@ const Rep = {
         res.status(200).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -142,7 +142,7 @@ const Rep = {
   //Función para mostrar informes PRIORITARIOS (Prioridad nivel 3).
   getPriorityReports: async function getPriorityReports(req, res) {
     const report = await Reports.find({ priority: req.params.id });
-    res.send(report);
+    res.send(error);
   },
 
   //Función para cerrar un informe solucionado.
@@ -155,7 +155,7 @@ const Rep = {
         res.status(201).send("Report solved!");
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -193,7 +193,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -204,7 +204,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -215,7 +215,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -229,7 +229,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -243,7 +243,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -257,7 +257,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -271,7 +271,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -282,7 +282,7 @@ const Rep = {
         res.status(201).send("Deleted all!");
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 
@@ -319,7 +319,7 @@ const Rep = {
         res.status(201).send(reporte);
       })
       .catch((error) => {
-        res.status(500).send(reporte);
+        res.status(500).send(error);
       });
   },
 

@@ -25,28 +25,6 @@ const ResolveReport = () => {
     getReportbyId();
   }, []);
 
-  const rejectedReport = (e) => {
-    <SendEmail report={e} />;
-    // axios
-    //   .put(
-    //     `http://localhost:3001/api/report/rejectedreport/${params.id}`,
-    //     {},
-    //     { withCredentials: true }
-    //   )
-    //   .then(() => {
-    //     Swal.fire({
-    //       icon: "error",
-    //       text: "Reporte rechazado",
-    //       width: 400,
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //       color: "secondary",
-    //     });
-    //     navigate("/admin/reports");
-    //   });
-    // navigate("/admin/reports");
-  };
-
   const resolveReport = async () => {
     try {
       await axios.put(

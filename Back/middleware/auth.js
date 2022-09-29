@@ -8,7 +8,6 @@ function validateAuth(req, res, next) {
 
   const { user } = validateToken(token);
   if (!user) return res.sendStatus(401);
-  console.log("🚀 ~ file: auth.js ~ line 10 ~ validateAuth ~ user", user);
 
   req.user = user;
 

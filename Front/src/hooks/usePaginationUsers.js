@@ -41,7 +41,7 @@ const usePaginationUsers = () => {
   };
 
   const nextPage = () => {
-    if (currentPage + 5 <= users.length) setCurrentPage(currentPage + 5);
+    if (currentPage + 5 < users.length) setCurrentPage(currentPage + 5);
   };
   const prevPage = () => {
     currentPage > 0 ? setCurrentPage(currentPage - 5) : setCurrentPage(0);

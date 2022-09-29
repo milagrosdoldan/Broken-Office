@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function SendEmail({ report }) {
+  console.log("🚀 ~ file: SendEmail.jsx ~ line 24 ~ SendEmail ~ report", report)
   const params = useParams();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -28,11 +29,11 @@ function SendEmail({ report }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
+  const [email, setEmail]=useState("")
   const sendEmail = () => {
     axios
       .post(`http://localhost:3001/api/report/share/${params.id}`, {
-        email: report.email,
+        email,
         subject,
         message,
       }, { withCredentials: true })
@@ -85,7 +86,10 @@ function SendEmail({ report }) {
                 mb={4}
                 _focusVisible={{ borderColor: "third" }}
                 placeholder="TO"
-                defaultValue={report.email}
+                onChange={(e)=>{
+                  setEmail(e.target.value)
+                }}
+
               />
             </FormControl>
             <FormControl>

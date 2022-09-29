@@ -182,7 +182,7 @@ const Rep = {
       });
       res.status(201).send("Report rejected!");
     } catch (err) {
-      res.status(500).send(reporte);
+      res.status(500).send(err);
     }
   },
 

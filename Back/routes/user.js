@@ -5,6 +5,7 @@ const { validateAuth, validateAdmin } = require("../middleware/auth");
 
 const {
   register,
+  notification,
   login,
   me,
   deleteUser,
@@ -84,6 +85,7 @@ const {
  *     400:
  *       description: error
  */
+router.post("/notification", notification);
 
 router.post("/register", register);
 /**

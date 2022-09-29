@@ -38,9 +38,10 @@ const Register = () => {
 
   const onSubmit = (data) => {
     dispatch(signUp(data));
-    user.email && navigate("/login");
   };
-
+  
+  user.email && navigate("/login");
+  
   return (
     <>
       <HStack

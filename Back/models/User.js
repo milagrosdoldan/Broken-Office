@@ -53,11 +53,9 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.validatePassword = function validatePassword(password) {
-  if(this.password) {
-    return bcrypt
+  return bcrypt
     .hash(password, this.salt)
     .then((newHash) => newHash === this.password);
-  }
 };
 
 UserSchema.set("toJSON", {

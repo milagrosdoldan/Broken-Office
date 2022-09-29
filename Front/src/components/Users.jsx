@@ -32,7 +32,7 @@ import usePaginationUsers from "../hooks/usePaginationUsers";
 const Users = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  
+
   const {
     nextPage,
     prevPage,
@@ -79,13 +79,21 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         if (isAdmin) {
-          axios.put(`http://localhost:3001/api/admin/demote/${id}`, {
-            withCredentials: true,
-          });
+          axios.put(
+            `http://localhost:3001/api/admin/demote/${id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
         } else {
-          axios.put(`http://localhost:3001/api/admin/promote/${id}`, {
-            withCredentials: true,
-          });
+          axios.put(
+            `http://localhost:3001/api/admin/promote/${id}`,
+            {},
+            {
+              withCredentials: true,
+            }
+          );
         }
         getAllUsers();
         Swal.fire("Updated!", "User has been updated.", "success");
@@ -93,9 +101,8 @@ const Users = () => {
     });
   };
 
-
   const filteredUsers = () => users.slice(currentPage, currentPage + 5);
-  
+
   if (isLoading) {
     if (user.length) {
       user.isAdmin ? getAllUsers() : navigate("/404");
@@ -136,7 +143,8 @@ const Users = () => {
               icon={<SearchIcon />}
             />
           </Box>
-          <Tabs m="3">
+
+          <Tabs>
             <TabList m="0 auto" display="flex" justifyContent="center">
               <Tab
                 value={"USER"}
@@ -154,6 +162,7 @@ const Users = () => {
               </Tab>
             </TabList>
           </Tabs>
+
           <Table size="s">
             <Thead>
               <Tr>
@@ -196,7 +205,8 @@ const Users = () => {
               ))}
             </Tbody>
           </Table>
-          <Box>
+
+          <Box m="0 auto">
             <Button
               alt="previus page"
               bg="secondary"

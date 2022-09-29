@@ -35,7 +35,6 @@ const usePaginationUsers = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         setUsers(res.data);
         setCurrentPage(0);
       });

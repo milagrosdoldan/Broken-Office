@@ -43,9 +43,13 @@ const MyReports = () => {
         });
     }
     if (value === "FULFILLED") {
-      axios.get("http://localhost:3001/api/report/myreportsfullfilled", { withCredentials: true }).then((res) => {
-        setReports(res.data);
-      });
+      axios
+        .get("http://localhost:3001/api/report/myreportsfullfilled", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setReports(res.data);
+        });
     }
     if (value === "REJECTED") {
       axios
@@ -67,7 +71,12 @@ const MyReports = () => {
 
   return (
     <>
-      <Box h={{ xl: "75vh", lg: "75vh", md: "75vh", base: "75vh" }}>
+      <Box
+        h={{ xl: "110vh", lg: "110vh", md: "75vh", base: "83vh" }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
         <Heading textAlign={"center"} m="5">
           My reports
         </Heading>

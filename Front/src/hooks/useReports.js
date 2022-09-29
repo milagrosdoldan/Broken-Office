@@ -23,7 +23,6 @@ const useReports = () => {
       .then((res) => {
         setReports(res.data);
         setIsLoading(false);
-        console.log(reports);
       })
       .catch((err) => console.log(err));
   }

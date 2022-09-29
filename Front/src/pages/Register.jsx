@@ -18,20 +18,19 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { signUp } from "../state/register";
+
 import "@fontsource/open-sans";
 import "@fontsource/heebo";
 import Footer from "../components/Footer";
-import Login from "./Login";
-
+import axios from "axios";
+import Swal from "sweetalert2";
 const Register = () => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
   const { colorMode } = useColorMode();
-  const registro = useSelector((state) => state.registro);
-
   const {
     register,
     handleSubmit,
@@ -39,9 +38,23 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(signUp(data));
+    axios
+      .post("http://localhost:3001/api/user/register", data, {
+        withCredentials: true,
+      })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch(() => {
+        Swal.fire({
+          text: "Datos inválidos.",
+          width: 400,
+          showConfirmButton: false,
+          timer: 1500,
+          color: "secondary",
+        });
+      });
   };
-  registro.email && navigate("/login");
 
   return (
     <>

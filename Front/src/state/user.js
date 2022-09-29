@@ -29,9 +29,13 @@ export const sendMe = createAsyncThunk("SEND_ME", async () => {
 });
 
 export const logOut = createAsyncThunk("LOG_OUT", async () => {
-  const res = await axios.post("http://localhost:3001/api/user/logout", {
-    withCredentials: true,
-  });
+  const res = await axios.post(
+    "http://localhost:3001/api/user/logout",
+    {},
+    {
+      withCredentials: true,
+    }
+  );
   return res.data;
 });
 

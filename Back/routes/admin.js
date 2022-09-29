@@ -19,7 +19,7 @@ const {
  * /api/admin/all:
  *  get:
  *    summary: return all user
- *    tag: [User]
+ *    tags: [User]
  *    responses:
  *      200:
  *        description: all user
@@ -39,7 +39,7 @@ const {
  * /api/admin/promote/{userId}:
  *  put:
  *    summary: promote to admin
- *    tag: [User]
+ *    tags: [User]
  *    parameters:
  *      - in: path
  *        _id: userId
@@ -67,7 +67,7 @@ const {
  * /api/admin/demote/{userId}:
  *  put:
  *    summary: demote to admin
- *    tag: [User]
+ *    tags: [User]
  *    parameters:
  *      - in: path
  *        _id: userId
@@ -95,7 +95,7 @@ const {
  * /api/admin/activate/{userId}:
  *  put:
  *    summary: activate to admin
- *    tag: [User]
+ *    tags: [User]
  *    parameters:
  *      - in: path
  *        _id: userId
@@ -123,7 +123,7 @@ const {
  * /api/admin/deactivate/{userId}:
  *  put:
  *    summary: deactivate to admin
- *    tag: [User]
+ *    tags: [User]
  *    parameters:
  *      - in: path
  *        _id: userId

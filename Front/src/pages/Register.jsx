@@ -37,9 +37,9 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(signUp(data));
+    dispatch(signUp(data))
   };
-  user.email && navigate("/login");
+  user.email && navigate("/login")
 
   return (
     <>

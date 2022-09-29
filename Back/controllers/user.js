@@ -2,6 +2,7 @@ const User = require("../models/User");
 
 const { generateToken } = require("../config/token");
 const Reports = require("../models/Reports");
+const webpush = require("../webpush")
 
 const cloudinary = require("cloudinary").v2;
 
@@ -30,6 +31,23 @@ const handleErrors = (err) => {
 const user = {};
 
 //create user
+user.notification = async(req, res) => {
+
+  let pushNotification = req.body;
+  
+  const payload = JSON.stringify({
+    name: pushNotification.name,
+    message: pushNotification.message
+  });
+
+  try {
+    await webpush.sendNotification(pushNotification.endpoint, payload);
+    res.status(200).send();
+  } catch (error) {
+    res.status(500).send(error);
+  }
+
+}
 
 user.register = async (req, res) => {
   try {

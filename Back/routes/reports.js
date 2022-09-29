@@ -105,7 +105,7 @@ const {
  * /api/report/reportswithoutadmin:
  *  get:
  *    summary: get all reports without admin
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return all reports without admin
@@ -149,7 +149,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/allreports:
  *  get:
  *    summary: get all reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return all reports
@@ -168,7 +168,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/catchedreports:
  *  get:
  *    summary: get catched reports of admin logged
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return catched reports of admin logged
@@ -187,7 +187,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/myreportsfullfilled:
  *  get:
  *    summary: get fullfilled reports of user logged
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return fullfilled reports of user logged
@@ -206,7 +206,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/myreportsrejected:
  *  get:
  *    summary: get rejected reports of user logged
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return rejected reports of user logged
@@ -225,7 +225,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/reportsbyuserid/{id}:
  *  get:
  *    summary: get reports by user id
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -248,7 +248,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/priorityreports/{id}:
  *  get:
  *    summary: get priority reports 1 to 3 levels
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -271,7 +271,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/dailyreports:
  *  get:
  *    summary: get daily reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: daily reports
@@ -290,7 +290,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/myreports:
  *  get:
  *    summary: get all pending reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      200:
  *       description: return all you reports
@@ -309,7 +309,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/getreportbyid/{id}:
  *  get:
  *    summary: get report by id
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -332,7 +332,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/getpendingreports:
  *  get:
  *    summary: get all pending reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      201:
  *       description: return all pending reports
@@ -352,7 +352,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/getrejectedreports:
  *  get:
  *    summary: get all rejected reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      201:
  *       description: return all rejected reports
@@ -371,7 +371,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/getsolvedreports:
  *  get:
  *    summary: get all fullfilled reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      201:
  *       description: return all fullfilled reports
@@ -390,7 +390,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/addreport:
  *  post:
  *    summary: created report
- *    tag: [Reports]
+ *    tags: [Reports]
  *    requestBody:
  *      required: true
  *      content:
@@ -410,7 +410,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/catchreport/{id}:
  *  put:
  *    summary: updated fullname
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -438,7 +438,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/modifyreport/{id}:
  *  put:
  *    summary: updated state fullfilled
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -466,7 +466,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/solvereport/{id}:
  *  put:
  *    summary: updated state fullfilled
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -494,7 +494,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/rejectedreport/{id}:
  *  put:
  *    summary: updated state rejected
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -522,7 +522,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/removereport/{id}:
  *  delete:
  *    summary: report deleted
- *    tag: [Reports]
+ *    tags: [Reports]
  *    parameters:
  *      - in: path
  *        _id: id
@@ -550,7 +550,7 @@ router.get("/reportswithoutadmin", validateAuth, getReportWithoutAdmin);
  * /api/report/deleteall:
  *  delete:
  *    summary: delete all reports
- *    tag: [Reports]
+ *    tags: [Reports]
  *    responses:
  *      201:
  *        description: Deleted all!

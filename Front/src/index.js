@@ -23,6 +23,8 @@ root.render(
   </BrowserRouter>
 );
 
+
+
 serviceWorkerRegistration.register({
   onUpdate: async (registration) => {
     // Corremos este código si hay una nueva versión de nuestra app

@@ -33,7 +33,7 @@ FilledForm.play = async () => {
     selector: <Input />,
   });
 
-  await userEvent.type(nameInput, "Jerry", {
+  await userEvent.type(nameInput, "Martin", {
     delay: 100,
   });
 
@@ -41,7 +41,7 @@ FilledForm.play = async () => {
     selector: <Input />,
   });
 
-  await userEvent.type(lastnameInput, "Jhonson", {
+  await userEvent.type(lastnameInput, "Paez", {
     delay: 100,
   });
 
@@ -49,7 +49,7 @@ FilledForm.play = async () => {
     selector: <Input />,
   });
 
-  await userEvent.type(emailInput, "Jerry-Jhonson@email.com", {
+  await userEvent.type(emailInput, "martin-paez@gmail.com", {
     delay: 100,
   });
 

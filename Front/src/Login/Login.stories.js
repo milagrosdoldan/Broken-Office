@@ -32,7 +32,7 @@ FilledForm.play = async () => {
     selector: <Input />,
   });
 
-  await userEvent.type(emailInput, "milagrosivanadoldan@gmail.com", {
+  await userEvent.type(emailInput, "martin-paez@gmail.com", {
     delay: 100,
   });
 
@@ -40,7 +40,7 @@ FilledForm.play = async () => {
     selector: <Input />,
   });
 
-  await userEvent.type(passwordInput, "milagros1.", {
+  await userEvent.type(passwordInput, "ExamplePassword.", {
     delay: 100,
   });
   // See https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args to learn how to setup logging in the Actions panel

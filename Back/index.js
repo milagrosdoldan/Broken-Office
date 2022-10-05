@@ -33,7 +33,7 @@ const swaggerSpec = {
 
 app.use(
   cors({
-    origin: "http://localhost:6006",
+    origin: "http://localhost:6007",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     optionsSuccessStatus: 200,

@@ -35,7 +35,7 @@ Material UI | Storybook | Google Vision API | Google Maps API | Firebase | Swagg
 
 ###Instructions: 
 
-Install dependencies and inside the folders Front and Back run npm install. And after that run in the same folders npm start.
+Install dependencies and inside the folders Front and Back run `npm install. And after that run in the same folders `npm start`.
 
 You must create a file .env in the root of the Back folder with the following lines:
     
@@ -100,7 +100,8 @@ PWA mobile first que permite reportar problemas y elementos dañados en lugares 
 
 Material UI | Storybook | Google Vision API | Google Maps API | Firebase | Swagger | Cloudinary | Nodemailer | Chakra UI |React | Redux Mongo db | Mongoose | React-Joyride | Express | Axios | JWT | Bycrip
 
-Instrucciones: Para instalar las dependencias ejecutar lo siguiente dentro de cada una de las carpetas Front y Back: npm install Para iniciar el servidor del back y del front en cada una de las carpetas client y server ejecutar: npm start
+Instrucciones: Para instalar las dependencias ejecutar lo siguiente dentro de cada una de las carpetas Front y Back: `npm install` 
+Para iniciar el servidor del back y del front en cada una de las carpetas client y server ejecutar: `npm start`
 
 Se debe crear un archivo .env en la raiz de la carpeta Back con las siguientes lineas:
 

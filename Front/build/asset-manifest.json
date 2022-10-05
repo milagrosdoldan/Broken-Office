@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8e92fe90.css",
+    "main.js": "/static/js/main.6f8769db.js",
+    "static/media/open-sans-all-400-normal.woff": "/static/media/open-sans-all-400-normal.3bc4108fa8f9a72e6ea5.woff",
+    "service-worker.js": "/service-worker.js",
+    "static/media/heebo-all-700-normal.woff": "/static/media/heebo-all-700-normal.e1ad58e9be60cfb806b6.woff",
+    "static/media/heebo-all-400-normal.woff": "/static/media/heebo-all-400-normal.aa917875affd38530b8f.woff",
+    "static/media/open-sans-cyrillic-ext-400-normal.woff2": "/static/media/open-sans-cyrillic-ext-400-normal.acfea1d2352591b09c46.woff2",
+    "static/media/open-sans-latin-400-normal.woff2": "/static/media/open-sans-latin-400-normal.4d140983c7c8c4a8c722.woff2",
+    "static/media/open-sans-latin-ext-400-normal.woff2": "/static/media/open-sans-latin-ext-400-normal.8deeb3884c8ce11a3537.woff2",
+    "static/media/heebo-latin-700-normal.woff2": "/static/media/heebo-latin-700-normal.fe5ad5b0fb885455f1ad.woff2",
+    "static/media/open-sans-cyrillic-400-normal.woff2": "/static/media/open-sans-cyrillic-400-normal.35d9aa74a5c9697bc38c.woff2",
+    "static/media/heebo-latin-400-normal.woff2": "/static/media/heebo-latin-400-normal.bb0a61a5b413f06b64ac.woff2",
+    "static/media/open-sans-greek-400-normal.woff2": "/static/media/open-sans-greek-400-normal.accce9b81f55c6f4779c.woff2",
+    "static/media/open-sans-hebrew-400-normal.woff2": "/static/media/open-sans-hebrew-400-normal.608be94da46d7cd7a003.woff2",
+    "static/media/open-sans-vietnamese-400-normal.woff2": "/static/media/open-sans-vietnamese-400-normal.6517a5545bd31eeb4a61.woff2",
+    "static/media/heebo-hebrew-700-normal.woff2": "/static/media/heebo-hebrew-700-normal.77b96fd175637eac31eb.woff2",
+    "static/media/heebo-hebrew-400-normal.woff2": "/static/media/heebo-hebrew-400-normal.9f939e5a5a34cd742913.woff2",
+    "static/media/open-sans-greek-ext-400-normal.woff2": "/static/media/open-sans-greek-ext-400-normal.6e872659616d9b8fb28c.woff2",
+    "index.html": "/index.html",
+    "main.8e92fe90.css.map": "/static/css/main.8e92fe90.css.map",
+    "main.6f8769db.js.map": "/static/js/main.6f8769db.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8e92fe90.css",
+    "static/js/main.6f8769db.js"
+  ]
+}

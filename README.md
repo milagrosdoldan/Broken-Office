@@ -4,7 +4,7 @@ Professional project developed with Globant supervision.
 
 ### Proyect Description:
 
--PWA mobile first which allow the staff to report problems or damaged elements in work places using tools like geolocalization and machine learning. It was developed using Scrum metodology.
+-PWA mobile first which allow the staff to report problems or damaged elements in workplaces using tools like geolocalization and machine learning. It was developed using Scrum methodology.
 
 -Funcionalities:
 
